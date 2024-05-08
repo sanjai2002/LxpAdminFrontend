@@ -1,21 +1,19 @@
-// actions.js
+import axios from 'axios'; // Assuming you're using Axios for API calls\
+import { FORGOT_PASSWORD_URL } from '../middleware/api';
+export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
 
-// Action types
-export const UPDATE_PASSWORD_REQUEST = 'UPDATE_PASSWORD_REQUEST';
-export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
-export const UPDATE_PASSWORD_FAILURE = 'UPDATE_PASSWORD_FAILURE';
+ // Import the endpoint
 
-// Action creators
-export const updatePasswordRequest = (email, receivePassword, newPassword) => ({
-  type: UPDATE_PASSWORD_REQUEST,
-  payload: { email, receivePassword, newPassword },
-});
+export const forgotPassword = (email) => async (dispatch) => {
+  dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
-export const updatePasswordSuccess = () => ({
-  type: UPDATE_PASSWORD_SUCCESS,
-});
-
-export const updatePasswordFailure = (error) => ({
-  type: UPDATE_PASSWORD_FAILURE,
-  payload: error,
-});
+  try {
+    const response = await axios.post(FORGOT_PASSWORD_URL, { email });
+    dispatch({ type: FORGOT_PASSWORD_SUCCESS });
+    // Optionally, navigate or display success message here
+  } catch (error) {
+    dispatch({ type: FORGOT_PASSWORD_FAILURE, payload: error.message });
+  }
+};

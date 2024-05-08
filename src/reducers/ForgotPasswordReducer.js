@@ -1,23 +1,34 @@
-// reducer.js
-
-import { UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAILURE } from '../actions/ForgotPasswordAction';
+import { FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILURE } from '../actions/ForgotPasswordAction';
 
 const initialState = {
+  email: '',
   loading: false,
   error: null,
+  success: false,
 };
 
-const ForgotPasswordreducer = (state = initialState, action) => {
+export default function authReducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_PASSWORD_REQUEST:
-      return { ...state, loading: true, error: null };
-    case UPDATE_PASSWORD_SUCCESS:
-      return { ...state, loading: false };
-    case UPDATE_PASSWORD_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+    case FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: null,
+      };
+    case FORGOT_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        success: false,
+      };
     default:
       return state;
   }
-};
-
-export default ForgotPasswordreducer;
+}

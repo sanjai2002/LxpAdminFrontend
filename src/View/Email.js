@@ -3,18 +3,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
 import '../Styles/Loginpage.css';
 import Relevantz from '../assets/Images/Relevantz.png'
-import { useNavigate, useLocation } from 'react-router-dom';
 import { emailRegex,validationMessages } from '../utils/Validation';
+import { submitEmail } from '../actions/EmailAction';
+import { useDispatch,useSelector } from 'react-redux';
 function Email() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     
-    const navigate = useNavigate();
-    const onSubmit = data => {
-        setTimeout(() => {
-            navigate('/forgotpassword', { state: { email: data.email } });
-        }, 2000);
-        console.log(data);
-    };
+    // const navigate = useNavigate();
+    // const onSubmit = data => {
+    //     setTimeout(() => {
+    //         navigate('/forgotpassword', { state: { email: data.email } });
+    //     }, 2000);
+    //     console.log(data);
+    // };
+    const [userEmail,setUserEmail]=useState('');
+    const dispatch=useDispatch();
+    const {submitting,error}=useSelector(state=>state.email);
+    const onSubmit=(e)=>{
+        // e.preventDefault();
+        dispatch(submitEmail(userEmail));
+        setUserEmail('');
+    }
     return (
         <>
             <div className='login-app'>

@@ -38,7 +38,7 @@ export const loginError = (error) => {
 // };
 export const loginUser = (userData) => {
     return (dispatch) => {
-      axios.post('http://localhost:3001/posts', userData)
+      axios.post('http://localhost:3002/userData', userData)
         .then(response => {
           // Handle success
           dispatch({
