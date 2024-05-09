@@ -56,9 +56,8 @@ const Loginpage = () => {
                   placeholder='Password'
                 />
               </div>
-              <p>{errors.password?.message}</p>
-
               <Link to={'/email'} >Forgot password?</Link>
+              <p>{errors.password?.message}</p>
               <div className='button-login'>
                 <button className='btn'>Login</button>
               </div>

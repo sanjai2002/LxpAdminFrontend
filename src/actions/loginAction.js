@@ -1,4 +1,6 @@
 import axios from "axios";
+import Swal from "sweetalert2";
+import { baseUrl } from "../middleware/api";
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -15,7 +17,6 @@ export const loginSuccess = (user) => {
         payload: user
     };
 };
-
 export const loginError = (error) => {
     return {
         type: LOGIN_ERROR,
@@ -36,10 +37,68 @@ export const loginError = (error) => {
 //         }
 //     };
 // };
+
 export const loginUser = (userData) => {
     return (dispatch) => {
-      axios.post('http://localhost:3001/posts', userData)
+      axios.post(`${baseUrl}api/Login`, userData)
         .then(response => {
+           console.log(response.data);
+           if(response.data.email==true&&response.data.password==false) {
+            // emailerrorr.current.innerText="Your password is incorrect"
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "error",
+                title: "Invalid Password"
+              });
+          }
+          if(response.data.email==false&&response.data.password==false) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                }
+              });
+              Toast.fire({
+                icon: "error",
+                title: "Invalid Email id"
+              });
+          }
+          if(response.data.email==true&&response.data.password==true&& response.data.role=="Admin") {
+            
+             const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
+            Toast.fire({
+              icon: "success",
+              title: "Signed in successfully"
+            });
+            //  setTimeout(() => {
+            //   navigate('/admindashboard')
+            // }, 1000);
+             }
           // Handle success
           dispatch({
             type: LOGIN_SUCCESS,
