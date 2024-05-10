@@ -112,7 +112,7 @@ import Relevantz from '../assets/Images/Relevantz.png';
 function ForgotPassword() {
     const dispatch = useDispatch();
     const location = useLocation();
-    const { time = 60, errors = {} } = useSelector((state) => state);
+    const { errors = {} } = useSelector((state) => state);
     const email = location.state?.email || '';
 
     // useEffect(() => {
@@ -126,7 +126,9 @@ function ForgotPassword() {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = (data) => {
-        dispatch(updatePassword(data.email, errors ));
+        console.log(data);
+        dispatch(updatePassword(data));
+        console.log('called...');
         
     };
 
@@ -137,7 +139,7 @@ function ForgotPassword() {
                     <div className="login-header">
                         <img src={Relevantz} alt="Logo" />
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={onSubmit}>
                         <div>
                             <input
                                 {...register('email', {
@@ -164,7 +166,7 @@ function ForgotPassword() {
                                     }
                                 })}
                                 type='password'
-                                placeholder='Receive Password'
+                                placeholder='Received Password'
                             />
                         </div>
                         <p>{errors.receivepassword?.message}</p>

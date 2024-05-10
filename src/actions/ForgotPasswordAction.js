@@ -39,21 +39,22 @@ export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 
 // Define the base URL for your API
 
-
-
-
 // Action creator for updating the password
 export const updatePassword = (data) => async (dispatch) => {
   try {
     // Destructure the data object to get the new password and email
-    const { newpassword, email,oldpassword } = data;
-
+    const email = data.currentTarget[0].value;
+    const oldPassword = data.currentTarget[1].value;
+    const newPassword = data.currentTarget[2].value;
+    console.log(email);
+    // const { email,oldPassword,newPassword } = data;
     // Make an Axios POST request to your API endpoint for updating the password
     const response = await axios.put(`http://localhost:5199/api/UpdatePassword`, {
       email,
-      oldpassword,
-      newpassword,
+      oldPassword,
+      newPassword,
     });
+    console.log(response.data());
     // Dispatch the UPDATE_PASSWORD action with the response data
     dispatch({
       type: UPDATE_PASSWORD,
@@ -63,4 +64,5 @@ export const updatePassword = (data) => async (dispatch) => {
     // Handle errors here, such as dispatching a different action with the error message
     console.error('Error updating password:', error);
   }
+  debugger
 };

@@ -78,7 +78,7 @@ export const loginUser = (userData) => {
                 title: "Invalid Email id"
               });
           }
-          if(response.data.email==true&&response.data.password==true&& response.data.role=="Admin") {
+          if(response.data.email==true&&response.data.password==true) {
             
              const Toast = Swal.mixin({
               toast: true,
