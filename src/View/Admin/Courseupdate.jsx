@@ -38,7 +38,7 @@ const Courseupdate = () => {
         courseId: courseId
     });
 
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -51,7 +51,13 @@ const Courseupdate = () => {
                 console.log("courselevels", levelResponse.data.data)
 
                 setLevel(levelResponse.data.data);
-            } catch (error) {
+
+                const course = await axios.get(`http://localhost:5199/api/Course/GetById/get/course/${courseId}`);
+                console.log(course);
+                setCourse(course.data.data);
+                console.log(course.data.data);
+            }
+            catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
@@ -61,7 +67,7 @@ const Courseupdate = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const isFormvalid=validateForm(course,setErrors)
+        const isFormvalid = validateForm(course, setErrors)
 
         // if(isFormvalid)
         // {
@@ -69,7 +75,7 @@ const Courseupdate = () => {
         formData.append('CourseId', course.courseId);
         formData.append('Title', course.title);
         formData.append('LevelId', course.level);
-        console.log("k"+course.category);
+        console.log("k" + course.category);
         formData.append('CategoryId', course.category);
         formData.append('Description', course.description);
         formData.append('Duration', course.duration);
@@ -88,7 +94,7 @@ const Courseupdate = () => {
         } catch (error) {
             console.error('Error updating course:', error);
         }
-    // }
+        // }
     };
 
 
@@ -162,7 +168,7 @@ const Courseupdate = () => {
                                                 {errors.category && <p className="error">{errors.category}</p>}
                                             </Col>
                                         </Row>
-                                
+
                                         <Row>
                                             <label>
                                                 Course Level:
