@@ -12,9 +12,11 @@ function Email() {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
+        debugger
         dispatch(submitEmail(data.email))
         .then((response)=>
         {
+            debugger
             if(response.data !==false)
             {
                 setTimeout(() => {
