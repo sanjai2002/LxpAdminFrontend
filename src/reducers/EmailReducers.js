@@ -1,8 +1,8 @@
 import { SUBMIT_EMAIL } from "../actions/EmailAction";
 const initialState = {
     email: '',
-    submitting: false, // Flag for submission state (optional)
-    error: null, // To store any errors (optional)
+    submitting: false, 
+    error: null, 
 };
 
 const emailReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const emailReducer = (state = initialState, action) => {
             return {
                 ...state,
                 email: action.payload.email,
-                submitting: true, // Set submitting flag to true (optional)
+                submitting: true, 
                 
             };
         default:

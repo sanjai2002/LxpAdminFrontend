@@ -1,20 +1,46 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../Styles/Loginpage.css';
 import Relevantz from '../assets/Images/Relevantz.png'
-import { loginUser } from '../actions/loginAction';
+import loginUser from '../middleware/Admin/apiLogin'
 import { Link } from 'react-router-dom';
 import { emailRegex, passwordRegex, validationMessages } from '../utils/Validation';
+import { loginRequest } from '../actions/loginAction';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Loginpage = () => {
- 
+
+
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
+  const navigate=useNavigate(); 
+
+  const isSuccessadmin  = useSelector((state) => state.user.isSuccessadmin);
+
+  const  isSuccessuser  = useSelector((state) => state.user.isSuccessuser)
+
+  useEffect(() => {
+    if (isSuccessadmin) {
+      navigate('/admindashboard'); // Navigate to the next page on success
+    }
+  }, [isSuccessadmin, navigate]);
+
+
+  useEffect(() => {
+    if (isSuccessuser) {
+      navigate('/userdashboard'); // Navigate to the next page on success
+    }
+  }, [isSuccessuser, navigate]);
+
+
+
   const onSubmit = data => {
-    dispatch(loginUser(data));
+
+    dispatch(loginRequest(data));
   };
   return (
     <>
