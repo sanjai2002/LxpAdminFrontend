@@ -1,19 +1,32 @@
-import axios from 'axios'; // Assuming you're using Axios for API calls\
-import { FORGOT_PASSWORD_URL } from '../middleware/api';
-export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST';
-export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
-export const FORGOT_PASSWORD_FAILURE = 'FORGOT_PASSWORD_FAILURE';
+// // actions.js
+import axios from 'axios';
+import { baseUrl } from '../middleware/api';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 
- // Import the endpoint
 
-export const forgotPassword = (email) => async (dispatch) => {
-  dispatch({ type: FORGOT_PASSWORD_REQUEST });
-
+export const updatePassword = (data) => async (dispatch) => {
   try {
-    const response = await axios.post(FORGOT_PASSWORD_URL, { email });
-    dispatch({ type: FORGOT_PASSWORD_SUCCESS });
-    // Optionally, navigate or display success message here
+    // Destructure the data object to get the new password and email
+    const email = data.currentTarget[0].value;
+    const oldPassword = data.currentTarget[1].value;
+    const newPassword = data.currentTarget[2].value;
+    console.log(email);
+    // const { email,oldPassword,newPassword } = data;
+    // Make an Axios POST request to your API endpoint for updating the password
+
+    const response = await axios.put(`http://localhost:5199/api/UpdatePassword`, {
+      email,
+      oldPassword,
+      newPassword,
+    });
+    console.log(response.data());
+    // Dispatch the UPDATE_PASSWORD action with the response data
+    dispatch({
+      type: UPDATE_PASSWORD,
+      payload: response.data,
+    });
   } catch (error) {
-    dispatch({ type: FORGOT_PASSWORD_FAILURE, payload: error.message });
+    // Handle errors here, such as dispatching a different action with the error message
+    console.error('Error updating password:', error);
   }
 };

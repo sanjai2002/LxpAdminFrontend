@@ -1,20 +1,32 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import {thunk} from 'redux-thunk';
+import { thunk } from 'redux-thunk';
+import courseReducer from '../reducers/courseReducer';
+import apiMiddleware from '../middleware/apiMiddleware';
 import ForgotPasswordreducer from '../reducers/ForgotPasswordReducer';
 import userReducer from '../reducers/loginReducer';
-import emailReducer from '../reducers/EmailReducer';
-import emailMiddleware from '../middleware/Emailapi';
-// Combine the reducers
+import AllcourseReducer from '../reducers/AllcourseReducer';
+import apiviewallcourse from '../middleware/apiviewallcourse';
+import loginUser from '../middleware/Admin/apiLogin';
+import apiDeletecourse from '../middleware/Admin/apiDeletecourse';
+import DeletecourseReducer from '../reducers/Admin/DeletecourseReducer';
+import UpdateCourse from '../middleware/Admin/apiUpdatecourse';
+import courseupdateReducer from '../reducers/Admin/Updatecourse';
+
 const rootReducer = combineReducers({
-  forgotPassword:  ForgotPasswordreducer,
+  forgotPassword: ForgotPasswordreducer,
   user: userReducer,
-  email:emailReducer,
+  course: courseReducer,
+  allcourse: AllcourseReducer,
+  deletecourse: DeletecourseReducer,
+  updatecourse:courseupdateReducer,
 });
 
-// Create the Redux store
+
 const store = createStore(
+
   rootReducer,
-  applyMiddleware(emailMiddleware) // Apply the thunk middleware
+  applyMiddleware(thunk, apiMiddleware,apiviewallcourse,loginUser,apiDeletecourse,UpdateCourse)
 );
 
 export default store;
+
