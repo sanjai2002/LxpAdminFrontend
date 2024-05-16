@@ -81,9 +81,9 @@ const Loginpage = () => {
                   type='password'
                   placeholder='Password'
                 />
+              <p>{errors.password?.message}</p>
               </div>
               <Link to={'/email'} >Forgot password?</Link>
-              <p>{errors.password?.message}</p>
               <div className='button-login'>
                 <button className='btn'>Login</button>
               </div>

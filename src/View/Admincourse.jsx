@@ -271,15 +271,16 @@ const Admincourse = ({ fetchCourses, courses }) => {
             <Container fluid className='coursepagebody'>
                 <Row className='mb-5'>
                     <Col xs={12}>
-                        <Navigationbar />
+                        {/* <Navigationbar /> */}
                     </Col>
                 </Row>
                 <Row className='pt-3 contentbody'>
-                    <Col xs={12} md={1} className='sidebar  mb-5'>
+                    {/* <Col xs={12} md={1} className='sidebar  mb-5'>
 
-                    </Col>
-                    <Col xs={12} md={11} className='landingcoursepage  mb-5'>
+                    </Col> */}
+                    <Col xs={12} md={12} className='landingcoursepage  mb-5'>
                         <Row>
+                            <Col><b><h4>Recently Added Courses</h4></b></Col>
                             <Col className='text-end  mt-2'><Link to='/adminviewallcourse'><Button variant="outline-primary">View All courses</Button></Link></Col>
                         </Row>
                         <div className='scrollable-content'>
@@ -291,7 +292,7 @@ const Admincourse = ({ fetchCourses, courses }) => {
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            //   width="150"
+                                            // width="80"
                                             image={course.thumbnailimage}
                                             alt={course.title || 'Course image'}
                                         />

@@ -90,7 +90,7 @@ const Courseupdate = () => {
             console.log('Action payload:', { courseId: course.courseId, formData });
 
             dispatch(updateCoursesRequest({ courseId: course.courseId, formData }));
-            // navigate('/coursecontent'); // Navigate to the next page on success
+            // navigate('/adminviewallcourse'); // Navigate to the next page on success
         } catch (error) {
             console.error('Error updating course:', error);
         }
@@ -133,8 +133,8 @@ const Courseupdate = () => {
             <Row>
                 <Col md={12}>
                     <Container className='courseForm mt-5'>
-                        <h2>Update Course</h2>
-                        <hr />
+                        <h3>Update Course</h3>
+                        {/* <hr /> */}
                         <Card className="course-form">
                             <Card.Body>
                                 <Form onSubmit={handleSubmit}>
@@ -188,8 +188,9 @@ const Courseupdate = () => {
                                             <label>
                                                 Course Duration (in Hrs):
                                                 <input
-                                                    type="number"
-                                                    min="0"
+                                                    className='inputnumber'
+                                                    // type="number"
+                                                    // min="0"
                                                     placeholder="Enter no. of hours"
                                                     name="duration"
                                                     value={course.duration}

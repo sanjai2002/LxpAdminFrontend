@@ -15,7 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import GridViewIcon from '@mui/icons-material/GridView';
 import '../Styles/Adminviewcourse.css';
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
@@ -26,13 +26,13 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
     const [selectedCourseId, setSelectedCourseId] = useState(null);
 
 
-        // State to control the open status of the dialog
-        const [open, setOpen] = React.useState(false);
-        const [dialogMessage, setDialogMessage] =useState('');
+    // State to control the open status of the dialog
+    const [open, setOpen] = React.useState(false);
+    const [dialogMessage, setDialogMessage] = useState('');
 
     // Delete Failure Message 
     const istrue = useSelector((state) => state.deletecourse.isdeleted);
-    const mes = useSelector((state) =>state.deletecourse.message);
+    const mes = useSelector((state) => state.deletecourse.message);
     console.log("message", istrue);
 
     const isfalse = useSelector((state) => state.deletecourse.isnotdelete);
@@ -40,14 +40,14 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
     console.log("failure message", isfalse);
 
 
-      const handleClose = () => {
+    const handleClose = () => {
         setOpen(false);
     };
 
     useEffect(() => {
         if (istrue) {
             setDialogMessage(mes);
-            setOpen(true);
+            setOpen(true);                      
             fetchCourses();
         } else if (isfalse) {
             setDialogMessage(failuremessage);
@@ -64,7 +64,7 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
     // }, [istrue, mes,fetchCourses]);
 
     // Delete Success Message 
-   
+
 
     // useEffect(() => {
 
@@ -108,14 +108,11 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
     return (
         <>
             <Container fluid>
-                <Row>
-                    <Navigationbar />
-                </Row>
                 <Row className='mt-5'>
-                    <Col xs={12} md={1} className='mt-5'></Col>
-                    <Col xs={12} md={11} className='mt-5'>
+                    {/* <Col xs={12} md={1} className='mt-5'></Col> */}
+                    <Col xs={12} md={12} className='mt-2'>
                         <Row>
-                            <Col xs={12} md={3}>
+                            <Col xs={12} md={6}>
                                 <form className="form-inline my-2 my-lg-0">
                                     <input
                                         className="form-control mr-sm-2"
@@ -132,8 +129,8 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
                             <Paper style={{ width: '100%' }}>
                                 <TableContainer style={{ maxHeight: 640 }}>
                                     <Table stickyHeader aria-label="sticky table" style={{ backgroundColor: '#f3f3f3' }}>
-                                        <TableHead style={{ backgroundColor: '#4D90FE' }}>
-                                            <TableRow>
+                                        <TableHead style={{ backgroundColor: 'black' }}>
+                                            <TableRow >
                                                 <TableCell>Title</TableCell>
                                                 <TableCell>Category</TableCell>
                                                 <TableCell>Duration</TableCell>
