@@ -32,25 +32,17 @@ function Routing() {
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             {/* <DrawerHeader /> */}
             <Routes>
-              {/* <Route exact path="/" element={<Loginpage />} />
-            <Route path="/email" element={<Email />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
+              <Route exact path="/" element={<Loginpage />} />
+              <Route path="/email" element={<Email />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
               {/* <Route path="/adminnavbar" element={<Navigationbar/>} /> */}
-
-
-
               <Route path='/' element={<Admindashboard />} />
               <Route path="/admincourse" element={<Admincourse />} />
               <Route path='/adminviewallcourse' element={<Adminviewcourse />}></Route>
               <Route path='/admindashboard' element={<Admindashboard />}></Route>
               <Route path='/admindupdatecourse/:courseId' element={<Courseupdate />}></Route>
-
-
-
               {/* <Route path='/userdashboard' element={<UserDashboard />}></Route> */}
-
             </Routes>
-
           </Box>
         </BrowserRouter>
       </Box>
