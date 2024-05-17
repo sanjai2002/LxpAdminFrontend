@@ -250,15 +250,13 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { connect } from 'react-redux';
 import { fetchCoursesRequest } from '../actions/courseAction';
-import Navigationbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+
 const Admincourse = ({ fetchCourses, courses }) => {
 
     useEffect(() => {
         fetchCourses();
     }, [fetchCourses]);
-
-
 
 
     if (courses.length === 0) {
@@ -267,7 +265,6 @@ const Admincourse = ({ fetchCourses, courses }) => {
     
     return (
         <>
-
             <Container fluid className='coursepagebody'>
                 <Row className='mb-5'>
                     <Col xs={12}>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../../Styles/Courseupdate.css'
 import { Container, Row, Col, Card, Form, Modal, Button } from 'react-bootstrap';
-import { useDispatch, connect, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { GiCancel } from 'react-icons/gi';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
 import { updateCoursesRequest } from '../../actions/Admin/Updatecourse';
 import { useParams } from 'react-router-dom';
 import { validateForm } from '../../utils/Admin/ValidationUpdatecourse';

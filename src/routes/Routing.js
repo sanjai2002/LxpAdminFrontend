@@ -13,6 +13,9 @@ import Adminrouting from './AdminRouting';
 import Home from '../View/Home';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Learners } from '../View/Admin/Learner/Learners';
+import IndividualLearnerView from '../View/Admin/Learner/IndividualLearnerView';
+import { IndividualLearner } from '../View/Admin/Learner/IndividualLearner';
 
 function Routing() {
   // const DrawerHeader = styled('div')(({ theme }) => ({
@@ -41,6 +44,8 @@ function Routing() {
               <Route path='/adminviewallcourse' element={<Adminviewcourse />}></Route>
               <Route path='/admindashboard' element={<Admindashboard />}></Route>
               <Route path='/admindupdatecourse/:courseId' element={<Courseupdate />}></Route>
+              <Route path='/learnerviewall' element={<Learners />}></Route>
+              <Route path='/individuallearner/:learnerId' element={<IndividualLearnerView />}></Route>
               {/* <Route path='/userdashboard' element={<UserDashboard />}></Route> */}
             </Routes>
           </Box>
