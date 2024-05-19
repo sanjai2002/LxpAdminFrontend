@@ -4,18 +4,13 @@ import Loginpage from '../View/LoginPage';
 import ForgotPassword from '../View/ForgotPassword';
 import Email from '../View/Email';
 import Admincourse from '../View/Admincourse';
-// import Navigationbar from '../components/Navbar';
 import Adminviewcourse from '../View/Adminviewcourse';
 import Admindashboard from '../View/Admin/Admindashboard';
 import Courseupdate from '../View/Admin/Courseupdate';
-import UserDashboard from '../View/User/UserDashboard';
 import Adminrouting from './AdminRouting';
-import Home from '../View/Home';
 import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Learners } from '../View/Admin/Learner/Learners';
 import IndividualLearnerView from '../View/Admin/Learner/IndividualLearnerView';
-import { IndividualLearner } from '../View/Admin/Learner/IndividualLearner';
+import LearnerReduxView from '../View/Admin/LearnerReduxView';
 
 function Routing() {
   // const DrawerHeader = styled('div')(({ theme }) => ({
@@ -44,7 +39,7 @@ function Routing() {
               <Route path='/adminviewallcourse' element={<Adminviewcourse />}></Route>
               <Route path='/admindashboard' element={<Admindashboard />}></Route>
               <Route path='/admindupdatecourse/:courseId' element={<Courseupdate />}></Route>
-              <Route path='/learnerviewall' element={<Learners />}></Route>
+              <Route path='/learnerviewall' element={<LearnerReduxView />}></Route>
               <Route path='/individuallearner/:learnerId' element={<IndividualLearnerView />}></Route>
               {/* <Route path='/userdashboard' element={<UserDashboard />}></Route> */}
             </Routes>

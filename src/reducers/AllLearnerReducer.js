@@ -1,4 +1,4 @@
-import { FETCH_LEARNERS_FAILURE, FETCH_LEARNERS_SUCCESS } from "../actions/LearnersViewAction"
+import { FETCH_LEARNERS_FAILURE, FETCH_LEARNERS_REQUEST, FETCH_LEARNERS_SUCCESS } from "../actions/LearnersViewAction"
 
 const initialState = {
     learners: [],
@@ -8,9 +8,12 @@ const initialState = {
 
 const AllLearnerReducer = (state = initialState, action) => {
     switch (action.type) {
+        case FETCH_LEARNERS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
         case FETCH_LEARNERS_SUCCESS:
-            console.log(action.payload);
-            console.log(action);
             return {
                 ...state,
                 loading: false,
