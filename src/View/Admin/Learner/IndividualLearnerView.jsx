@@ -13,7 +13,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CardMedia from '@mui/material/CardMedia';
-import { useEffect } from 'react';
 
 function createData(enrollmentid, enrolledcourse, enrolledCourseCategory, enrolledCourselevels, enrollmentdate) {
     return { enrollmentid, enrolledcourse, enrolledCourseCategory, enrolledCourselevels, enrollmentdate };
@@ -23,8 +22,8 @@ const rows = [
     createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
     createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
     createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
-
 ];
+
 
 export default function IndividualLearnerView() {
     const theme = useTheme();
@@ -38,8 +37,8 @@ export default function IndividualLearnerView() {
                         <Card sx={{ display: 'flex' }}>
                             <CardMedia
                                 component="img"
-                                sx={{ width: 151 }}
-                                image=""
+                                sx={{ width: 151, borderRadius: "25%" }}
+                                image="http://localhost:5199/wwwroot/CourseThumbnailImages/6c6ffd86-9c3b-455e-b5f2-e00f032fc02d_js.png"
                                 alt="Live from space album cover"
                             />
                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -103,7 +102,6 @@ export default function IndividualLearnerView() {
                     </TableBody>
                 </Table>
             </TableContainer >
-
 
         </>
     );

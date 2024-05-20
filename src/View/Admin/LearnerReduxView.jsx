@@ -32,7 +32,6 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
     const rows = learners.learners;
 
     //Descending function
-
     function descendingComparator(a, b, orderBy) {
         if (b[orderBy] < a[orderBy]) {
             return -1;
@@ -248,7 +247,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                 ),
             [order, orderBy, page, rowsPerPage],
         );
-
+        const [count, setCount] = React.useState(0);
 
         return (
             <Box sx={{ width: '100%' }}>
@@ -272,8 +271,8 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                                 rowCount={rows.length}
                             />
                             <TableBody>
-                                {visibleRows.map((row) => {
-                                    const isItemSelected = isSelected(row.id);
+                                {visibleRows.map((row, index) => {
+                                    const isItemSelected = isSelected(row.learnerID);
 
                                     return (
                                         <TableRow
@@ -282,24 +281,26 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.id}
+                                            key={row.index}
                                             selected={isItemSelected}
                                             sx={{ cursor: 'pointer' }}
                                         >
-                                            <TableCell align="left">{row.id}</TableCell>
+                                            <TableCell align="left">
+                                                {index + 1}
+                                            </TableCell>
                                             <TableCell
                                                 component="th"
-                                                id={row.learner_id}
+                                                id={row.learnerID}
                                                 scope="row"
                                                 align="left"
                                                 padding="none"
                                             >
-                                                {row.name}
+                                                {row.learnerName}
                                             </TableCell>
                                             <TableCell align="left">{row.email}</TableCell>
-                                            <TableCell align="left">{row.last_login}</TableCell>
+                                            <TableCell align="left">{row.lastLogin.replace('T', " ")}</TableCell>
                                             <TableCell align="left">
-                                                <Link to={`/individuallearner/${row.learner_id}`}><PreviewIcon /></Link>
+                                                <Link to={`/individuallearner/${row.learnerID}`}><PreviewIcon /></Link>
                                             </TableCell>
                                         </TableRow>
                                     );

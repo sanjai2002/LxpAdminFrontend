@@ -2,7 +2,7 @@ import axios from "axios";
 import { FETCH_LEARNERS_REQUEST, fetchLearnerFailure, fetchLearnerSuccess } from "../actions/LearnersViewAction";
 import { baseUrl } from "./api";
 
-const API_URL = `${baseUrl}/ViewAllLearners`;
+const API_URL = `${baseUrl}/lxp/learner/getalllearnerdetails`;
 // const API_URL = 'http://localhost:3001/ViewAllLearners';
 
 const apiViewAllLearners = ({ dispatch }) => (next) => async (action) => {
@@ -12,7 +12,7 @@ const apiViewAllLearners = ({ dispatch }) => (next) => async (action) => {
             const response = await axios.get(API_URL);
 
             if (response.status === 200) {
-                dispatch(fetchLearnerSuccess(response.data));
+                dispatch(fetchLearnerSuccess(response.data.data));
             }
             else {
                 console.error("No data received from API")
