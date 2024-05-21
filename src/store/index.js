@@ -19,6 +19,8 @@ import ProfileCoursesReducer from '../reducers/Admin/ProfileCoursesReducers';
 import GetProfileCourses from '../middleware/Admin/apiProfileCourses';
 import LastEnrolledCourseReducer from '../reducers/Admin/LastEnrolledCourseReducer';
 import LastEnrolledCourse from '../middleware/Admin/apiLastEnrolledCourse';
+import EnableDisableCourseReducer from '../reducers/Admin/EnableDisbaleCourseReducer';
+import EnableDisableCourse from '../middleware/Admin/apiEnableDisbaleCourse';
 
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
@@ -31,11 +33,12 @@ const rootReducer = combineReducers({
   profilecard: ProfileCardReducer,
   profilecourses: ProfileCoursesReducer,
   enrolledcourse: LastEnrolledCourseReducer,
+  enabledisablecourse: EnableDisableCourseReducer
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk, apiMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse)
+  applyMiddleware(thunk, apiMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse)
 );
 
 export default store;

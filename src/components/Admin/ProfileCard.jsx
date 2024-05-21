@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,7 +15,6 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
     useEffect(() => {
         fetchProfileCard(learnerid);
     }, [fetchProfileCard]);
-    console.log(profilecard)
     if (profilecard.profilecard.learnerprofile === "http://localhost:5199/wwwroot/LearnerProfileImages/") {
         return (
             <>

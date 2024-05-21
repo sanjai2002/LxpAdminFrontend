@@ -21,7 +21,7 @@ const Courseupdate = () => {
     const [show, setShow] = useState(false);
     const [category, setAddCategory] = useState({
         category: '',
-        modifiedby: 'kavin'
+        modifiedby: 'Admin'
     });
 
 
@@ -32,7 +32,7 @@ const Courseupdate = () => {
         category: '',
         description: '',
         duration: '',
-        modifiedby: 'Kavin',
+        modifiedby: 'Admin',
         thumbnailimage: null,
         courseId: courseId
     });
