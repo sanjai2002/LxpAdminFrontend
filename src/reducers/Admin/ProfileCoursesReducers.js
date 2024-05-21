@@ -1,26 +1,26 @@
-import { FETCH_PROFILECARD_FAILURE, FETCH_PROFILECARD_REQUEST, FETCH_PROFILECARD_SUCCESS, fetchLearnerSuccess } from "../../actions/LearnersViewAction"
+import { FETCH_PROFILECOURSES_FAILURE, FETCH_PROFILECOURSES_REQUEST, FETCH_PROFILECOURSES_SUCCESS } from "../../actions/LearnersViewAction"
 
 const initialState = {
-    profilecard: {},
+    profileCourses: [],
     loading: false,
     error: null,
 }
 
-const ProfileCardReducer = (state = initialState, action) => {
+const ProfileCoursesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_PROFILECARD_REQUEST:
+        case FETCH_PROFILECOURSES_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        case FETCH_PROFILECARD_SUCCESS:
+        case FETCH_PROFILECOURSES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                profilecard: action.payload,
+                profileCourses: action.payload,
                 error: null,
             }
-        case FETCH_PROFILECARD_FAILURE:
+        case FETCH_PROFILECOURSES_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -30,4 +30,5 @@ const ProfileCardReducer = (state = initialState, action) => {
             return state;
     }
 };
-export default ProfileCardReducer;
+
+export default ProfileCoursesReducer;

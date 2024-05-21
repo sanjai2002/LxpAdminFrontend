@@ -14,7 +14,7 @@ const GetProfileCard = ({ dispatch }) => (next) => async (action) => {
         try {
             const response = await axios.get(API_URL);
             if (response.status === 200) {
-                dispatch(fetchProfileCardSuccess(response.data.data));
+                dispatch(fetchProfileCardSuccess(response.data.data[0]));
             }
             else {
                 console.error("No data received.")

@@ -30,5 +30,3 @@ const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
 };
 
 export default apiviewallcourse;
-
-

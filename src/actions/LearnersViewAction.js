@@ -37,3 +37,24 @@ export const fetchProfileCardFailure = (error) => ({
     type: FETCH_PROFILECARD_FAILURE,
     payload: error
 })
+
+export const FETCH_PROFILECOURSES_REQUEST = 'FETCH_PROFILECOURSES_REQUEST';
+export const FETCH_PROFILECOURSES_SUCCESS = 'FETCH_PROFILECOURSES_SUCCESS';
+export const FETCH_PROFILECOURSES_FAILURE = 'FETCH_PROFILECOURSES_FAILURE';
+
+export const fetchProfileCoursesRequest = (payload) => ({
+    type: FETCH_PROFILECOURSES_REQUEST,
+    payload: payload
+})
+
+
+export const fetchProfileCoursesSuccess = (profilecourses) => ({
+    type: FETCH_PROFILECOURSES_SUCCESS,
+    payload: profilecourses
+})
+
+
+export const fetchProfileCoursesFailure = (error) => ({
+    type: FETCH_PROFILECOURSES_FAILURE,
+    payload: error
+})

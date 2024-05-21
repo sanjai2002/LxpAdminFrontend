@@ -12,13 +12,12 @@ import { fetchProfileCardRequest } from "../../actions/LearnersViewAction";
 import { useParams } from 'react-router-dom';
 
 const ProfileCard = ({ fetchProfileCard, profilecard }) => {
-
     const learnerid = useParams();
-
     useEffect(() => {
         fetchProfileCard(learnerid);
     }, [fetchProfileCard]);
-    console.log(profilecard);
+
+
     if (profilecard === 0) {
         return <div>
             <Box sx={{ width: 300 }}>
@@ -28,33 +27,43 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
             </Box>
         </div>
     }
-
+    
     return (
+        <>
+            <Grid item xs={9}>
+                <Card sx={{ display: 'flex', width: 800 }}>
+                    <CardMedia
+                        component="img"
+                        sx={{ width: 151, }}
+                        image={profilecard.profilecard.learnerprofile}
+                        alt="Profile"
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                        <CardContent sx={{ flex: '1 0 auto' }}>
+                            <Typography variant="h4" color="text.secondary" component="div">
+                                <span style={{ fontWeight: 'bold', color: '#23275c' }}>{profilecard.profilecard.learnerFirstName} {profilecard.profilecard.learnerLastName} </span>
+                                <span style={{ fontStyle: 'italic', fontWeight: 'lighter', fontSize: '15px' }}>({profilecard.profilecard.learnerStream})</span>
+                            </Typography>
+                            <Typography variant="subtitle1" color="text.secondary" component="div">
+                                <span style={{ fontWeight: 'bold', color: 'black' }}>Email : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerEmail}</span>
+                            </Typography>
+                            <Typography variant="subtitle1" color="text.secondary" component="div">
+                                <span style={{ fontWeight: 'bold', color: 'black' }}>DOB : </span><span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerDob}</span>
+                            </Typography>
+                            <Typography variant="subtitle1" color="text.secondary" component="div">
+                                <span style={{ fontWeight: 'bold', color: 'black' }}>Contact Number : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerContactNumber}</span>
+                            </Typography>
+                            <Typography variant="subtitle1" color="text.secondary" component="div">
+                                <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{profilecard.profilecard.learnerGender}</span>
+                                <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '12em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>{profilecard.profilecard.learnerLastlogin}</span>
+                            </Typography>
+                        </CardContent>
 
-        <Grid item xs={9}>
-            <Card sx={{ display: 'flex' }}>
-                <CardMedia
-                    component="img"
-                    sx={{ width: 151, borderRadius: "25%" }}
-                    // image={profilecard.profilecard[0].learnerprofile[0].learnerprofile}
-                    alt="Live from space album cover"
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
-                            Personal Details
-                        </Typography>
-                        <Typography variant="h2" color="text.secondary" component="div">
+                    </Box>
+                </Card>
+            </Grid>
 
-                            {/* {profilecard.profilecard[0].learnerprofile[0].learnerFirstName} {profilecard.profilecard[0].learnerprofile[0].learnerLastName} */}
-                        </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div">
-                            {/* {profilecard.profilecard[0].learnerEmail} */}
-                        </Typography>
-                    </CardContent>
-                </Box>
-            </Card>
-        </Grid>
+        </>
     )
 
 };
