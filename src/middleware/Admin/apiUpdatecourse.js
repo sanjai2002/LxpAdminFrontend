@@ -5,7 +5,7 @@
 // const API_URL = 'http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate';
 
 //  const UpdateCourse = ({ dispatch }) => (next) => async (action) => {
-  
+
 
 //   if (action.type === UPDATE_COURSES_REQUEST) {
 //     try {
@@ -25,7 +25,7 @@
 //     }
 //   }
 //   return next(action);
-  
+
 // };
 
 // export default UpdateCourse;
@@ -123,7 +123,7 @@ const UpdateCourseMiddleware = ({ dispatch }) => (next) => async (action) => {
     const API_URL = `http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate`;
 
     try {
-      console.log("l"+formData);
+      console.log("l" + formData);
       const response = await axios.put(API_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'

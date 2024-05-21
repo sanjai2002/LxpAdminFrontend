@@ -26,9 +26,7 @@ const ProfileEnrolledCourses = ({ fetchProfileCourses, profilecourses }) => {
     useEffect(() => {
         fetchProfileCourses(learnerid);
     }, [fetchProfileCourses]);
-    console.log(profilecourses);
     const rows = profilecourses.profileCourses;
-    console.log(rows);
     return (
         <TableContainer component={Paper} sx={{ mt: 5 }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">

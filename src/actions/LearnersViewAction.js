@@ -58,3 +58,22 @@ export const fetchProfileCoursesFailure = (error) => ({
     type: FETCH_PROFILECOURSES_FAILURE,
     payload: error
 })
+
+export const FETCH_LAST_ENROLLED_COURSE_REQUEST = 'FETCH_LAST_ENROLLED_COURSE_REQUEST';
+export const FETCH_LAST_ENROLLED_COURSE_SUCCESS = 'FETCH_LAST_ENROLLED_COURSE_SUCCESS';
+export const FETCH_LAST_ENROLLED_COURSE_FAILURE = 'FETCH_LAST_ENROLLED_COURSE_FAILURE';
+
+export const fetchLastEnrolledCourseRequest = (payload) => ({
+    type: FETCH_LAST_ENROLLED_COURSE_REQUEST,
+    payload: payload
+})
+
+export const fetchLastEnrolledCourseSuccess = (enrolledcourse) => ({
+    type: FETCH_LAST_ENROLLED_COURSE_SUCCESS,
+    payload: enrolledcourse
+})
+
+export const fetchLastEnrolledCourseFailure = (error) => ({
+    type: FETCH_LAST_ENROLLED_COURSE_FAILURE,
+    payload: error
+})
