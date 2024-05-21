@@ -6,7 +6,6 @@ const API_URL = `${baseUrl}/lxp/learner/getalllearnerdetails`;
 // const API_URL = 'http://localhost:3001/ViewAllLearners';
 
 const apiViewAllLearners = ({ dispatch }) => (next) => async (action) => {
-    next(action);
     if (action.type === FETCH_LEARNERS_REQUEST) {
         try {
             const response = await axios.get(API_URL);
@@ -23,6 +22,7 @@ const apiViewAllLearners = ({ dispatch }) => (next) => async (action) => {
             dispatch(fetchLearnerFailure(error.message));
         }
     }
+    return next(action);
 }
 
 export default apiViewAllLearners;

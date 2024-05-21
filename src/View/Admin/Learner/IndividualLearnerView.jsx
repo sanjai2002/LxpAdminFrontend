@@ -24,7 +24,6 @@ const rows = [
     createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
 ];
 
-
 export default function IndividualLearnerView() {
     const theme = useTheme();
     const count = 1;

@@ -13,6 +13,8 @@ import UpdateCourse from '../middleware/Admin/apiUpdatecourse';
 import courseupdateReducer from '../reducers/Admin/Updatecourse';
 import AllLearnerReducer from '../reducers/AllLearnerReducer';
 import apiViewAllLearners from '../middleware/apiViewAllLearners';
+import ProfileCardReducer from '../reducers/Admin/IndividualLearnerReducer';
+import GetProfileCard from '../middleware/Admin/apiIndividualLearners';
 
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
@@ -22,11 +24,12 @@ const rootReducer = combineReducers({
   deletecourse: DeletecourseReducer,
   updatecourse: courseupdateReducer,
   alllearner: AllLearnerReducer,
+  profilecard: ProfileCardReducer,
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk, apiMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners)
+  applyMiddleware(thunk, apiMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard)
 );
 
 export default store;
