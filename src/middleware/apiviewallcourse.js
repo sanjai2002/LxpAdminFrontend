@@ -14,7 +14,7 @@ const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
     try {
       const response = await axios.get(API_URL);
       console.log(API_URL);
-      debugger
+
       console.log('API Response:', response.data); // Log the response data 
 
       if (response.status === 200 && response.data && response.data.data.length > 0) {

@@ -11,24 +11,13 @@ import { useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchProfileCoursesRequest } from '../../actions/LearnersViewAction';
 
-function createData(enrollmentid, enrolledcourse, enrolledCourseCategory, enrolledCourselevels, enrollmentdate) {
-    return { enrollmentid, enrolledcourse, enrolledCourseCategory, enrolledCourselevels, enrollmentdate };
-}
-
-const rows = [
-    createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
-    createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
-    createData(1, 'python', 'Technical', "Intermediate", "2024-05-16",),
-];
 
 const ProfileEnrolledCourses = ({ fetchProfileCourses, profilecourses }) => {
     const learnerid = useParams();
     useEffect(() => {
         fetchProfileCourses(learnerid);
     }, [fetchProfileCourses]);
-    console.log(profilecourses);
     const rows = profilecourses.profileCourses;
-    console.log(rows);
     return (
         <TableContainer component={Paper} sx={{ mt: 5 }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
