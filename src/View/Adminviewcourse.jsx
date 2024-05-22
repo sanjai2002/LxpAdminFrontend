@@ -10,17 +10,14 @@ import { TableContainer, Switch } from '@mui/material';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { fetchallCoursesRequest } from '../actions/Adnimviewcourse';
 import { deleteCoursesRequest } from '../actions/Admin/DeletecourseAction';
-import Navigationbar from '../components/Navbar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import GridViewIcon from '@mui/icons-material/GridView';
 import '../Styles/Adminviewcourse.css';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { enableDisableCourseRequest } from '../actions/Admin/EnableDisableAction';
 
 const Adminviewcourse = ({ fetchCourses, deleteCourse, courses, enableordisable }) => {
@@ -124,9 +121,6 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses, enableordisable 
 
     //Event for Enable And Disable
     const EnableOrDisable = () => {
-        console.log("enable or disable");
-        console.log(enabledisablecourseId);
-        console.log(!coursestatus);
         enableordisable(enabledisablecourseId, !coursestatus);
         setShowEnableModal(false);
         setTimeout(() => {

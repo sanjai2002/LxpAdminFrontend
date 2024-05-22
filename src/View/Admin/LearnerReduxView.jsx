@@ -208,6 +208,8 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
         const [page, setPage] = React.useState(0);
         const dense = true;
         const [rowsPerPage, setRowsPerPage] = React.useState(5);
+        const [searchTerm, setSearchTerm] = React.useState('');
+        const [filteredUser, setFilteredUser] = React.useState([]);
 
         const handleRequestSort = (event, property) => {
             const isAsc = orderBy === property && order === 'asc';
@@ -239,6 +241,13 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
         const emptyRows =
             page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+        useEffect(() => {
+            setFilteredUser(
+                visibleRows.filter(row =>
+                    Object.values(row).some(value => value.toString().toLowerCase().includes(searchTerm.toLowerCase())))
+            )
+        });
+
         const visibleRows = React.useMemo(
             () =>
                 stableSort(rows, getComparator(order, orderBy)).slice(
@@ -248,13 +257,24 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
             [order, orderBy, page, rowsPerPage],
         );
         const [count, setCount] = React.useState(0);
-
         return (
             <Box sx={{ width: '100%' }}>
                 <Paper sx={{
                     width: '100%', mb: 2
                 }}>
                     <EnhancedTableToolbar numSelected={selected.length} />
+                    <form className="form-inline my-2 my-lg-0">
+                        <input
+                            className="form-control mr-sm-2"
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                            value={searchTerm}
+                            style={{ width: "30vw" }}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </form>
+
                     <TableContainer>
                         <Table
                             sx={{ minWidth: 100 }}
@@ -271,7 +291,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                                 rowCount={rows.length}
                             />
                             <TableBody>
-                                {visibleRows.map((row, index) => {
+                                {filteredUser.map((row, index) => {
                                     const isItemSelected = isSelected(row.learnerID);
 
                                     return (
