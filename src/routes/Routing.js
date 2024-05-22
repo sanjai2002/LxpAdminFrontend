@@ -24,30 +24,27 @@ function Routing() {
   // }));
   return (
     <div>
-      <Box sx={{ display: 'flex' }}>
-        <BrowserRouter>
-
-          <Adminrouting />
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            {/* <DrawerHeader /> */}
-            <Routes>
-              <Route exact path="/" element={<Loginpage />} />
-              <Route path="/email" element={<Email />} />
-              <Route path="/forgotpassword" element={<ForgotPassword />} />
-              {/* <Route path="/adminnavbar" element={<Navigationbar/>} /> */}
-              <Route path='/' element={<Admindashboard />} />
-              <Route path="/admincourse" element={<Admincourse />} />
-              <Route path='/adminviewallcourse' element={<Adminviewcourse />}></Route>
-              <Route path='/admindashboard' element={<Admindashboard />}></Route>
-              <Route path='/admindupdatecourse/:courseId' element={<Courseupdate />}></Route>
-              <Route path='/learnerviewall' element={<LearnerReduxView />}></Route>
-              <Route path='/individuallearner/:learnerId' element={<IndividualLearner />}></Route>
-              {/* <Route path='/userdashboard' element={<UserDashboard />}></Route> */}
-            </Routes>
-          </Box>
-        </BrowserRouter>
-      </Box>
-    </div >
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Loginpage />} />
+          <Route path="/email" element={<Email />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route element={<Adminrouting />}>
+            <Route path="/home" element={<Admindashboard />} />
+            <Route path="/admincourse" element={<Admincourse />} />
+            <Route
+              path="/adminviewallcourse"
+              element={<Adminviewcourse />}
+            ></Route>
+            <Route path="/admindashboard" element={<Admindashboard />}></Route>
+            <Route
+              path="/admindupdatecourse/:courseId"
+              element={<Courseupdate />}
+            ></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

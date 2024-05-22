@@ -14,7 +14,6 @@ const Courseupdate = () => {
 
     // const navigate = useNavigate();
     const { courseId } = useParams(); // Destructure the courseId from the URL
-
     const dispatch = useDispatch();
     const [coursecategory, setCategory] = useState([]);
     const [courselevel, setLevel] = useState([]);
