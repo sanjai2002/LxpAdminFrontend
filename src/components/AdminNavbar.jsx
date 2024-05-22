@@ -16,9 +16,9 @@ import { FaBookOpenReader } from "react-icons/fa6";
 import { FaUserGraduate, FaHome, FaChartBar } from "react-icons/fa";
 import logo from '../assets/logo.png'
 import '../Styles/AdminNavbar.css'
- 
+
 const drawerWidth = 240;
- 
+
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -27,7 +27,7 @@ const openedMixin = (theme) => ({
     }),
     overflowX: 'hidden',
 });
- 
+
 const closedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -39,7 +39,7 @@ const closedMixin = (theme) => ({
         width: `calc(${theme.spacing(8)} + 1px)`,
     },
 });
- 
+
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -48,7 +48,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
 }));
- 
+
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -66,7 +66,7 @@ const AppBar = styled(MuiAppBar, {
         }),
     }),
 }));
- 
+
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         width: drawerWidth,
@@ -83,42 +83,42 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         }),
     }),
 );
- 
+
 export default function AdminNavbar() {
- 
+
     const [activePage, setActivePage] = useState('home');
- 
- 
+
+
     const [showReportDropdown, setShowReportDropdown] = useState(false);
     const handlePageChange = (page) => {
         setActivePage(page);
- 
+
         if (page === 'reports' && showSideNav) {
             setShowReportDropdown(!showReportDropdown);
         }
         // if (showReportDropdown) {
         //     setShowReportDropdown(!showReportDropdown);
         // }
- 
+
     };
- 
- 
+
+
     const theme = useTheme();
     const [showSideNav, setShowSideNav] = React.useState(false);
- 
+
     const handleDrawerOpen = () => {
         setShowSideNav(true);
     };
- 
+
     const handleDrawerClose = () => {
         setShowSideNav(false);
         if (showReportDropdown) {
             setShowReportDropdown(!showReportDropdown)
         }
- 
- 
+
+
     };
- 
+
     return (
         // <Box sx={{ display: 'flex' }}>
         //    
@@ -152,7 +152,7 @@ export default function AdminNavbar() {
                 <Divider />
                 <div className={`side-nav ${showSideNav ? 'open' : ''}`}>
                     <ul>
-                        <Link to="/">
+                        <Link to="/admindashboard">
                             <li className={activePage === 'home' ? 'active' : ''} onClick={() => handlePageChange('home')}>
                                 <FaHome className='icon' /> {/* Icon for Home */}
                                 {showSideNav && <span>Home</span>}
@@ -160,24 +160,26 @@ export default function AdminNavbar() {
                         </Link>
                         <Link to="/admincourse">
                             <li className={activePage === 'course' ? 'active' : ''} onClick={() => handlePageChange('course')}>
- 
+
                                 <FaBookOpenReader className='icon' />
                                 {showSideNav && <span>Course</span>}
- 
+
                             </li>
                         </Link>
- 
-                        <li
-                            className={activePage === 'learner' ? 'active' : ''}
-                            onClick={() => handlePageChange('learner')}
-                        >
-                            <FaUserGraduate className='icon' /> {/* Icon for Tracking */}
-                            {showSideNav && <span>Learner</span>}
-                        </li>
+                        <Link to="/learnerviewall">
+                            <li
+                                className={activePage === 'learner' ? 'active' : ''}
+                                onClick={() => handlePageChange('learner')}
+                            >
+                                <FaUserGraduate className='icon' /> {/* Icon for Tracking */}
+                                {showSideNav && <span>Learner</span>}
+                            </li>
+                        </Link>
+
                         <li className='reports' onClick={() => handlePageChange('reports')}>
                             <FaChartBar className='icon' />
                             {showSideNav && <span>Reports</span>}
- 
+
                         </li>
                     </ul>
                     <ul className={`submenu ${showReportDropdown ? 'open' : ''}`}>
@@ -188,7 +190,7 @@ export default function AdminNavbar() {
                     </ul>
                 </div>
                 <Divider />
- 
+
             </Drawer>
             {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
@@ -198,4 +200,3 @@ export default function AdminNavbar() {
         // </Box>
     );
 }
- 

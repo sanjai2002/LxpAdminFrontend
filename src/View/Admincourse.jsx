@@ -13,7 +13,6 @@ import Spinner from '../components/Loading/Spinner';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-
 const Admincourse = ({ fetchCourses, courses }) => {
 
 
@@ -37,15 +36,20 @@ const Admincourse = ({ fetchCourses, courses }) => {
         fetchCourses();
     }, [fetchCourses]);
 
-
-
-
     if (courses.length === 0 && loading) {
         return <div className='spinnerclass'> <Spinner /></div>;
     }
 
     return (
         <>
+            <Container fluid className='coursepagebody'>
+                <Row className='mb-5'>
+                    <Col xs={12}>
+                        {/* <Navigationbar /> */}
+                    </Col>
+                </Row>
+                <Row className='pt-3 contentbody'>
+                    {/* <Col xs={12} md={1} className='sidebar  mb-5'>
             {
                 courses.length > 0 ? (
 

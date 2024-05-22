@@ -5,6 +5,7 @@ import { emailRegex, validationMessages } from '../utils/Validation';
 import { submitEmail } from '../actions/EmailAction';
 import { useDispatch } from 'react-redux';
 import Relevantz from '../assets/Images/Relevantz.png';
+import '../Styles/Loginpage.css';
 
 function Email() {
     const { register, handleSubmit, formState: { errors } } = useForm();

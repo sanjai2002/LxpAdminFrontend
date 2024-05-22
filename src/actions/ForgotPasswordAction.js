@@ -29,5 +29,4 @@ export const updatePassword = (data) => async (dispatch) => {
     // Handle errors here, such as dispatching a different action with the error message
     console.error('Error updating password:', error);
   }
-  debugger
 };

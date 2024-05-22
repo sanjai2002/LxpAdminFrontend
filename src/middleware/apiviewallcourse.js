@@ -13,10 +13,11 @@ const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
   if (action.type === FETCH_ALL_COURSES_REQUEST) {
     try {
       const response = await axios.get(API_URL);
+      console.log(API_URL);
 
       console.log('API Response:', response.data); // Log the response data 
 
-      if (response.status===200 && response.data&& response.data.data.length > 0) {
+      if (response.status === 200 && response.data && response.data.data.length > 0) {
         dispatch(fetchallCoursesSuccess(response.data.data));
       } else {
         console.error('No data received from API');
@@ -29,5 +30,3 @@ const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
 };
 
 export default apiviewallcourse;
-
-

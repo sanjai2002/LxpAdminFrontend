@@ -85,7 +85,7 @@ const Loginpage = () => {
               </div>
               <Link to={'/email'} >Forgot password?</Link>
               <div className='button-login'>
-                <button className='btn'>Login</button>
+                <button className='btn' >Login</button>
               </div>
             </form>
           </div>

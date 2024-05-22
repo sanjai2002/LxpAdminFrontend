@@ -14,6 +14,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import GridViewIcon from '@mui/icons-material/GridView';
 import '../Styles/Adminviewcourse.css';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Link } from 'react-router-dom';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { styled } from '@mui/material/styles';
+import { enableDisableCourseRequest } from '../actions/Admin/EnableDisableAction';
 import { Dialog, DialogActions, DialogContent, DialogContentText, TextField, DialogTitle } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -24,8 +29,7 @@ import { useDropzone } from 'react-dropzone';
 import { updateCoursesRequest } from '../actions/Admin/Updatecourse';
 import ClearIcon from '@mui/icons-material/Clear';
 
-
-const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
+const Adminviewcourse = ({ fetchCourses, deleteCourse, courses, enableordisable }) => {
 
 
     console.log("Checking the courses", courses)
@@ -215,9 +219,6 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
         }
     };
 
-
-
-
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredCourses, setFilteredCourses] = useState([]);
 
@@ -225,8 +226,8 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCourseId, setSelectedCourseId] = useState(null);
-
-    const [open, setOpen] = useState(false);
+    // State to control the open status of the dialog
+    const [open, setOpen] = React.useState(false);
     const [dialogMessage, setDialogMessage] = useState('');
 
     const istrue = useSelector((state) => state.deletecourse.isdeleted);
@@ -274,6 +275,7 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
         if (istrue) {
             setOpen(true);
             setDialogMessage(mes);
+            setOpen(true);
             fetchCourses();
         } else if (isfalse) {
             setOpen(true);
@@ -306,9 +308,138 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
         setShowModal(false);
     };
 
+    //const for Enable & Disable Pop up
+    const [showEnableModal, setShowEnableModal] = useState(false);
+    const handleToggle = (title, courseId, status) => {
+        console.log(courseId, status);
+        setCourseTitle(title);
+        setenabledisablecourseId(courseId);
+        setCourseStatus(status);
+        setShowEnableModal(true);
+    };
+
+    const [enabledisablecourseId, setenabledisablecourseId] = useState("");
+    const [coursetitle, setCourseTitle] = useState("");
+    const [coursestatus, setCourseStatus] = useState();
+
+    //Event for Enable And Disable
+    const EnableOrDisable = () => {
+        enableordisable(enabledisablecourseId, !coursestatus);
+        setShowEnableModal(false);
+        setTimeout(() => {
+            document.location.reload();
+        }, 500);
+    }
+
+    //Style for Disable And Enable Modal
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
+
+    const IOSSwitch = styled((props) => (
+        <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    ))(({ theme }) => ({
+        width: 42,
+        height: 26,
+        padding: 0,
+        '& .MuiSwitch-switchBase': {
+            padding: 0,
+            margin: 2,
+            transitionDuration: '300ms',
+            '&.Mui-checked': {
+                transform: 'translateX(16px)',
+                color: '#fff',
+                '& + .MuiSwitch-track': {
+                    backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+                    opacity: 1,
+                    border: 0,
+                },
+                '&.Mui-disabled + .MuiSwitch-track': {
+                    opacity: 0.5,
+                },
+            },
+            '&.Mui-focusVisible .MuiSwitch-thumb': {
+                color: '#33cf4d',
+                border: '6px solid #fff',
+            },
+            '&.Mui-disabled .MuiSwitch-thumb': {
+                color:
+                    theme.palette.mode === 'light'
+                        ? theme.palette.grey[100]
+                        : theme.palette.grey[600],
+            },
+            '&.Mui-disabled + .MuiSwitch-track': {
+                opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+            },
+        },
+        '& .MuiSwitch-thumb': {
+            boxSizing: 'border-box',
+            width: 22,
+            height: 22,
+        },
+        '& .MuiSwitch-track': {
+            borderRadius: 26 / 2,
+            backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+            opacity: 1,
+            transition: theme.transitions.create(['background-color'], {
+                duration: 500,
+            }),
+        },
+    }));
 
     return (
         <>
+
+        //Modal for Enable & Disable
+            <Modal show={showEnableModal} onHide={() => setShowEnableModal(false)} centered>
+                {
+                    coursestatus !== true ?
+                        <>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Enable Course - {coursetitle} </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Are you sure you want to Enable the course {coursetitle}?
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => setShowEnableModal(false)}>
+                                    Cancel
+                                </Button>
+                                <Button variant="danger" onClick={EnableOrDisable}>
+                                    Enable
+                                </Button>
+                            </Modal.Footer>
+                        </>
+                        :
+                        <>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Disable Course - {coursetitle} </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                Are you sure you want to Disable the course {coursetitle}?
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => setShowEnableModal(false)}>
+                                    Cancel
+                                </Button>
+                                <Button variant="danger" onClick={EnableOrDisable}>
+                                    Disable
+                                </Button>
+                            </Modal.Footer>
+                        </>
+
+                }
+            </Modal>
+
             <Container fluid>
                 <Row className='mt-5'>
                     <Col xs={12} md={12} className='mt-2'>
@@ -363,9 +494,11 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
                                                         </Button>
                                                     </TableCell>
                                                     <TableCell align='right'>
-                                                        <Switch
-                                                            checked={course.enabled}
-                                                            color="primary"
+                                                        <FormControlLabel
+                                                            control={
+                                                                <IOSSwitch sx={{ m: 1 }} checked={course.status}
+                                                                    onClick={() => handleToggle(course.title, course.courseId, course.status)} />
+                                                            }
                                                         />
                                                     </TableCell>
                                                 </TableRow>
@@ -392,6 +525,9 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+
+
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -527,7 +663,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchCourses: () => dispatch(fetchallCoursesRequest()),
-    deleteCourse: (courseId) => dispatch(deleteCoursesRequest(courseId))
+    deleteCourse: (courseId) => dispatch(deleteCoursesRequest(courseId)),
+    enableordisable: (enabledisablecourseId, coursestatus) => dispatch(enableDisableCourseRequest(enabledisablecourseId, coursestatus)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Adminviewcourse);
