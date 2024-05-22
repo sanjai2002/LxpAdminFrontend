@@ -32,6 +32,8 @@ function Routing() {
           <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             {/* <DrawerHeader /> */}
             <Routes>
+             <Route exact path="/" element={<Loginpage />} />
+
               {/* <Route exact path="/" element={<Loginpage />} />
             <Route path="/email" element={<Email />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} /> */}

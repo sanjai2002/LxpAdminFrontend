@@ -87,13 +87,13 @@
 
 import { LOGIN_REQUEST, loginSuccessadmin,loginSuccessuser, loginError } from '../../actions/loginAction';
 import axios from "axios";
-import { baseUrl } from "../../middleware/api";
 
+import { baseUrl } from "../../middleware/api";
 
 
 const loginUser = ({dispatch}) =>(next)=>async(action) =>{
   
-  if(action.type ===LOGIN_REQUEST)
+  if(action.type ===LOGIN_REQUEST)  
   {
     try {
         const response = await axios.post(`${baseUrl}api/Login`,action.payload);
