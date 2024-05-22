@@ -246,6 +246,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                 visibleRows.filter(row =>
                     Object.values(row).some(value => value.toString().toLowerCase().includes(searchTerm.toLowerCase())))
             )
+         
         });
 
         const visibleRows = React.useMemo(

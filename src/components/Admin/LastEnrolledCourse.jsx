@@ -16,11 +16,11 @@ const LastEnrolledCourse = ({ fetchLastEnrolledCourse, enrolledcourse }) => {
             <>
                 <Grid item xs>
                     <Card sx={{ display: 'flex' }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', height: 200 }}>
-                            <Typography component="div" variant="h5">
+                        <Box sx={{ display: 'flex', flexDirection: 'column', height: 150 ,padding:'25px'}}>
+                            <Typography component="div" variant="h5" sx={{color:'#23275c' ,fontWeight:'bold'}}>
                                 Last Enrolled course
                             </Typography>
-                            <Typography sx={{ display: 'flex', flexDirection: 'row' }} component="div" variant="h3">
+                            <Typography sx={{ display: 'flex', flexDirection: 'row' ,fontStyle:'italic' }} component="div" variant="h6">
                                 No Courses Enrolled
                             </Typography>
                         </Box>
@@ -34,11 +34,11 @@ const LastEnrolledCourse = ({ fetchLastEnrolledCourse, enrolledcourse }) => {
             <>
                 <Grid item xs>
                     <Card sx={{ display: 'flex' }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', height: 200 }}>
-                            <Typography component="div" variant="h5">
+                        <Box sx={{ display: 'flex', flexDirection: 'column',  height: 150 ,padding:'25px' }}>
+                            <Typography component="div" variant="h5" sx={{color:'#23275c' ,fontWeight:'bold'}}>
                                 Last Enrolled course
                             </Typography>
-                            <Typography sx={{ display: 'flex', flexDirection: 'row' }} component="div" variant="h3">
+                            <Typography sx={{ display: 'flex', flexDirection: 'row',fontStyle:'italic' }} component="div" variant="h5">
                                 {enrolledcourse.lastenrolledCourse.enrolledcourse}
                             </Typography>
                         </Box>
