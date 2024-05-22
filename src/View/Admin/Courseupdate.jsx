@@ -16,9 +16,15 @@ const Courseupdate = () => {
     const { courseId } = useParams(); // Destructure the courseId from the URL
 
     const dispatch = useDispatch();
+
+
+
     const [coursecategory, setCategory] = useState([]);
+
+
     const [courselevel, setLevel] = useState([]);
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
+    
     const [category, setAddCategory] = useState({
         category: '',
         modifiedby: 'Admin'
@@ -73,7 +79,7 @@ const Courseupdate = () => {
         const formData = new FormData();
         formData.append('CourseId', course.courseId);
         formData.append('Title', course.title);
-        formData.append('LevelId', course.level);
+        formData.append('LevelId', course.level); 
         console.log("k" + course.category);
         formData.append('CategoryId', course.category);
         formData.append('Description', course.description);
@@ -85,6 +91,7 @@ const Courseupdate = () => {
         }
 
         try {
+            debugger
             console.log("form", formData);
             console.log('Action payload:', { courseId: course.courseId, formData });
 
@@ -97,28 +104,23 @@ const Courseupdate = () => {
     };
 
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setCourse({ ...course, [name]: value });
 
-
-        if (name === "category" && value === "Add category") {
-            handleShow();
-        }
     };
-    const handleInputCategory = (e) => {
-        setAddCategory({ ...category, [e.target.name]: e.target.value })
-    }
+    
 
-    const handleThumbnailChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            setCourse((prevCourse) => ({ ...prevCourse, thumbnailimage: event.target.files[0] }));
-        }
-    };
+
+        const handleThumbnailChange = (event) => {
+            if (event.target.files && event.target.files[0]) {
+                setCourse((prevCourse) => ({ ...prevCourse, thumbnailimage: event.target.files[0] }));
+            }
+        };
 
     const removeThumbnail = () => {
         setCourse((prevCourse) => ({ ...prevCourse, thumbnailimage: null }));
@@ -250,12 +252,12 @@ const Courseupdate = () => {
                     </Container>
                 </Col>
             </Row>
-            <Modal show={show} onHide={handleClose} centered>
+            {/* <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Category</Modal.Title>
                 </Modal.Header>
                 <Form>
-                    {/* <Form onSubmit={handleCategory}> */}
+                    
                     <Modal.Body>
 
                         <input
@@ -276,7 +278,7 @@ const Courseupdate = () => {
                         </Button>
                     </Modal.Footer>
                 </Form>
-            </Modal>
+            </Modal> */}
         </>
     );
 };
