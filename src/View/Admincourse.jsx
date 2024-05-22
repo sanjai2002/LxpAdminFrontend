@@ -42,14 +42,6 @@ const Admincourse = ({ fetchCourses, courses }) => {
 
     return (
         <>
-            <Container fluid className='coursepagebody'>
-                <Row className='mb-5'>
-                    <Col xs={12}>
-                        {/* <Navigationbar /> */}
-                    </Col>
-                </Row>
-                <Row className='pt-3 contentbody'>
-                    {/* <Col xs={12} md={1} className='sidebar  mb-5'>
             {
                 courses.length > 0 ? (
 

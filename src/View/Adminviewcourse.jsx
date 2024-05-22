@@ -14,7 +14,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import GridViewIcon from '@mui/icons-material/GridView';
 import '../Styles/Adminviewcourse.css';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Link } from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
@@ -578,8 +577,8 @@ const Adminviewcourse = ({ fetchCourses, deleteCourse, courses, enableordisable 
                                 label="Course Level"
                                 value={selectedcourse.level}
                                 onChange={handleInputChange}
-                            // error={selectedcourse.level.trim() === ""}
-                            // helperText={selectedcourse.level.trim() === '' ? "Course Level cannot be empty" : ""}
+                            error={selectedcourse.level.trim() === ""}
+                            helperText={selectedcourse.level.trim() === '' ? "Course Level cannot be empty" : ""}
                             >
                                 {courselevel.map((level) => (
                                     <MenuItem key={level.levelId} value={level.levelId}>
