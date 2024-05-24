@@ -5,7 +5,7 @@
 // const API_URL = 'http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate';
 
 //  const UpdateCourse = ({ dispatch }) => (next) => async (action) => {
-  
+
 
 //   if (action.type === UPDATE_COURSES_REQUEST) {
 //     try {
@@ -25,7 +25,7 @@
 //     }
 //   }
 //   return next(action);
-  
+
 // };
 
 // export default UpdateCourse;
@@ -99,7 +99,6 @@
 
 // export default UpdateCourseMiddleware;
 
-
 import axios from 'axios';
 import {
   UPDATE_COURSES_REQUEST,
@@ -117,19 +116,25 @@ const UpdateCourseMiddleware = ({ dispatch }) => (next) => async (action) => {
       return next(action);
     }
 
-    // const API_URL = "http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate";
-
-
     const API_URL = `http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate`;
 
     try {
-      console.log("l"+formData);
+      console.log("l" + formData);
+      console.log(formData);
       const response = await axios.put(API_URL, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      dispatch(updateCoursesSuccess(response.data));
+      if (response.status === 200)
+       {
+        dispatch(updateCoursesSuccess(response.data.message));
+        console.log("updatecourseapiresponse", response.data);
+      }
+      else {
+        console.error('No data received from API');
+      }
+
     } catch (error) {
       console.error('API Error:', error.response ? error.response.data : error.message);
       dispatch(updateCoursesFailure(error.message));
