@@ -32,7 +32,7 @@ const QuizReportView = ({FetchQuizereportRequest,quizreport}) => {
   useEffect(() => {
       const timer = setTimeout(() => {
           setLoading(false)
-      }, 1500);
+      }, 1000);
       return () => clearTimeout(timer);
   }, []);
 
@@ -89,37 +89,37 @@ if (loading||quizreport.length === 0) {
       label: "S.No",
     },
     {   
-      id: "CourseName",
+      id: "courseName",
       numeric: false,
       disablePadding: false,
       label: "Course Name",
     },
     {
-      id: "TopicName",
+      id: "topicName",
       numeric: false,
       disablePadding: false,
       label: "Topic Name",
     },
     {
-      id: "NoofAttempts",
-      numeric: true,
+      id: "quizName",
+      numeric: false,
       disablePadding: false,
-      label: "No of Attempts",
+      label: "Quiz Name",
     },
     {
-      id: "NoofPassedUsers",
+      id: "noOfPassedUsers",
       numeric: true,
       disablePadding: true,
       label: "No Of PassedUsers",
     },
     {
-        id: "NoofFailedUsers",
+        id: "noOfFailedUsers",
         numeric: true,
         disablePadding: true,
         label:"No Of Failed Users",
    },
    {
-    id: "AverageScore",
+    id: "averageScore",
     numeric: true,
     disablePadding: true,
     label: "Average Score",
@@ -328,7 +328,7 @@ const Exportreport=()=>{
               onChange={(e) => setSearchTerm(e.target.value)}
             />
          </form>         
-         <button onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
+         <button className="btn btn-success" onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
           </div>
              
          <div id="learnersreport">
@@ -368,16 +368,16 @@ const Exportreport=()=>{
                         align="left"
                         padding="none"
                       >
-                        {row.CourseName}
+                        {row.courseName}
                       </TableCell>
-                      <TableCell align="left">{row.TopicName}</TableCell>
+                      <TableCell align="left">{row.topicName}</TableCell>
                       <TableCell align="left">
                         {/* {row.lastLogin.replace("T", " ")} */}
-                        {row.NoofAttempts}
+                        {row.quizName}
                       </TableCell>
-                      <TableCell align="left">{row.NoofPassedUsers}</TableCell>
-                      <TableCell align="left">{row.NoofFailedUsers}</TableCell>
-                      <TableCell align="left">{row.AverageScore}</TableCell>
+                      <TableCell align="left">{row.noOfPassedUsers}</TableCell>
+                      <TableCell align="left">{row.noOfFailedUsers}</TableCell>
+                      <TableCell align="left">{row.averageScore}</TableCell>
                     
                     </TableRow>
                   );

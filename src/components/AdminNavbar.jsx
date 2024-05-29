@@ -117,8 +117,6 @@ export default function AdminNavbar() {
   };
 
   return (
-    // <Box sx={{ display: 'flex' }}>
-    //
     <>
      <CssBaseline />
       <AppBar position="fixed" open={showSideNav}>
@@ -136,7 +134,7 @@ export default function AdminNavbar() {
           <MenuIcon />
           </IconButton>
           <Box component="div">
-            <img src={logo} alt="logo"/> <KeyboardBackspaceIcon style={{position:"absolute",marginLeft:'65%',width:"60px"}} onClick={() => navigate(-1)} />
+            <img src={logo} alt="logo"/> <KeyboardBackspaceIcon style={{position:"absolute",marginLeft:'70%',marginTop:'10px',cursor:"pointer"}} onClick={() => navigate(-1)} />
             <span >
               {/* <ArrowBackIosIcon style={{marginLeft:'90%'}} onClick={() => navigate(-1)} /> */}
               {/* <ArrowForwardIosIcon onClick={( ) => navigate(1)} /> */}

@@ -32,7 +32,7 @@ const CourseReportView = ({FetchCoursereportRequest,coursereport}) => {
   useEffect(() => {
       const timer = setTimeout(() => {
           setLoading(false)
-      }, 1500);
+      }, 1000);
       return () => clearTimeout(timer);
   }, []);
 
@@ -323,7 +323,7 @@ const Exportreport=()=>{
               onChange={(e) => setSearchTerm(e.target.value)}
             />
          </form>         
-         <button onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
+         <button className="btn btn-success"  onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
           </div>
              
 
@@ -364,15 +364,15 @@ const Exportreport=()=>{
                         align="left"
                         padding="none"
                       >
-                        {row.coursename}
+                        {row.title}
                       </TableCell>
-                      <TableCell align="left">{row.coursecategory}</TableCell>
+                      <TableCell align="left">{row.category}</TableCell>
                       <TableCell align="left">
                         {/* {row.lastLogin.replace("T", " ")} */}
-                        {row.courselevels}
+                        {row.level}
                       </TableCell>
-                      <TableCell align="left">{row.createdate}</TableCell>
-                      <TableCell align="left">{row.modifydate}</TableCell>
+                      <TableCell align="left">{row.createdAt.replace("T", " ")}</TableCell>
+                      <TableCell align="left">{row.modifiedAt.replace("T", " ")}</TableCell>
                     
                     </TableRow>
                   );

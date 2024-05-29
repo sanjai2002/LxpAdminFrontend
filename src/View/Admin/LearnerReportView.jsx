@@ -32,7 +32,7 @@ const LearnerReportView = ({fetchlearnersreport,learnerreport}) => {
   useEffect(() => {
       const timer = setTimeout(() => {
           setLoading(false)
-      }, 1500);
+      }, 1000);
       return () => clearTimeout(timer);
   }, []);
 
@@ -89,25 +89,25 @@ if (loading||learnerreport.length === 0) {
       label: "S.No",
     },
     {
-      id: "username",
+      id: "userName",
       numeric: false,
       disablePadding: false,
       label: "Learner Name",
     },
     {
-      id: "enrolledcourse",
+      id: "enrolledCourse",
       numeric: true,
       disablePadding: false,
       label: "No of Enrolled Course",
     },
     {
-      id: "completedcourse",
+      id: "completedCourse",
       numeric: true,
       disablePadding: false,
       label: "No of Completed Course",
     },
     {
-      id: "last_login",
+      id: "lastLogin",
       numeric: true,
       disablePadding: true,
       label: "Last Login",
@@ -317,7 +317,7 @@ const Exportreport=()=>{
               onChange={(e) => setSearchTerm(e.target.value)}
             />
          </form>         
-         <button onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
+         <button className="btn btn-success" onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
          
           </div>
              
@@ -359,15 +359,14 @@ const Exportreport=()=>{
                         align="left"
                         padding="none"
                       >
-                        {row.username}
+                        {row.userName}
                       </TableCell>
-                      <TableCell align="left">{row.enrolledcourse}</TableCell>
+                      <TableCell align="left">{row.enrolledCourse}</TableCell>
                       <TableCell align="left">
                         {/* {row.lastLogin.replace("T", " ")} */}
-                        {row.completedcourse}
+                        {row.completedCourse}
                       </TableCell>
-                      <TableCell align="left">{row.last_login}</TableCell>
-                    
+                      <TableCell align="left">{row.lastLogin.replace("T", " ")}</TableCell>
                     </TableRow>
                   );
                 })}
