@@ -229,5 +229,118 @@
       "email": "jerisha@gmail.com",
       "last_login": "12-01-2024"
     }
+  ],
+  "ViewlearnerReports":[
+    {
+      "id": "1",
+      "username": "Sanjai",
+      "enrolledcourse": "5",
+      "completedcourse": "3",
+      "last_login": "12-01-2024"
+    },
+    {
+      "id": "2",
+      "username": "kavin",
+      "enrolledcourse": "2",
+      "completedcourse": "1",
+      "last_login": "14-01-2024"
+    },
+    {
+      "id": "3",
+      "username": "Kathir",
+      "enrolledcourse": "2",
+      "completedcourse": "2",
+      "last_login": "14-05-2024"
+    },
+    {
+      "id": "4",
+      "username": "Laevi",
+      "enrolledcourse": "6",
+      "completedcourse": "2",
+      "last_login": "24-05-2024"
+    },
+    {
+      "id": "5",
+      "username": "Karnisha",
+      "enrolledcourse": "5",
+      "completedcourse": "3",
+      "last_login": "12-01-2024"
+    },
+    {
+      "id": "6",
+      "username": "Asha",
+      "enrolledcourse": "2",
+      "completedcourse": "1",
+      "last_login": "14-01-2024"
+    },
+    {
+      "id": "7",
+      "username": "Mano",
+      "enrolledcourse": "2",
+      "completedcourse": "2",
+      "last_login": "14-05-2024"
+    },
+    {
+      "id": "8",
+      "username": "Raj",
+      "enrolledcourse": "6",
+      "completedcourse": "2",
+      "last_login": "24-05-2024"
+    }
+  ],
+  "ViewCoursereport":[
+    {
+      "id":"1",
+      "coursename":"html",
+      "coursecategory":"Technical",
+      "courselevels":"beginer",
+      "createdate":"23-08-23",
+      "modifydate":"08-04-24"
+    },
+    {
+      "id":"2",
+      "coursename":"css",
+      "coursecategory":"Technical",
+      "courselevels":"beginer",
+      "createdate":"12-08-23",
+      "modifydate":"08-04-24"
+    },
+    {
+      "id":"3",
+      "coursename":"active Listening",
+      "coursecategory":"Behavioural",
+      "courselevels":"advance",
+      "createdate":"23-08-23",
+      "modifydate":"08-04-24"
+    }
+  ],
+  "QuizReport":[
+    {
+      "id":"1",
+      "CourseName":"html",
+      "TopicName":"Introduction",
+      "NoofAttempts":"120",
+      "NoofPassedUsers":"80",
+      "NoofFailedUsers":"40",
+      "AverageScore":"80.00"
+    },
+    {
+      "id":"2",
+      "CourseName":"html",
+      "TopicName":"Basic Tags",
+      "NoofAttempts":"60",
+      "NoofPassedUsers":"50",
+      "NoofFailedUsers":"10",
+      "AverageScore":"56.00"
+    },
+    {
+      "id":"3",
+      "CourseName":"html",
+      "TopicName":"Headingtags",
+      "NoofAttempts":"60",
+      "NoofPassedUsers":"50",
+      "NoofFailedUsers":"10",
+      "AverageScore":"76.00"
+    }
   ]
 }

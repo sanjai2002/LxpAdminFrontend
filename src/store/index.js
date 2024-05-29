@@ -23,7 +23,18 @@ import EnableDisableCourseReducer from '../reducers/Admin/EnableDisbaleCourseRed
 import EnableDisableCourse from '../middleware/Admin/apiEnableDisbaleCourse';
 import fetchDataReducer from '../reducers/DashboardReducer';
 import FetchdashboardData from '../middleware/apiDashboard';
+import emailReducer from '../reducers/EmailReducers';
+import emailMiddleware from '../middleware/Emailapi';
 
+import ApiForgotpassword from '../middleware/Admin/ApiForgotpassword';
+import forgotPasswordReducer from '../reducers/ForgotPasswordReducer';
+
+import ApiViewlearnersReport from '../middleware/Admin/ApiViewlearnersReport';
+import ViewLearnersreportsReducer from '../reducers/Admin/ViewLearnersreportsReducer';
+import ApiViewCourseReport  from '../middleware/Admin/ApiViewCourseReport';
+import ViewCoursereportReducers from '../reducers/Admin/ViewCoursereportReducers';
+import QuizReportReducer from '../reducers/Admin/ViewQuizReportReducers';
+import ApiViewQuizReport from '../middleware/Admin/ApiViewQuizReport';
 
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
@@ -37,12 +48,17 @@ const rootReducer = combineReducers({
   profilecourses: ProfileCoursesReducer,
   enrolledcourse: LastEnrolledCourseReducer,
   enabledisablecourse: EnableDisableCourseReducer,
-  fetchdashboard: fetchDataReducer
+  fetchdashboard: fetchDataReducer,
+  learnerreport:ViewLearnersreportsReducer,
+  coursereport:ViewCoursereportReducers,
+  quizreport:QuizReportReducer,
+  email:emailReducer,
+
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk, apiMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData)
+  applyMiddleware(thunk, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport,)
 );
 
 export default store;

@@ -87,7 +87,7 @@ function Sidebar() {
           ...(open && { display: 'none' }),
         }}
       >
-        <MenuIcon />
+      <MenuIcon />
       </IconButton>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>

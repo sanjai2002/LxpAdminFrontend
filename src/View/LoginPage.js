@@ -12,8 +12,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Loginpage = () => {
-
-
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -36,10 +34,7 @@ const Loginpage = () => {
     }
   }, [isSuccessuser, navigate]);
 
-
-
   const onSubmit = data => {
-
     dispatch(loginRequest(data));
   };
   return (

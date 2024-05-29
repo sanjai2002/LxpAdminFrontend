@@ -1,27 +1,34 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { emailRegex, passwordRegex, validationMessages } from '../utils/Validation';
+import { emailRegex, passwordRegex, validationMessages,receivedPasswordRegex } from '../utils/Validation';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePassword } from '../actions/ForgotPasswordAction';
+import { forgotpasswordrequest } from '../actions/ForgotPasswordAction';
 import Relevantz from '../assets/Images/Relevantz.png';
 
-function ForgotPassword() {
+export default function ForgotPassword() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     const location = useLocation();
-    const { errors = {} } = useSelector((state) => state);
     const email = location.state?.email || '';
-    
+    console.log("verify",email.email);
+    const isSuccessForgotpassword=useSelector((state)=>state.forgotPassword.issuccessforgotpassword);
+    useEffect(() => {
+        if (isSuccessForgotpassword) {
+                navigate('/');
+        }
 
-    const { register, handleSubmit } = useForm();
+    }, [isSuccessForgotpassword, navigate]); 
+    // const location = useLocation();
 
+    // const email = location.state?.email || '';
     const onSubmit = (data) => {
         console.log(data);
-        dispatch(updatePassword(data));
-        console.log('called...');
-        
+        dispatch(forgotpasswordrequest(data));
+        console.log('called...',data);
     };
-
     return (
         <div className='login-app'>
             <div className='login-container'>
@@ -29,7 +36,7 @@ function ForgotPassword() {
                     <div className="login-header">
                         <img src={Relevantz} alt="Logo" />
                     </div>
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <input
                                 {...register('email', {
@@ -41,43 +48,53 @@ function ForgotPassword() {
                                 })}
                                 type='text'
                                 placeholder='Email'
-                                value={email}
+                                value={email.email}
                                 readOnly
+                           
                             />
                         </div>
                         <p>{errors.email?.message}</p>
                         <div>
                             <input
-                                {...register('receivepassword', {
+                                {...register('oldPassword', {
                                     required: validationMessages.password.required,
+                                    minLength: {
+                                        value: 6,
+                                        message: validationMessages.password.receivePassword
+                                    },
                                     pattern: {
-                                        value: passwordRegex,
-                                        message: "Invalid password"
+                                        value: receivedPasswordRegex,
+                                        message: validationMessages.password.receivePattern
                                     }
                                 })}
                                 type='password'
                                 placeholder='Received Password'
+                               
                             />
                         </div>
-                        <p>{errors.receivepassword?.message}</p>
+                        <p>{errors.oldPassword?.message}</p>
                         <div>
                             <input
-                                {...register('newpassword', {
+                                {...register('newPassword', {
                                     required: validationMessages.password.required,
                                     minLength: {
-                                        value: 14,
+                                        value: 6,
                                         message: validationMessages.password.minLength
                                     },
                                     pattern: {
                                         value: passwordRegex,
                                         message: validationMessages.password.pattern
+
                                     }
+
                                 })}
                                 type='password'
                                 placeholder='New Password'
+                            
+
                             />
                         </div>
-                        <p>{errors.newpassword?.message}</p>
+                        <p>{errors.newPassword?.message}</p>
                         <div className='button-login'>
                             <button className='btn'>Update password</button>
                         </div>
@@ -87,5 +104,3 @@ function ForgotPassword() {
         </div>
     );
 }
-
-export default ForgotPassword;

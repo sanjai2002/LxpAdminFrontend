@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { fetchLearnerRequest } from "../../actions/LearnersViewAction";
-import { useEffect } from "react";
+import { FetchLearnersreportRequest } from '../../actions/LearnersReportAction';
+import { useEffect,useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
@@ -19,19 +19,35 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import PreviewIcon from "@mui/icons-material/Preview";
+import { Col } from "react-bootstrap";
+import { Button } from "bootstrap";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import  ReportSkeleton from '../../components/Loading/Reportskeleton'
 
-const LearnerReduxView = ({ fetchLearners, learners }) => {
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+const LearnerReportView = ({fetchlearnersreport,learnerreport}) => {
+  //skeleton
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetchLearners();
-  }, [fetchLearners]);
+      const timer = setTimeout(() => {
+          setLoading(false)
+      }, 1500);
+      return () => clearTimeout(timer);
+  }, []);
 
-  if (learners.length === 0) {
-    return <div>
-      <h1>Loading courses...</h1>
-    </div>;
+  useEffect(() => {
+    fetchlearnersreport();
+}, [fetchlearnersreport]);
+
+//Pdf 
+const pdfRef=React.useRef();
+
+if (loading||learnerreport.length === 0) {
+    return <div><ReportSkeleton/></div>;
   }
   //Rows for the table
-  const rows = learners.learners;
+  const rows = learnerreport;
 
   //Descending function
   function descendingComparator(a, b, orderBy) {
@@ -73,30 +89,54 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
       label: "S.No",
     },
     {
-      id: "learnerName",
+      id: "username",
       numeric: false,
       disablePadding: false,
-      label: "Name",
+      label: "Learner Name",
     },
     {
-      id: "email",
-      numeric: false,
+      id: "enrolledcourse",
+      numeric: true,
       disablePadding: false,
-      label: "Email",
+      label: "No of Enrolled Course",
+    },
+    {
+      id: "completedcourse",
+      numeric: true,
+      disablePadding: false,
+      label: "No of Completed Course",
     },
     {
       id: "last_login",
       numeric: true,
-      disablePadding: false,
+      disablePadding: true,
       label: "Last Login",
     },
-    {
-      id: "view_details",
-      numeric: false,
-      disablePadding: true,
-      label: "View Details",
-    },
   ];
+ 
+  // today date
+let today = new Date();
+today.setDate(today.getDate()); // Add 5 days
+let month = String(today.getMonth() + 1).padStart(2, '0');
+let day = String(today.getDate()).padStart(2, '0');
+let Dates = day+ '-' + month + '-' + today.getFullYear() ;
+
+const Exportreport=()=>{
+  const input=pdfRef.current;
+  html2canvas(input).then((canvas)=>{
+    const imgData=canvas.toDataURL('image/png');
+    const pdf=new jsPDF('p','mm','a4',true);
+    const pdfWidth=pdf.internal.pageSize.getWidth();
+    const pdfHeight=pdf.internal.pageSize.getHeight();
+    const imgWidth=canvas.width;
+    const imgHeight=canvas.height;
+    const ratio=Math.min(pdfWidth/imgWidth,pdfHeight/imgHeight);
+    const imgX=(pdfWidth-imgWidth*ratio)/2;
+    const imgY=30;
+    pdf.addImage(imgData,'PNG',imgX,imgY,imgWidth*ratio,imgHeight*ratio);
+    pdf.save(`Learnersreports_${Dates}.pdf`);
+  })
+};
 
   //Component for Head in Table
   function EnhancedTableHead(props) {
@@ -185,7 +225,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
             component="div"
             align="center"
           >
-            Learners Details
+            Learners Report
           </Typography>
         )}
       </Toolbar>
@@ -222,7 +262,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
       }
       setSelected([]);
     };
-
+    
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -255,7 +295,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
         ),
       [order, orderBy, page, rowsPerPage]
     );
-    const [count, setCount] = React.useState(0);
+    
     return (
       <Box sx={{ width: "100%" }}>
         <Paper
@@ -265,6 +305,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
           }}
         >
           <EnhancedTableToolbar numSelected={selected.length} />
+          <div style={{display:'flex',padding:"10px"}}>
           <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-2"
@@ -275,13 +316,18 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
               style={{ width: "30vw" }}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-          </form>
+         </form>         
+         <button onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
+         
+          </div>
+             
 
-          <TableContainer>
+         <div id="learnersreport">
+          <TableContainer ref={pdfRef}>
             <Table
-              sx={{ minWidth: 100 }}
+              sx={{width:'100%'}}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={dense ? "medium" : "medium"}
             >
               <EnhancedTableHead
                 numSelected={selected.length}
@@ -293,12 +339,11 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
               />
               <TableBody>
                 {filteredUser.map((row, index) => {
-                  const isItemSelected = isSelected(row.learnerID);
+                  const isItemSelected = isSelected(row.id);
 
                   return (
                     <TableRow
                       hover
-                      // onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -309,22 +354,20 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                       <TableCell align="left">{index + 1}</TableCell>
                       <TableCell
                         component="th"
-                        id={row.learnerID}
+                        id={row.id}
                         scope="row"
                         align="left"
                         padding="none"
                       >
-                        {row.learnerName}
+                        {row.username}
                       </TableCell>
-                      <TableCell align="left">{row.email}</TableCell>
+                      <TableCell align="left">{row.enrolledcourse}</TableCell>
                       <TableCell align="left">
-                        {row.lastLogin.replace("T", " ")}
+                        {/* {row.lastLogin.replace("T", " ")} */}
+                        {row.completedcourse}
                       </TableCell>
-                      <TableCell align="left">
-                        <Link to={`/individuallearner/${row.learnerID}`}>
-                          <PreviewIcon />
-                        </Link>
-                      </TableCell>
+                      <TableCell align="left">{row.last_login}</TableCell>
+                    
                     </TableRow>
                   );
                 })}
@@ -340,6 +383,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
               </TableBody>
             </Table>
           </TableContainer>
+          </div>
           <TablePagination
             rowsPerPageOptions={[5, 10, 20, 40]}
             component="div"
@@ -351,6 +395,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
           />
         </Paper>
       </Box>
+    
     );
   }
 
@@ -362,11 +407,12 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
 };
 
 const mapStateToProps = (state) => ({
-  learners: state.alllearner,
+  learnerreport: state.learnerreport.reports,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchLearners: () => dispatch(fetchLearnerRequest()),
+  fetchlearnersreport: () => dispatch(FetchLearnersreportRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearnerReduxView);
+export default connect(mapStateToProps, mapDispatchToProps)(LearnerReportView);
+
