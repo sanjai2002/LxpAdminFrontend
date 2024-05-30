@@ -18,6 +18,7 @@ import QuizReportView from '../View/Admin/QuizReportView';
 
 import ReportSkeleton from '../components/Loading/Reportskeleton'
 
+
 function Routing() {
   // const DrawerHeader = styled('div')(({ theme }) => ({
   //   display: 'flex',
@@ -28,7 +29,7 @@ function Routing() {
   //   ...theme.mixins.toolbar,
   // }));
   return (
-  
+
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Loginpage />} />
@@ -51,6 +52,7 @@ function Routing() {
         </Routes>
       </BrowserRouter>
   
+
   );
 }
 

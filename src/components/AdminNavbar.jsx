@@ -117,8 +117,10 @@ export default function AdminNavbar() {
   };
 
   return (
+
     <>
      <CssBaseline />
+
       <AppBar position="fixed" open={showSideNav}>
         <Toolbar className="top-nav">
           <IconButton
@@ -155,7 +157,9 @@ export default function AdminNavbar() {
         <Divider />
         <div className={`side-nav ${showSideNav ? "open" : ""}`}>
           <ul>
+
             <Link to="/admindashboard" style={{textDecoration:"none"}}>
+
               <li
                 className={activePage === "home" ? "active" : ""}
                 onClick={() => handlePageChange("home")}
@@ -174,6 +178,7 @@ export default function AdminNavbar() {
               </li>
             </Link>
             <Link to="/learnerviewall" style={{textDecoration:"none"}}>
+
               <li
                 className={activePage === "learner" ? "active" : ""}
                 onClick={() => handlePageChange("learner")}
@@ -182,12 +187,14 @@ export default function AdminNavbar() {
                 {showSideNav && <span>Learner</span>}
               </li>
             </Link>
+
             <li className="reports" onClick={() => handlePageChange("reports")}>
               <FaChartBar className="icon" />
               {showSideNav && <span>Reports</span>}
             </li>
           </ul>
           <ul className={`submenu ${showReportDropdown ? "open" : ""}`}>
+
             <Link style={{textDecoration:"none"}} to='/learnerreport'><li onClick={() => setActivePage("learnerreport")}>
               {" "}
               Learner Report  
@@ -195,6 +202,7 @@ export default function AdminNavbar() {
             <Link style={{textDecoration:"none"}} to='/coursereport'><li onClick={() => setActivePage("coursereport")}>Course Report</li></Link>
             {/* <Link  style={{textDecoration:"none"}}to='/enrollmentreport'> <li onClick={() => setActivePage("enroll")}>Enrollment Report</li></Link> */}
             <Link  style={{textDecoration:"none"}}to='/quizreport'><li onClick={() => setActivePage("quiz")}>Quiz Report</li></Link>
+
           </ul>
         </div>
         <Divider />
