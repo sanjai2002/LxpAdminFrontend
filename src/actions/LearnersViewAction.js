@@ -16,6 +16,7 @@ export const fetchLearnerFailure = (error) => ({
     payload: error
 })
 
+
 export const FETCH_PROFILECARD_REQUEST = 'FETCH_PROFILECARD_REQUEST';
 export const FETCH_PROFILECARD_SUCCESS = 'FETCH_PROFILECARD_SUCCESS';
 export const FETCH_PROFILECARD_FAILURE = 'FETCH_PROFILECARD_FAILURE';

@@ -17,6 +17,7 @@ import { FaUserGraduate, FaHome, FaChartBar } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import "../Styles/AdminNavbar.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const drawerWidth = 240;
 
@@ -116,10 +117,10 @@ export default function AdminNavbar() {
   };
 
   return (
-    // <Box sx={{ display: 'flex' }}>
-    //
+
     <>
-      <CssBaseline />
+     <CssBaseline />
+
       <AppBar position="fixed" open={showSideNav}>
         <Toolbar className="top-nav">
           <IconButton
@@ -132,13 +133,13 @@ export default function AdminNavbar() {
               ...(showSideNav && { display: "none" }),
             }}
           >
-            <MenuIcon />
+          <MenuIcon />
           </IconButton>
           <Box component="div">
-            <img src={logo} alt="logo" />
-            <span>
-              <ArrowBackIosIcon onClick={() => navigate(-1)} />
-              <ArrowForwardIosIcon onClick={() => navigate(1)} />
+            <img src={logo} alt="logo"/> <KeyboardBackspaceIcon style={{position:"absolute",marginLeft:'70%',marginTop:'10px',cursor:"pointer"}} onClick={() => navigate(-1)} />
+            <span >
+              {/* <ArrowBackIosIcon style={{marginLeft:'90%'}} onClick={() => navigate(-1)} /> */}
+              {/* <ArrowForwardIosIcon onClick={( ) => navigate(1)} /> */}
             </span>
           </Box>
         </Toolbar>
@@ -156,7 +157,9 @@ export default function AdminNavbar() {
         <Divider />
         <div className={`side-nav ${showSideNav ? "open" : ""}`}>
           <ul>
-            <Link to="/admindashboard">
+
+            <Link to="/admindashboard" style={{textDecoration:"none"}}>
+
               <li
                 className={activePage === "home" ? "active" : ""}
                 onClick={() => handlePageChange("home")}
@@ -165,7 +168,7 @@ export default function AdminNavbar() {
                 {showSideNav && <span>Home</span>}
               </li>
             </Link>
-            <Link to="/admincourse">
+            <Link to="/admincourse" style={{textDecoration:"none"}}>
               <li
                 className={activePage === "course" ? "active" : ""}
                 onClick={() => handlePageChange("course")}
@@ -174,7 +177,8 @@ export default function AdminNavbar() {
                 {showSideNav && <span>Course</span>}
               </li>
             </Link>
-            <Link to="/learnerviewall">
+            <Link to="/learnerviewall" style={{textDecoration:"none"}}>
+
               <li
                 className={activePage === "learner" ? "active" : ""}
                 onClick={() => handlePageChange("learner")}
@@ -190,13 +194,15 @@ export default function AdminNavbar() {
             </li>
           </ul>
           <ul className={`submenu ${showReportDropdown ? "open" : ""}`}>
-            <li onClick={() => setActivePage("learnerreport")}>
+
+            <Link style={{textDecoration:"none"}} to='/learnerreport'><li onClick={() => setActivePage("learnerreport")}>
               {" "}
-              Learner Report
-            </li>
-            <li onClick={() => setActivePage("coursereport")}>Course Report</li>
-            <li onClick={() => setActivePage("enroll")}>Enrollment Report</li>
-            <li onClick={() => setActivePage("quiz")}>Quiz Report</li>
+              Learner Report  
+            </li></Link>
+            <Link style={{textDecoration:"none"}} to='/coursereport'><li onClick={() => setActivePage("coursereport")}>Course Report</li></Link>
+            {/* <Link  style={{textDecoration:"none"}}to='/enrollmentreport'> <li onClick={() => setActivePage("enroll")}>Enrollment Report</li></Link> */}
+            <Link  style={{textDecoration:"none"}}to='/quizreport'><li onClick={() => setActivePage("quiz")}>Quiz Report</li></Link>
+
           </ul>
         </div>
         <Divider />

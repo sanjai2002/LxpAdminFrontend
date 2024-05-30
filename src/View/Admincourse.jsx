@@ -14,38 +14,28 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
 const Admincourse = ({ fetchCourses, courses }) => {
-
-
     const [loading, setLoading] = useState(true);
     const rootRef = React.useRef(null);
-
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false)
-        }, 3000);
+        }, 1000);
         return () => clearTimeout(timer);
 
     }, []);
-
-
-
-
-
+    
     useEffect(() => {
         fetchCourses();
     }, [fetchCourses]);
 
-    if (courses.length === 0 && loading) {
+    if ( loading||courses.length === 0) {
         return <div className='spinnerclass'> <Spinner /></div>;
     }
-
     return (
         <>
             {
                 courses.length > 0 ? (
-
-
                     <Container fluid className='coursepagebody'>
                         <Row className='mb-5'>
                             <Col xs={12}>
@@ -146,6 +136,7 @@ const Admincourse = ({ fetchCourses, courses }) => {
 
     );
 };
+
 
 const mapStateToProps = (state) => ({
     courses: state.course.courses,

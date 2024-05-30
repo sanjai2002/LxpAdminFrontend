@@ -104,5 +104,4 @@ const mapDispatchToProps = (dispatch) => ({
     fetchProfileCard: (learnerid) => dispatch(fetchProfileCardRequest(learnerid))
 })
 
-
 export default connect(mapStoreToProps, mapDispatchToProps)(ProfileCard);

@@ -35,6 +35,3 @@ const apiMiddleware = ({ dispatch }) => (next) => async (action) => {
 
 export default apiMiddleware;
 
-
-
-

@@ -1,18 +1,37 @@
-import { UPDATE_PASSWORD } from "../actions/ForgotPasswordAction";
+
+import {FORGOTPASSWORD_REQUEST,FORGOTPASSWORD_SUCCESS,FORGOTPASSWORD_ERROR} from '../actions/ForgotPasswordAction'
+
 const initialState = {
-  time: 60,
-  email: '',
-  errors: {},
+ updatepassword:null,
+ loading:false,
+ issuccessforgotpassword:false,
+ error:null,
 };
 
 const forgotPasswordReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_PASSWORD:
+    case FORGOTPASSWORD_REQUEST:
+      console.log("reducers",action.payload);
       return {
         ...state,
-        // time: action.payload.time,
-        email: action.payload.email,
-        errors: action.payload.errors,
+       loading:true,
+       error:null
+      };
+    case FORGOTPASSWORD_SUCCESS:
+      return{
+        ...state,
+        issuccessforgotpassword:true,
+        loading:false,
+        forgotpassword:action.payload,
+        error:null
+      };
+
+    case FORGOTPASSWORD_ERROR:
+      return{
+        ...state,
+        loading:false,
+        error:action.payload,
+
       };
     default:
       return state;

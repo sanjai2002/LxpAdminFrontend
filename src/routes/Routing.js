@@ -12,6 +12,12 @@ import { Box } from "@mui/material";
 import IndividualLearnerView from "../View/Admin/Learner/IndividualLearnerView";
 import LearnerReduxView from "../View/Admin/LearnerReduxView";
 import { IndividualLearner } from "../View/Admin/Learner/IndividualLearner";
+import  LearnerReportView  from "../View/Admin/LearnerReportView";
+import CourseReportView from '../View/Admin/CourseReportView';
+import QuizReportView from '../View/Admin/QuizReportView';
+
+import ReportSkeleton from '../components/Loading/Reportskeleton'
+
 
 function Routing() {
   // const DrawerHeader = styled('div')(({ theme }) => ({
@@ -23,36 +29,30 @@ function Routing() {
   //   ...theme.mixins.toolbar,
   // }));
   return (
-    <div>
+
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Loginpage />} />
           <Route path="/email" element={<Email />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />}/>
           <Route element={<Adminrouting />}>
             <Route path="/home" element={<Admindashboard />} />
             <Route path="/admincourse" element={<Admincourse />} />
-            <Route
-              path="/adminviewallcourse"
-              element={<Adminviewcourse />}
-            ></Route>
+            <Route path="/adminviewallcourse"element={<Adminviewcourse />} ></Route>
             <Route path="/admindashboard" element={<Admindashboard />}></Route>
-            <Route
-              path="/admindupdatecourse/:courseId"
-              element={<Courseupdate />}
-            ></Route>
-            <Route
-              path="/learnerviewall"
-              element={<LearnerReduxView />}
-            ></Route>
-            <Route
-              path="/individuallearner/:learnerId"
-              element={<IndividualLearner />}
-            ></Route>
+            <Route path="/admindupdatecourse/:courseId" element={<Courseupdate />} ></Route>
+            <Route path="/learnerviewall"element={<LearnerReduxView />} ></Route>
+            <Route path="/individuallearner/:learnerId" element={<IndividualLearner />}></Route>
+            <Route path="/learnerreport" element={<LearnerReportView/>}></Route>
+            <Route path="/coursereport" element={<CourseReportView/>}></Route>
+            <Route path='/quizreport' element={<QuizReportView/>}></Route>
+            
+            <Route path='/ReportSkeleton' element={<ReportSkeleton/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
-    </div>
+  
+
   );
 }
 

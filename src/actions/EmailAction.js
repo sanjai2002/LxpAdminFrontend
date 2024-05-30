@@ -1,19 +1,22 @@
-import axios from 'axios';
-export const SUBMIT_EMAIL = 'FORGOT_PASSWORD_REQUEST';
-export const submitEmail = (email) => {
+export const EMAIL_REQUEST = 'EMAIL_REQUEST';
+export const EMAIL_SUCCESS= 'EMAIL_SUCCESS';
+export const EMAIL_ERROR = 'EMAIL_ERROR';
 
-  return async (dispatch) => {
-    try {
-      const response = await axios.post('http://localhost:5199/api/ForgetPassword', { email });
-      console.log(response.data);
+export const emailRequest = (emailrequest) =>
+({
+  type: EMAIL_REQUEST,
+  payload: emailrequest
+});
 
-      if (response.data === false) {
-        window.alert("Invalid Email")
-      }
-      return response;
+export const emailSuccess = (email) => ({
+  type: EMAIL_SUCCESS,
+  payload: email
+});
 
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
+export const emailError = (error) =>
+({
+  type: EMAIL_ERROR,
+  payload: error
+
+});
+

@@ -29,10 +29,9 @@
 
     margin-left: auto;
 }
-
 .side-nav {
     margin-top: 4rem;
-    width: 70px;
+    /* width: 50%; */
     /* Collapsed width */
     height: 100%;
     background-color: #23275c;
@@ -54,7 +53,7 @@
 }
 
 .side-nav.open {
-    width: 17.7%;
+    width: 15.7%;
     /* Expanded width */
 }
 

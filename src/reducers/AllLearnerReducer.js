@@ -14,6 +14,7 @@ const AllLearnerReducer = (state = initialState, action) => {
                 loading: true,
             };
         case FETCH_LEARNERS_SUCCESS:
+            console.log("alllearner",action.payload);
             return {
                 ...state,
                 loading: false,

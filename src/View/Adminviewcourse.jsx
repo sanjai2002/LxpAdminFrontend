@@ -124,6 +124,8 @@ const Adminviewcourse = ({
     setThumbnail(null);
   };
 
+  
+  
   const [coursecategory, setCategory] = useState([]);
   const [courselevel, setLevel] = useState([]);
 
@@ -158,7 +160,6 @@ const Adminviewcourse = ({
   // Form Validation
   const validationform = () => {
     const { title, level, category, description, duration } = selectedcourse;
-
     return (
       title.trim() !== "" &&
       level.trim() !== "" &&
@@ -170,14 +171,15 @@ const Adminviewcourse = ({
 
   // check the the values in the dialog box container when its open
 
+
   useEffect(() => {
     if (openDialog) {
       console.log("Current selected value", selectedcourse);
     }
   }, [openDialog, selectedcourse]);
 
-  //Form Submission for the Update course
 
+  //Form Submission for the Update course 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -254,6 +256,7 @@ const Adminviewcourse = ({
 
   const updatefailuremessage = "Updated was not successfull";
 
+
   useEffect(() => {
     if (isUpdated) {
       setOpen(true);
@@ -321,6 +324,7 @@ const Adminviewcourse = ({
   const [coursetitle, setCourseTitle] = useState("");
   const [coursestatus, setCourseStatus] = useState();
 
+  
   //Event for Enable And Disable
   const EnableOrDisable = () => {
     enableordisable(enabledisablecourseId, !coursestatus);
@@ -402,7 +406,8 @@ const Adminviewcourse = ({
 
   return (
     <>
-      //Modal for Enable & Disable
+
+      {/* Modal for Enable & Disable */}
       <Modal
         show={showEnableModal}
         onHide={() => setShowEnableModal(false)}
