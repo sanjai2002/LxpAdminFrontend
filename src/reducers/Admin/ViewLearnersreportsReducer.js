@@ -1,5 +1,5 @@
 
-import { FETCH_LEARNERSREPORT_REQUEST, FETCH_LEARNERSREPORT_SUCCESS, FETCH_LEARNERSREPORT_FAILURE } from "../../actions/LearnersReportAction";
+import { FETCH_LEARNERSREPORT_REQUEST, FETCH_LEARNERSREPORT_SUCCESS, FETCH_LEARNERSREPORT_FAILURE } from "../../actions/Admin/LearnersReportAction";
 
 const initialState = {
     reports: [],

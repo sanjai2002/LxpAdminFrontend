@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {FORGOTPASSWORD_REQUEST,forgotpasswordSuccess,forgotpasswordError} from '../../actions/ForgotPasswordAction';
-import { baseUrl } from '../api'
+import {FORGOTPASSWORD_REQUEST,forgotpasswordSuccess,forgotpasswordError} from '../../actions/Admin/ForgotPasswordAction';
+import { baseUrl } from './api'
 
 const ApiForgotpassword =({ dispatch }) => (next) => async (action) =>{
     console.log(action.type);

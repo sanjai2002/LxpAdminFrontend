@@ -1,6 +1,6 @@
 import axios from "axios";
-import { FETCH_PROFILECOURSES_REQUEST, fetchProfileCoursesFailure, fetchProfileCoursesSuccess } from "../../actions/LearnersViewAction";
-import { baseUrl } from "../api";
+import { FETCH_PROFILECOURSES_REQUEST, fetchProfileCoursesFailure, fetchProfileCoursesSuccess } from "../../actions/Admin/LearnersViewAction";
+import { baseUrl } from "./api";
 
 const GetProfileCourses = ({ dispatch }) => (next) => async (action) => {
     if (action.type === FETCH_PROFILECOURSES_REQUEST) {

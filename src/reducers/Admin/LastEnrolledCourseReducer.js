@@ -1,4 +1,4 @@
-import { FETCH_LAST_ENROLLED_COURSE_FAILURE, FETCH_LAST_ENROLLED_COURSE_REQUEST, FETCH_LAST_ENROLLED_COURSE_SUCCESS } from "../../actions/LearnersViewAction"
+import { FETCH_LAST_ENROLLED_COURSE_FAILURE, FETCH_LAST_ENROLLED_COURSE_REQUEST, FETCH_LAST_ENROLLED_COURSE_SUCCESS } from "../../actions/Admin/LearnersViewAction";
 
 const initialState = {
     lastenrolledCourse: [],

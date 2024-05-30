@@ -1,4 +1,4 @@
-import { FETCH_PROFILECOURSES_FAILURE, FETCH_PROFILECOURSES_REQUEST, FETCH_PROFILECOURSES_SUCCESS } from "../../actions/LearnersViewAction"
+import { FETCH_PROFILECOURSES_FAILURE, FETCH_PROFILECOURSES_REQUEST, FETCH_PROFILECOURSES_SUCCESS } from "../../actions/Admin/LearnersViewAction"
 
 const initialState = {
     profileCourses: [],

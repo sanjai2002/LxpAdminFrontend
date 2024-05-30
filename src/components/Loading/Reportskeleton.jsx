@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import Skeleton from '@mui/material/Skeleton';
-import '../../Styles/Skeleton.css'
+import '../../Styles/Admin/Skeleton.css'
 
 function ReportSkeleton() {
 return(

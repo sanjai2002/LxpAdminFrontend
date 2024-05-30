@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom"
-import { fetchLastEnrolledCourseRequest } from "../../actions/LearnersViewAction";
+import { fetchLastEnrolledCourseRequest } from "../../actions/Admin/LearnersViewAction";
 import { connect } from "react-redux";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';

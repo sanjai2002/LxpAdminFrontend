@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ENABLE_DISABLE_COURSE_REQUEST, enableDisableCourseFailure, enableDisableCourseSuccess } from "../../actions/Admin/EnableDisableAction";
-import { baseUrl } from "../api";
+import { baseUrl } from "./api";
 
 const EnableDisableCourse = ({ dispatch }) => (next) => async (action) => {
     if (action.type === ENABLE_DISABLE_COURSE_REQUEST) {
