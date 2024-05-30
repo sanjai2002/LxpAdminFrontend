@@ -1,6 +1,6 @@
 import axios from "axios";
-import { FETCH_PROFILECARD_REQUEST, fetchProfileCardFailure, fetchProfileCardSuccess } from "../../actions/LearnersViewAction";
-import { baseUrl } from "../api";
+import { FETCH_PROFILECARD_REQUEST, fetchProfileCardFailure, fetchProfileCardSuccess } from "../../actions/Admin/LearnersViewAction";
+import { baseUrl } from "./api";
 
 const GetProfileCard = ({ dispatch }) => (next) => async (action) => {
     if (action.type === FETCH_PROFILECARD_REQUEST) {

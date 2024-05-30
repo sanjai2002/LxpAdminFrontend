@@ -1,6 +1,6 @@
 import axios from "axios";
-import { FETCH_LAST_ENROLLED_COURSE_REQUEST, fetchLastEnrolledCourseFailure, fetchLastEnrolledCourseSuccess } from "../../actions/LearnersViewAction";
-import { baseUrl } from "../api";
+import { FETCH_LAST_ENROLLED_COURSE_REQUEST, fetchLastEnrolledCourseFailure, fetchLastEnrolledCourseSuccess } from "../../actions/Admin/LearnersViewAction";
+import { baseUrl } from "./api";
 
 
 const LastEnrolledCourse = ({ dispatch }) => (next) => async (action) => {

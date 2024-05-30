@@ -1,18 +1,18 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
-import courseReducer from '../reducers/courseReducer';
-import apiMiddleware from '../middleware/apiMiddleware';
-import ForgotPasswordreducer from '../reducers/ForgotPasswordReducer';
-import userReducer from '../reducers/loginReducer';
-import AllcourseReducer from '../reducers/AllcourseReducer';
-import apiviewallcourse from '../middleware/apiviewallcourse';
+import courseReducer from '../reducers/Admin/courseReducer';
+import apiMiddleware from '../middleware/Admin/apiMiddleware';
+import ForgotPasswordreducer from '../reducers/Admin/ForgotPasswordReducer';
+import userReducer from '../reducers/Admin/loginReducer';
+import AllcourseReducer from '../reducers/Admin/AllcourseReducer';
+import apiviewallcourse from '../middleware/Admin/apiviewallcourse';
 import loginUser from '../middleware/Admin/apiLogin';
 import apiDeletecourse from '../middleware/Admin/apiDeletecourse';
 import DeletecourseReducer from '../reducers/Admin/DeletecourseReducer';
 import UpdateCourse from '../middleware/Admin/apiUpdatecourse';
 import courseupdateReducer from '../reducers/Admin/Updatecourse';
-import AllLearnerReducer from '../reducers/AllLearnerReducer';
-import apiViewAllLearners from '../middleware/apiViewAllLearners';
+import AllLearnerReducer from '../reducers/Admin/AllLearnerReducer';
+import apiViewAllLearners from '../middleware/Admin/apiViewAllLearners';
 import ProfileCardReducer from '../reducers/Admin/IndividualLearnerReducer';
 import GetProfileCard from '../middleware/Admin/apiIndividualLearners';
 import ProfileCoursesReducer from '../reducers/Admin/ProfileCoursesReducers';
@@ -21,13 +21,13 @@ import LastEnrolledCourseReducer from '../reducers/Admin/LastEnrolledCourseReduc
 import LastEnrolledCourse from '../middleware/Admin/apiLastEnrolledCourse';
 import EnableDisableCourseReducer from '../reducers/Admin/EnableDisbaleCourseReducer';
 import EnableDisableCourse from '../middleware/Admin/apiEnableDisbaleCourse';
-import fetchDataReducer from '../reducers/DashboardReducer';
-import FetchdashboardData from '../middleware/apiDashboard';
-import emailReducer from '../reducers/EmailReducers';
-import emailMiddleware from '../middleware/Emailapi';
+import fetchDataReducer from '../reducers/Admin/DashboardReducer';
+import FetchdashboardData from '../middleware/Admin/apiDashboard';
+import emailReducer from '../reducers/Admin/EmailReducers';
+import emailMiddleware from '../middleware/Admin/Emailapi';
 
 import ApiForgotpassword from '../middleware/Admin/ApiForgotpassword';
-import forgotPasswordReducer from '../reducers/ForgotPasswordReducer';
+import forgotPasswordReducer from '../reducers/Admin/ForgotPasswordReducer';
 
 import ApiViewlearnersReport from '../middleware/Admin/ApiViewlearnersReport';
 import ViewLearnersreportsReducer from '../reducers/Admin/ViewLearnersreportsReducer';

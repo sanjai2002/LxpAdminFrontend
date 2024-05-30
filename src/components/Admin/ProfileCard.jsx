@@ -7,9 +7,9 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import { connect } from "react-redux";
-import { fetchProfileCardRequest } from "../../actions/LearnersViewAction";
+import { fetchProfileCardRequest } from "../../actions/Admin/LearnersViewAction";
 import { useParams } from 'react-router-dom';
-import user from '../../assets/Images/user.png';
+import user from '../../assets/Admin/Images/user.png';
 const ProfileCard = ({ fetchProfileCard, profilecard }) => {
     const learnerid = useParams();
     useEffect(() => {

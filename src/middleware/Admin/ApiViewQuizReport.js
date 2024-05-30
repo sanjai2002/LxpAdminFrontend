@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FETCH_QUIZREPORT_REQUEST, FetchQuizreportSuccess, FetchQuizreportFailure } from '../../actions/Admin/QuizReportAction';
-import { baseUrl } from "../api";
+import { baseUrl } from "./api";
 
 // const API_URL = 'http://localhost:5199/api/Quiz/QuizReport';
 const API_URL = `${baseUrl}/api/Quiz/QuizReport`;

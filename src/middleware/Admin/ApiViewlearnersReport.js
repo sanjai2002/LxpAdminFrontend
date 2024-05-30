@@ -1,6 +1,6 @@
 import axios from "axios";
-import { FETCH_LEARNERSREPORT_REQUEST, FetchLearnersreportSuccess, FetchLearnersreportFailure } from '../../actions/LearnersReportAction';
-import { baseUrl } from "../api";
+import { FETCH_LEARNERSREPORT_REQUEST, FetchLearnersreportSuccess, FetchLearnersreportFailure } from '../../actions/Admin/LearnersReportAction';
+import { baseUrl } from "./api";
 
 // const API_URL = 'http://localhost:5199/lxp/learnerReport';
 const API_URL = `${baseUrl}/lxp/learnerReport`;
