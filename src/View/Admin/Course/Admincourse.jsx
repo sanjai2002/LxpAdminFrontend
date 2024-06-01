@@ -24,12 +24,12 @@ const Admincourse = ({ fetchCourses, courses }) => {
         return () => clearTimeout(timer);
 
     }, []);
-    
+
     useEffect(() => {
         fetchCourses();
     }, [fetchCourses]);
 
-    if ( loading||courses.length === 0) {
+    if (loading || courses.length === 0) {
         return <div className='spinnerclass'> <Spinner /></div>;
     }
     return (
@@ -41,41 +41,44 @@ const Admincourse = ({ fetchCourses, courses }) => {
                         </Row> */}
                         <Row className='pt-3 contentbody'>
                             <Col>
-                            <Col className='text-end mt-5'><Button>Add Course</Button></Col>
+                                <Col className='text-end mt-5'><Button>Add Course</Button></Col>
 
                             </Col>
                             <Container>
-                            <Col xs={12} md={12} className='landingcoursepage  mb-5'>
-                                <Row>
-                                    <Col className='mt-2'><h4>Recently Added Courses</h4></Col>
-                                    <Col className='text-end  mt-2'><Link to='/adminviewallcourse'><Button variant="outline-primary">View All courses</Button></Link></Col>
-                                </Row>
-                                <div className='scrollable-content'>
-                                    {courses.map((course) => (
-                                        // <Card key={index} sx={{ maxWidth: 250, maxHeight: 250, mb:5,borderRadius:1}}>
+                                <Col xs={12} md={12} className='landingcoursepage  mb-5'>
+                                    <Row>
+                                        <Col className='mt-2'><h4>Recently Added Courses</h4></Col>
+                                        <Col className='text-end  mt-2'><Link to='/adminviewallcourse'><Button variant="outline-primary">View All courses</Button></Link></Col>
+                                    </Row>
+                                    <div className='scrollable-content'>
+                                        {courses.map((course) => (
+                                            // <Card key={index} sx={{ maxWidth: 250, maxHeight: 250, mb:5,borderRadius:1}}>
 
-                                        <Card key={course.courseId} sx={{ maxWidth: 250, maxHeight: 300, mb: 5, borderRadius: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                                            <CardActionArea>
-                                                <CardMedia
-                                                    component="img"
-                                                    height="140"
-                                                    // width="80"
-                                                    image={course.thumbnailimage}
-                                                    alt={course.title || 'Course image'}
-                                                />
-                                                <CardContent>
-                                                    <Typography gutterBottom variant="h5" component="div">
-                                                        {course.title}
-                                                    </Typography>
-                                                    <Typography variant="body2" color="text.secondary">
-                                                        {course.category}
-                                                    </Typography>
-                                                </CardContent>
-                                            </CardActionArea>
-                                        </Card>
-                                    ))}
-                                </div>
-                            </Col>
+                                            <Card key={course.courseId} sx={{ maxWidth: 250, maxHeight: 300, mb: 5, borderRadius: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                                <CardActionArea>
+                                                    <CardMedia
+                                                        component="img"
+                                                        height="140"
+                                                        // width="80"
+                                                        image={course.thumbnailimage}
+                                                        alt={course.title || 'Course image'}
+                                                    />
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="h5" component="div">
+                                                            {course.title}
+                                                        </Typography>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            {course.category}
+                                                        </Typography>
+                                                        <Typography variant="body2" color="text.secondary">
+                                                            {course.createdAt.replace('T', ' ')}
+                                                        </Typography>
+                                                    </CardContent>
+                                                </CardActionArea>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                </Col>
                             </Container>
                         </Row>
                     </Container>
@@ -125,7 +128,7 @@ const Admincourse = ({ fetchCourses, courses }) => {
                                     404 Error
                                 </Typography>
                                 <Typography id="server-modal-description" sx={{ pt: 2 }}>
-                                  Faliled to Load Resource 
+                                    Faliled to Load Resource
                                 </Typography>
                             </Box>
                         </Modal>

@@ -8,7 +8,7 @@ const loginUser = ({ dispatch }) => (next) => async (action) => {
 
   if (action.type === LOGIN_REQUEST) {
     try {
-      const response = await axios.post(`${baseUrl}/api/Login`, action.payload);
+      const response = await axios.post(`${baseUrl}/api/Login/LoginLearner`, action.payload);
 
       console.log('API Response:', response.data); // Log the response data 
 

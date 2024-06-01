@@ -5,12 +5,13 @@ import {
   fetchallCoursesFailure,
 } from '../../actions/Admin/Adnimviewcourse';
 
-const API_URL = 'http://localhost:5199/api/Course/GetAllCourse/lxp/GetAllCourse';
+const API_URL = 'http://localhost:5199/api/Course/lxp/GetAllCourse';
 
 const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
   next(action);
 
   if (action.type === FETCH_ALL_COURSES_REQUEST) {
+    
     try {
       const response = await axios.get(API_URL);
       console.log(API_URL);

@@ -31,7 +31,7 @@ import forgotPasswordReducer from '../reducers/Admin/ForgotPasswordReducer';
 
 import ApiViewlearnersReport from '../middleware/Admin/ApiViewlearnersReport';
 import ViewLearnersreportsReducer from '../reducers/Admin/ViewLearnersreportsReducer';
-import ApiViewCourseReport  from '../middleware/Admin/ApiViewCourseReport';
+import ApiViewCourseReport from '../middleware/Admin/ApiViewCourseReport';
 import ViewCoursereportReducers from '../reducers/Admin/ViewCoursereportReducers';
 import QuizReportReducer from '../reducers/Admin/ViewQuizReportReducers';
 import ApiViewQuizReport from '../middleware/Admin/ApiViewQuizReport';
@@ -49,16 +49,16 @@ const rootReducer = combineReducers({
   enrolledcourse: LastEnrolledCourseReducer,
   enabledisablecourse: EnableDisableCourseReducer,
   fetchdashboard: fetchDataReducer,
-  learnerreport:ViewLearnersreportsReducer,
-  coursereport:ViewCoursereportReducers,
-  quizreport:QuizReportReducer,
-  email:emailReducer,
+  learnerreport: ViewLearnersreportsReducer,
+  coursereport: ViewCoursereportReducers,
+  quizreport: QuizReportReducer,
+  email: emailReducer,
 
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport,)
+  applyMiddleware(thunk, apiMiddleware, ApiForgotpassword, emailMiddleware, apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData, ApiViewlearnersReport, ApiViewCourseReport, ApiViewQuizReport,)
 );
 
 export default store;

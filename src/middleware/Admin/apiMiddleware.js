@@ -6,7 +6,7 @@ import {
 } from '../../actions/Admin/courseAction';
 
 
-const API_URL = 'http://localhost:5199/api/Course/GetLimitedCourse/lxp/Getninecourse';
+const API_URL = 'http://localhost:5199/api/Course/lxp/Getninecourse';
 // const API_URL = '';
 
 
@@ -19,10 +19,9 @@ const apiMiddleware = ({ dispatch }) => (next) => async (action) => {
 
       console.log('API Response:', response.data); // Log the response data 
 
-      if (response.status=== 200 && response.data && response.data.data.length > 0)
-       {
+      if (response.status === 200 && response.data && response.data.data.length > 0) {
         console.log(response.data.data);
-        dispatch(fetchCoursesSuccess(response.data.data));  
+        dispatch(fetchCoursesSuccess(response.data.data));
       } else {
         console.error('No data received from API');
       }
