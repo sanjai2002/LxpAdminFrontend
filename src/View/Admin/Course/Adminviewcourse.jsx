@@ -74,12 +74,16 @@ const Adminviewcourse = ({
       );
       setSelectedcourse({
         ...selectedcourse,
-        thumbnailimage: acceptedFiles[0],
+        thumbnailimage:acceptedFiles[0],
       });
     },
   });
 
-  console.log("thumbnailimageinuput", thumbnail);
+
+
+
+
+console.log("thumbnailimageinuput", thumbnail);
 
   // Remove image .......
 
@@ -95,6 +99,8 @@ const Adminviewcourse = ({
 
   const handleupdatecourse = (course) => {
     console.log("check and check", course);
+
+    
     setSelectedcourse({
       courseId: course.courseId,
       title: course.title,
@@ -103,8 +109,9 @@ const Adminviewcourse = ({
       description: course.description,
       duration: course.duration,
       modifiedby: "Kavin",
-      thumbnailimage: course.thumbnailimage,
+      thumbnailimage:course.thumbnailimage,
     });
+
     setThumbnail({ preview: course.thumbnailimage });
     setOpenDialog(true);
   };
@@ -214,6 +221,7 @@ const Adminviewcourse = ({
         courseId: selectedcourse.courseId,
         formData,
       });
+
       dispatch(
         updateCoursesRequest({ courseId: selectedcourse.courseId, formData })
       );
@@ -317,7 +325,7 @@ const Adminviewcourse = ({
   const [enabledisablecourseId, setenabledisablecourseId] = useState("");
   const [coursetitle, setCourseTitle] = useState("");
   const [coursestatus, setCourseStatus] = useState();
-  
+
   //Event for Enable And Disable
   const EnableOrDisable = () => {
     enableordisable(enabledisablecourseId, !coursestatus);

@@ -116,7 +116,7 @@ const UpdateCourseMiddleware = ({ dispatch }) => (next) => async (action) => {
       return next(action);
     }
 
-    const API_URL = `http://localhost:5199/api/Course/Updatecourse/lxp/courseupdate`;
+    const API_URL = `http://localhost:5199/api/Course/lxp/courseupdate`;
 
     try {
       console.log("l" + formData);

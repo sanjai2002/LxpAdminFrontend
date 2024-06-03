@@ -3,7 +3,7 @@ import {FORGOTPASSWORD_REQUEST,forgotpasswordSuccess,forgotpasswordError} from '
 import { baseUrl } from './api'
 
 const ApiForgotpassword =({ dispatch }) => (next) => async (action) =>{
-    console.log(action.type);
+    // console.log(action.type);
     if(action.type===FORGOTPASSWORD_REQUEST){
 
         console.log("actiontypesforforgotpasswod",action);

@@ -30,7 +30,7 @@ const Loginpage = () => {
 
   useEffect(() => {
     if (isSuccessuser) {
-      navigate('/userdashboard'); // Navigate to the next page on success
+      navigate('/LearnerDashboard'); // Navigate to the next page on success
     }
   }, [isSuccessuser, navigate]);
 
@@ -45,7 +45,7 @@ const Loginpage = () => {
             <div className="login-header">
               <img src={Relevantz} alt="Logo" />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>  
               <div>
                 <input
                   {...register('email', {

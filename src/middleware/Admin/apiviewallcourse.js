@@ -5,7 +5,7 @@ import {
   fetchallCoursesFailure,
 } from '../../actions/Admin/Adnimviewcourse';
 
-const API_URL = 'http://localhost:5199/api/Course/GetAllCourse/lxp/GetAllCourse';
+const API_URL = 'http://localhost:5199/api/Course/lxp/GetAllCourse';
 
 const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
   next(action);
@@ -17,7 +17,10 @@ const apiviewallcourse = ({ dispatch }) => (next) => async (action) => {
 
       console.log('API Response:', response.data); // Log the response data 
 
+      // console.log("imageurl responese",response.data.thumbnailimage)
+
       if (response.status === 200 && response.data && response.data.data.length > 0) {
+
         dispatch(fetchallCoursesSuccess(response.data.data));
       } else {
         console.error('No data received from API');

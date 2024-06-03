@@ -3,7 +3,7 @@ import {FETCH_COURSEREPORT_REQUEST,FetchCoursereportSuccess,FetchCourereportFail
 import { baseUrl } from "./api";
 
 // const API_URL = 'http://localhost:5199/api/Course/GetAllCourse/lxp/GetAllCourse';
-const API_URL = `${baseUrl}/api/Course/GetAllCourse/lxp/GetAllCourse`;
+const API_URL = `${baseUrl}/api/Course/lxp/GetAllCourse`;
 const ApiViewCourseReport=({dispatch})=>(next)=>async(action)=>{
 
     if(action.type==FETCH_COURSEREPORT_REQUEST){

@@ -6,7 +6,7 @@ import {
 } from '../../actions/Admin/courseAction';
 
 
-const API_URL = 'http://localhost:5199/api/Course/GetLimitedCourse/lxp/Getninecourse';
+const API_URL = 'http://localhost:5199/api/Course/lxp/Getninecourse';
 // const API_URL = '';
 
 
