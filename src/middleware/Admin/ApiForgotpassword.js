@@ -1,20 +1,17 @@
 import axios from 'axios';
-import {FORGOTPASSWORD_REQUEST,forgotpasswordSuccess,forgotpasswordError} from '../../actions/Admin/ForgotPasswordAction';
+import { FORGOTPASSWORD_REQUEST, forgotpasswordSuccess, forgotpasswordError } from '../../actions/Admin/ForgotPasswordAction';
 import { baseUrl } from './api'
 
-const ApiForgotpassword =({ dispatch }) => (next) => async (action) =>{
-    console.log(action.type);
-    if(action.type===FORGOTPASSWORD_REQUEST){
-
-        console.log("actiontypesforforgotpasswod",action);
-        try{
-            const response=await axios.put(`${baseUrl}/api/UpdatePassword`,action.payload)
-            console.log("UPdate Password:",response.data);
-            if(response.data.statusCode===200){
+const ApiForgotpassword = ({ dispatch }) => (next) => async (action) => {
+    if (action.type === FORGOTPASSWORD_REQUEST) {
+        try {
+            const response = await axios.put(`${baseUrl}/api/UpdatePassword`, action.payload)
+            console.log("UPdate Password:", response.data);
+            if (response.data.statusCode === 200) {
                 dispatch(forgotpasswordSuccess(response.data));
             }
         }
-        catch(error){
+        catch (error) {
             dispatch(forgotpasswordError(error.message));
             console.log(error.message);
         }
