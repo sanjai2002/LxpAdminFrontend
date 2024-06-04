@@ -63,6 +63,8 @@ import updatePasswordApi from '../middleware/LearnerMiddleware/PasswordChangeApi
 import VerifyEmailApi from '../middleware/LearnerMiddleware/VerifyEmailApi';
 import LearnerReducer from '../reducers/LearnerReducer/Registerreducer';
 import fetchEmailReducer from '../reducers/LearnerReducer/FetchEmailReducer'
+import EnrollmentReportReducer from '../reducers/Admin/ViewEnrollmentReducer';
+import ApiViewEnrollmentReport from '../middleware/Admin/apiEnrollmentReport';
 
 
 const rootReducer = combineReducers({
@@ -99,15 +101,12 @@ const rootReducer = combineReducers({
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
-  
-
-
-
+  fetchenrollmentreport:EnrollmentReportReducer
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,FetchRegisterApi )
+  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,FetchRegisterApi,ApiViewEnrollmentReport )
 );
 
 export default store;

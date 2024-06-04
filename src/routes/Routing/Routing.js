@@ -25,6 +25,7 @@ import GetEnrollment from "../../components/LearnerComponent/GetEnrollment";
 import SidebarTopics from "../../components/LearnerComponent/SidebarTopics";
 import PDFViewer from "../../components/LearnerComponent/PDFViewer";
 import PptViewerComponent from "../../components/LearnerComponent/Pptxday";
+import CourseEnrollmentReportView from "../../View/Admin/Report/CourseEnrollmentReportView";
 
 
 
@@ -39,44 +40,57 @@ function Routing() {
   // }));
 
   return (
-
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Loginpage />} />
         <Route path="/email" element={<Email />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
 
-        <Route path='/passwordchange' element={<PasswordChange />} />
-        <Route path='/updateuserprofile' element={<UpdateUserProfileComponent />} />
+        <Route path="/passwordchange" element={<PasswordChange />} />
+        <Route
+          path="/updateuserprofile"
+          element={<UpdateUserProfileComponent />}
+        />
         <Route exact path="/" element={<Loginpage />} />
         <Route path="/email" element={<Email />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path='/RegisterView' element={<RegisterView />}></Route>
-        <Route path='/LearnerDashboard' element={<LearnerDashboard />}></Route>
+        <Route path="/RegisterView" element={<RegisterView />}></Route>
+        <Route path="/LearnerDashboard" element={<LearnerDashboard />}></Route>
         {/* <Route path='/LearnerNavbar' element={<LearnerNavbar />}></Route> */}
         {/* <Route path='/LearnerPage' element={<CourseNavbar />}></Route> */}
-        <Route path="/LearnerenrolledCourse" element={<GetEnrollment />}></Route>
+        <Route
+          path="/LearnerenrolledCourse"
+          element={<GetEnrollment />}
+        ></Route>
         <Route path="/ViewTopics" element={<SidebarTopics />}></Route>
         {/* <Route path="/PDF" element={<PDFViewer />}></Route>
         <Route path="/PPT" element={<PptViewerComponent />}></Route> */}
 
-
         <Route element={<Adminrouting />}>
           <Route path="/home" element={<Admindashboard />} />
           <Route path="/admincourse" element={<Admincourse />} />
-          <Route path="/adminviewallcourse" element={<Adminviewcourse />} ></Route>
+          <Route
+            path="/adminviewallcourse"
+            element={<Adminviewcourse />}
+          ></Route>
           <Route path="/admindashboard" element={<Admindashboard />}></Route>
-          <Route path="/admindupdatecourse/:courseId" element={<Courseupdate />} ></Route>
-          <Route path="/learnerviewall" element={<LearnerReduxView />} ></Route>
-          <Route path="/individuallearner/:learnerId" element={<IndividualLearner />}></Route>
+          <Route
+            path="/admindupdatecourse/:courseId"
+            element={<Courseupdate />}
+          ></Route>
+          <Route path="/learnerviewall" element={<LearnerReduxView />}></Route>
+          <Route
+            path="/individuallearner/:learnerId"
+            element={<IndividualLearner />}
+          ></Route>
           <Route path="/learnerreport" element={<LearnerReportView />}></Route>
           <Route path="/coursereport" element={<CourseReportView />}></Route>
-          <Route path='/quizreport' element={<QuizReportView />}></Route>
-          <Route path='/ReportSkeleton' element={<ReportSkeleton />}></Route>
+          <Route path="/quizreport" element={<QuizReportView />}></Route>
+          <Route path="/enrollreport" element={<CourseEnrollmentReportView/>}></Route>
+          <Route path="/ReportSkeleton" element={<ReportSkeleton />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
-
   );
 }
 
