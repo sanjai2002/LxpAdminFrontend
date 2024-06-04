@@ -27,7 +27,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
 
   if (learners.length === 0) {
     return <div>
-      <h1>Loading learners...</h1>
+      <h1>Loading courses...</h1>
     </div>;
   }
   //Rows for the table

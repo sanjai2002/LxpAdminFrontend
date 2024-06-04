@@ -22,3 +22,5 @@ export const deleteCoursesFailure = (error) => ({
   type: DELETE_COURSES_FAILURE,
   payload: error,
 });
+
+
