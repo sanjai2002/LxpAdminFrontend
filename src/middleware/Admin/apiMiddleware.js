@@ -10,7 +10,9 @@ const API_URL = 'http://localhost:5199/api/Course/lxp/Getninecourse';
 // const API_URL = '';
 
 
-const apiMiddleware = ({ dispatch }) => (next) => async (action) => {
+
+const apiMiddleware = ({ dispatch }) => (next) => async (action) => 
+{
   next(action);
 
   if (action.type === FETCH_COURSES_REQUEST) {

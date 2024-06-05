@@ -292,6 +292,7 @@ console.log("thumbnailimageinuput", thumbnail);
       courses.filter(
         (course) =>
           Object.values(course).some((value) =>
+          
             value.toString().toLowerCase().includes(searchTerm.toLowerCase())
           )
 

@@ -64,6 +64,11 @@ import VerifyEmailApi from '../middleware/LearnerMiddleware/VerifyEmailApi';
 import LearnerReducer from '../reducers/LearnerReducer/Registerreducer';
 import fetchEmailReducer from '../reducers/LearnerReducer/FetchEmailReducer'
 
+import quizPassedUserReducer from '../reducers/Admin/QuizPassedUserReducer';
+import ApiQuizPassedUsers from '../middleware/Admin/Reports/ApiQuizPassedUsers';
+
+import quizFailedUserReducer from '../reducers/Admin/QuizFailedUserReducer';
+import ApiQuizFailedUsers from '../middleware/Admin/Reports/ApiQuizFaliedUsers';
 
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
@@ -82,9 +87,13 @@ const rootReducer = combineReducers({
   coursereport:ViewCoursereportReducers,
   quizreport:QuizReportReducer,
   email:emailReducer,
+  quizpassedusers:quizPassedUserReducer,
+  quizfailedusers:quizFailedUserReducer,
   // enrolledCourses:LearnerPostEnrollReducer,
   fetchcourse: LearnerGetCourseReducer,
 
+
+  //
   passwordchangereducer : PasswordChangeReducer,
   user: userReducer,
   course: courseReducer,
@@ -107,7 +116,11 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,FetchRegisterApi )
+  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, 
+    loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses,
+     LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,
+     ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,
+     FetchRegisterApi,ApiQuizPassedUsers,ApiQuizFailedUsers )
 );
 
 export default store;

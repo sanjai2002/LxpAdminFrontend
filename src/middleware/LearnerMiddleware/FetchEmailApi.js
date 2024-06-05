@@ -12,7 +12,7 @@ const fetchEmailApi = ({ dispatch, getState }) => (next) => async (action) => {
     if (!isRequestingOTP) {
       dispatch({ type: SET_IS_REQUESTING_OTP, payload: true });
       try {
-        console.log("request payload", action.payload);
+        // console.log("request payload", action.payload);
         const response = await axios.post(API, JSON.stringify(action.payload), {
           headers: {
             'Content-Type': 'application/json',

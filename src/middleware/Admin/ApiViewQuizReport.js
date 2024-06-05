@@ -3,7 +3,7 @@ import { FETCH_QUIZREPORT_REQUEST, FetchQuizreportSuccess, FetchQuizreportFailur
 import { baseUrl } from "./api";
 
 // const API_URL = 'http://localhost:5199/api/Quiz/QuizReport';
-const API_URL = `${baseUrl}/api/Quiz/QuizReport`;
+const API_URL = `http://localhost:5199/api/QuizReport/QuizReport`;
 const ApiViewQuizReport = ({ dispatch }) => (next) => async (action) => {
     if (action.type === FETCH_QUIZREPORT_REQUEST) {
         try {

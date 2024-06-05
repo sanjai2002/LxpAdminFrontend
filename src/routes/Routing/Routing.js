@@ -25,6 +25,8 @@ import GetEnrollment from "../../components/LearnerComponent/GetEnrollment";
 import SidebarTopics from "../../components/LearnerComponent/SidebarTopics";
 import PDFViewer from "../../components/LearnerComponent/PDFViewer";
 import PptViewerComponent from "../../components/LearnerComponent/Pptxday";
+import QuizPassedUsers from "../../View/Admin/Report/QuizPassedUsers";
+import QuizFailedReport from "../../View/Admin/Report/QuizFailedUsers";
 
 
 
@@ -57,6 +59,7 @@ function Routing() {
         {/* <Route path='/LearnerPage' element={<CourseNavbar />}></Route> */}
         <Route path="/LearnerenrolledCourse" element={<GetEnrollment />}></Route>
         <Route path="/ViewTopics" element={<SidebarTopics />}></Route>
+
         {/* <Route path="/PDF" element={<PDFViewer />}></Route>
         <Route path="/PPT" element={<PptViewerComponent />}></Route> */}
 
@@ -72,6 +75,8 @@ function Routing() {
           <Route path="/learnerreport" element={<LearnerReportView />}></Route>
           <Route path="/coursereport" element={<CourseReportView />}></Route>
           <Route path='/quizreport' element={<QuizReportView />}></Route>
+          <Route path='/quizpassedusers/:quizId' element={<QuizPassedUsers/>}></Route>
+          <Route path="/quizfailedusers/:FailedUserQuizId" element={<QuizFailedReport/>}></Route>
           <Route path='/ReportSkeleton' element={<ReportSkeleton />}></Route>
         </Route>
       </Routes>

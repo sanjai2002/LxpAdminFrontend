@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {FetchQuizereportRequest} from '../../../actions/Admin/QuizReportAction'
-import { useEffect,useState } from "react";
+import { FetchQuizereportRequest } from '../../../actions/Admin/QuizReportAction'
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
@@ -24,27 +24,27 @@ import { Button } from "bootstrap";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import  ReportSkeleton from '../../../components/Loading/Reportskeleton'
+import ReportSkeleton from '../../../components/Loading/Reportskeleton'
 
-const QuizReportView = ({FetchQuizereportRequest,quizreport}) => {
+const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-      const timer = setTimeout(() => {
-          setLoading(false)
-      }, 1000);
-      return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     FetchQuizereportRequest();
-}, [FetchQuizereportRequest]);
+  }, [FetchQuizereportRequest]);
 
-//Pdf 
-const pdfRef=React.useRef();
+  //Pdf 
+  const pdfRef = React.useRef();
 
-if (loading||quizreport.length === 0) {
-    return <div> <ReportSkeleton/></div>;
+  if (loading || quizreport.length === 0) {
+    return <div> <ReportSkeleton /></div>;
   }
   //Rows for the table
   const rows = quizreport;
@@ -88,7 +88,7 @@ if (loading||quizreport.length === 0) {
       disablePadding: false,
       label: "S.No",
     },
-    {   
+    {
       id: "courseName",
       numeric: false,
       disablePadding: false,
@@ -113,42 +113,42 @@ if (loading||quizreport.length === 0) {
       label: "No Of PassedUsers",
     },
     {
-        id: "noOfFailedUsers",
-        numeric: true,
-        disablePadding: true,
-        label:"No Of Failed Users",
-   },
-   {
-    id: "averageScore",
-    numeric: true,
-    disablePadding: true,
-    label: "Average Score",
-  },
+      id: "noOfFailedUsers",
+      numeric: true,
+      disablePadding: true,
+      label: "No Of Failed Users",
+    },
+    {
+      id: "averageScore",
+      numeric: true,
+      disablePadding: true,
+      label: "Average Score",
+    },
   ];
- 
-  // today date
-let today = new Date();
-today.setDate(today.getDate()); 
-let month = String(today.getMonth() + 1).padStart(2, '0');
-let day = String(today.getDate()).padStart(2, '0');
-let Dates = day+ '-' + month + '-' + today.getFullYear() ;
 
-const Exportreport=()=>{
-  const input=pdfRef.current;
-  html2canvas(input).then((canvas)=>{
-    const imgData=canvas.toDataURL('image/png');
-    const pdf=new jsPDF('p','mm','a4',true);
-    const pdfWidth=pdf.internal.pageSize.getWidth();
-    const pdfHeight=pdf.internal.pageSize.getHeight();
-    const imgWidth=canvas.width;
-    const imgHeight=canvas.height;
-    const ratio=Math.min(pdfWidth/imgWidth,pdfHeight/imgHeight);
-    const imgX=(pdfWidth-imgWidth*ratio)/2;
-    const imgY=30;
-    pdf.addImage(imgData,'PNG',imgX,imgY,imgWidth*ratio,imgHeight*ratio);
-    pdf.save(`CourseReports_${Dates}.pdf`);
-  })
-};
+  // today date
+  let today = new Date();
+  today.setDate(today.getDate());
+  let month = String(today.getMonth() + 1).padStart(2, '0');
+  let day = String(today.getDate()).padStart(2, '0');
+  let Dates = day + '-' + month + '-' + today.getFullYear();
+
+  const Exportreport = () => {
+    const input = pdfRef.current;
+    html2canvas(input).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 30;
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save(`CourseReports_${Dates}.pdf`);
+    })
+  };
 
   //Component for Head in Table
   function EnhancedTableHead(props) {
@@ -172,7 +172,7 @@ const Exportreport=()=>{
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
-                style={{color:"white"}}
+                style={{ color: "white" }}
               >
                 {headCell.label}
                 {orderBy === headCell.id ? (
@@ -247,6 +247,8 @@ const Exportreport=()=>{
     numSelected: PropTypes.number.isRequired,
   };
 
+
+
   //Table for the Overall Component
 
   function EnhancedTable() {
@@ -273,7 +275,7 @@ const Exportreport=()=>{
       }
       setSelected([]);
     };
-    
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -289,13 +291,13 @@ const Exportreport=()=>{
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     useEffect(() => {
-        setFilteredUser(
-          visibleRows.filter((row) =>
-            Object.values(row).some((value) =>
-              value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-            )
+      setFilteredUser(
+        visibleRows.filter((row) =>
+          Object.values(row).some((value) =>
+            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
           )
-        );
+        )
+      );
     });
 
     const visibleRows = React.useMemo(
@@ -306,7 +308,7 @@ const Exportreport=()=>{
         ),
       [order, orderBy, page, rowsPerPage]
     );
-    
+
     return (
       <Box sx={{ width: "100%" }}>
         <Paper
@@ -316,84 +318,111 @@ const Exportreport=()=>{
           }}
         >
           <EnhancedTableToolbar numSelected={selected.length} />
-          <div style={{display:'flex',padding:"10px"}}>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value={searchTerm}
-              style={{ width: "30vw" }}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-         </form>         
-         <button className="btn btn-success" onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
-          </div>
-             
-         <div id="learnersreport">
-          <TableContainer ref={pdfRef}>
-            <Table
-              sx={{width:'100%'}}
-              aria-labelledby="tableTitle"
-              size={dense ? "medium" : "medium"}
-            >
-              <EnhancedTableHead
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={rows.length}
+          <div style={{ display: 'flex', padding: "10px" }}>
+            <form className="form-inline my-2 my-lg-0">
+              <input
+                className="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                value={searchTerm}
+                style={{ width: "30vw" }}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <TableBody>
-                {filteredUser.map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+            </form>
+            <button className="btn btn-success" onClick={Exportreport} style={{ marginLeft: '48%' }}>Download Report<ArrowDownwardIcon /></button>
+          </div>
 
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.index}
-                      selected={isItemSelected}
-                      sx={{ cursor: "pointer" }}
-                    >
-                      <TableCell align="left">{index + 1}</TableCell>
-                      <TableCell
-                        component="th"
-                        id={row.id}
-                        scope="row"
-                        align="left"
-                        padding="none"
+          <div id="learnersreport">
+            <TableContainer ref={pdfRef}>
+              <Table
+                sx={{ width: '100%' }}
+                aria-labelledby="tableTitle"
+                size={dense ? "medium" : "medium"}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={rows.length}
+                />
+                <TableBody>
+                  {filteredUser.map((row, index) => {
+
+                    const isItemSelected = isSelected(row.id);
+                    const disableLinkPassedUsers = row.noOfPassedUsers === 0; // Check if the number of passed users is zero
+
+                    const disableLinkFailedUsers = row.noOfFailedUsers === 0;  // check if the number of failed users is zero
+
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.index}
+                        selected={isItemSelected}
+                        sx={{ cursor: "pointer" }}
                       >
-                        {row.courseName}
-                      </TableCell>
-                      <TableCell align="left">{row.topicName}</TableCell>
-                      <TableCell align="left">
-                        {/* {row.lastLogin.replace("T", " ")} */}
-                        {row.quizName}
-                      </TableCell>
-                      <TableCell align="left">{row.noOfPassedUsers}</TableCell>
-                      <TableCell align="left">{row.noOfFailedUsers}</TableCell>
-                      <TableCell align="left">{row.averageScore}</TableCell>
-                    
+                        <TableCell align="left">{index + 1}</TableCell>
+                        <TableCell
+                          component="th"
+                          id={row.id}
+                          scope="row"
+                          align="left"
+                          padding="none"
+                        >
+                          {row.courseName}
+                        </TableCell>
+                        <TableCell align="left">{row.topicName}</TableCell>
+                        <TableCell align="left">
+                          {/* {row.lastLogin.replace("T", " ")} */}
+                          {row.quizName}
+                        </TableCell>
+
+                        {/* <Link to={'/quizpassedusers/'+row.quizid}>
+                      <TableCell align="left"> {row.noOfPassedUsers}</TableCell>
+                     </Link> */}
+                        <TableCell align="left">
+                          {disableLinkPassedUsers ? (
+                            <span style={{ pointerEvents: 'none', color: 'grey' }}>
+                              {row.noOfPassedUsers}
+                            </span>
+                          ) : (
+                            <Link to={'/quizpassedusers/' + row.quizid} style={{ textDecoration: 'none', color: 'green' }}>
+                              {row.noOfPassedUsers}
+                            </Link>
+                          )}
+                        </TableCell>
+
+                        <TableCell align="left">
+
+                          {disableLinkFailedUsers ? (<span style={{pointerEvents:'none',color:'grey'}}>
+                            {row.noOfFailedUsers}
+                          </span>) : (
+                            <Link to={'/quizfailedusers/'+row.quizid} style={{color:'red',textDecoration:'none'}}>{row.noOfFailedUsers}</Link>
+                          )}
+
+                        </TableCell>
+                        <TableCell align="left">{row.averageScore}</TableCell>
+
+                      </TableRow>
+                    );
+                  })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
                     </TableRow>
-                  );
-                })}
-                {emptyRows > 0 && (
-                  <TableRow
-                    style={{
-                      height: (dense ? 33 : 53) * emptyRows,
-                    }}
-                  >
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
           <TablePagination
             rowsPerPageOptions={[5, 10, 20, 40]}
@@ -409,6 +438,7 @@ const Exportreport=()=>{
     );
   }
 
+
   return (
     <>
       <EnhancedTable />
@@ -417,11 +447,11 @@ const Exportreport=()=>{
 };
 
 const mapStateToProps = (state) => ({
-    quizreport: state.quizreport.quizreport,
+  quizreport: state.quizreport.quizreport,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    FetchQuizereportRequest: () => dispatch(FetchQuizereportRequest()),
+  FetchQuizereportRequest: () => dispatch(FetchQuizereportRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizReportView);
