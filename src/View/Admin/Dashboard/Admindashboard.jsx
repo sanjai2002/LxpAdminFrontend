@@ -20,7 +20,8 @@ import HighestEnrolledCourse from "../../../components/Admin/HighestEnrolledCour
 import Recentfeedbackresponse from '../../../components/Admin/Recentfeedbackresponse';
 import RecordVoiceOverRoundedIcon from '@mui/icons-material/RecordVoiceOverRounded';
 import VoiceOverOffRoundedIcon from '@mui/icons-material/VoiceOverOffRounded';
-import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart'
+import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart';
+import { FaBookOpenReader } from "react-icons/fa6";
 import { FaUserGraduate } from "react-icons/fa";
 import '../../../Styles/Admin/AdminDashboard.css'
 const Item = styled(Paper)(({ theme }) => ({
@@ -69,7 +70,7 @@ export default function AdminDashboard() {
                   </Typography>
                   <div style={{display:'flex',justifyContent:'center'}}>
                   <Typography marginRight={"14% "}>
-                  <MenuBookIcon style={{fontSize:'280%',color:'#97247e'}}/>
+                  <FaBookOpenReader style={{fontSize:'280%',color:'#97247e'}}/>
                   </Typography>
                   <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"} >
                  <CountUp duration={8} end={dashboard.noOfCourse}/>

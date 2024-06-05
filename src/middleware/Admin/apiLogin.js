@@ -69,12 +69,9 @@ const loginUser = ({ dispatch }) => (next) => async (action) => {
       }
       else if (response.data.email === true && response.data.password === true && response.data.role === "Learner") {
         console.log("user", response.data)
-       
- 
         const learnerId = response.data.getLearnerId;
         // Store user ID in session
         sessionStorage.setItem('UserSessionID', learnerId);
- 
         dispatch(loginSuccessuser(response.data))
       }
       else {

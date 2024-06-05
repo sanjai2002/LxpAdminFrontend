@@ -59,9 +59,9 @@ const HighestEnrolledCourse = ({
               </Typography>
               { <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
                 <TransitionGroup>
-                  {rows.map((learner, learnerid) => (
+                  {rows.map((enrolledcourse) => (
                     <CSSTransition
-                      key={learnerid}
+                      // key={enrolledcourse.courseid}
                       timeout={500}
                       classNames="fade"
                     >
@@ -76,11 +76,11 @@ const HighestEnrolledCourse = ({
                         <ListItemAvatar>
                           <Avatar
                             alt="Learner profile"
-                            src={learner.thumbnailimage}
+                            src={enrolledcourse.thumbnailimage}
                           />
                         </ListItemAvatar>
                         <ListItemText
-                          primary= {<b>{learner.courseName}</b>}
+                          primary= {<b>{enrolledcourse.courseName}</b>}
                           secondary={
                             <React.Fragment>
                               <Typography
@@ -89,7 +89,7 @@ const HighestEnrolledCourse = ({
                                 variant="body2"
                                 color="text.primary"
                               >
-                               Learners Enrolled:{<b>{learner.learnerscount}</b>}
+                               Learners Enrolled:{<b>{enrolledcourse.learnerscount}</b>}
                               </Typography>
                             </React.Fragment>
                           }

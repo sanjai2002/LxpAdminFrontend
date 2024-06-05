@@ -103,7 +103,7 @@ const Recentfeedbackresponse = ({
                                 variant="body2"
                                 color="text.primary"
                               >
-                               {feedback.coursename} - {feedback.topicName}
+                               {<b>{feedback.coursename}</b>}- {feedback.topicName}
                               </Typography>
                               <br></br> 
                               <Typography

@@ -78,7 +78,7 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
                               }}
                             />
                             <span className="name-animation">
-                              {learner.learnerName}
+                              {<b>{learner.learnerName}</b>}
                             </span>
                             <hr
                               style={{

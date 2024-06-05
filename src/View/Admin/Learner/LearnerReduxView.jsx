@@ -104,7 +104,6 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
-
     return (
       <TableHead style={{ backgroundColor: "#23275c" }}>
         <TableRow>
@@ -279,9 +278,9 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
 
           <TableContainer>
             <Table
-              sx={{ minWidth: 100 }}
+              sx={{width:'100%'}}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={dense ? "medium" : "medium"}
             >
               <EnhancedTableHead
                 numSelected={selected.length}
