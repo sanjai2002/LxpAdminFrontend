@@ -12,8 +12,6 @@ export const fetchquizpassedusersRequest = (quizId) =>
     }
 
 );
-
-
 export const fetchquizpassedusersSuccess = (passedusers) =>
 (
     {

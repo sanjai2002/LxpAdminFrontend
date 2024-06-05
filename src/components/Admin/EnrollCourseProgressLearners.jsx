@@ -17,9 +17,9 @@ import PeopleIcon from '@mui/icons-material/People';
 
 
 export default function EnrollCourseProgressLearners() {
-
     const courseId = useParams();
     const dispatch = useDispatch();
+    
     const enrolledlearners = useSelector((state) => state.enrolledprogressuser.learners);
 
 

@@ -22,6 +22,7 @@ import RecordVoiceOverRoundedIcon from '@mui/icons-material/RecordVoiceOverRound
 import VoiceOverOffRoundedIcon from '@mui/icons-material/VoiceOverOffRounded';
 import { FaBookOpenReader } from "react-icons/fa6";
 import { FaUserGraduate } from "react-icons/fa";
+import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart'
 import '../../../Styles/Admin/AdminDashboard.css'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -177,10 +178,10 @@ export default function AdminDashboard() {
         </Grid>
       </Grid>
       <Grid container spacing={2} mt={3} >
+        <CourseEnrollmentChart/>
         <HighestEnrolledCourse />
         <Toplearners />
         <Recentfeedbackresponse />
-        {/* <CourseEnrollmentChart/> */}
       </Grid>
     </Box>
 

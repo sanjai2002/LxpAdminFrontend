@@ -14,8 +14,6 @@ import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEnrollCourseLearnerRequest } from "../../actions/Admin/EnrollmentCourseLearners";
 import { Link, useParams } from "react-router-dom";
-
-
 export default function EnrollCourseLearners() {
     const courseId = useParams();
     const dispatch = useDispatch();

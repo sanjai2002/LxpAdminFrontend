@@ -236,6 +236,7 @@ const mapStateToProps = (state) => ({
     quizpassedusers: state.quizpassedusers.quizpasseduser
 });
 
+
 const mapDispatchToProps = (dispatch) => ({
     fetchpassedusers: (quizid) => dispatch(fetchquizpassedusersRequest(quizid))
 });

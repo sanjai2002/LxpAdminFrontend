@@ -35,6 +35,8 @@ import ApiViewCourseReport  from '../middleware/Admin/ApiViewCourseReport';
 import ViewCoursereportReducers from '../reducers/Admin/ViewCoursereportReducers';
 import QuizReportReducer from '../reducers/Admin/ViewQuizReportReducers';
 import ApiViewQuizReport from '../middleware/Admin/ApiViewQuizReport';
+import ApiDashboardEnrollmentcourseBarchart from '../middleware/Admin/ApiDashboardEnrollmentcourseBarchart';
+import DashboardEnrollmentcourseBarchartReducer from '../reducers/Admin/DashboardEnrollmentcourseBarchartReducer'
 
 // import LearnerPostEnrollReducer from '../components/LearnerComponent/LearnerCourse'
 
@@ -121,12 +123,10 @@ const rootReducer = combineReducers({
   enrolledpasseduser: EnrollCoursePassedLearnerReducer,
   enrolledprogressuser: EnrollCourseProgressLearnerReducer,
   //sanjai -5
-
   toplearners:DashboardTopLearnersReducer,
   highestenrolledcourse:DashboardHighestEnrolledCourseReducer,
   recentfeedbackresponse:DashboardRecentFeedbackReducer,
-
-
+  enrollmentcoursebarchart:DashboardEnrollmentcourseBarchartReducer,
 
   //
   passwordchangereducer : PasswordChangeReducer,
@@ -157,7 +157,7 @@ const store = createStore(
      ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,
      FetchRegisterApi,ApiQuizPassedUsers,ApiQuizFailedUsers,EnrollCourseLearners,
       ApiViewEnrollmentReport, EnrollCoursePassedLearner, EnrollCourseProgressLearner,
-      ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse )
+      ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse,ApiDashboardEnrollmentcourseBarchart)
 );
 
 export default store;

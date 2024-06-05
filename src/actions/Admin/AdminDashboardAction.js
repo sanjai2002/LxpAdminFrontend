@@ -80,3 +80,26 @@ export const fetchRecentFeedbackResponseFailure=(error)=>({
   type:FETCH_RECENTFEEDBACKRESPONSE_FAILURE,
   payload:error,
 });
+
+
+// Enrolledcourse barchart
+export const FETCH_ENROLLMENTCOURSEBARCHART_REQUEST="FETCH_ENROLLMENTCOURSEBARCHART_REQUEST";
+export const FETCH_ENROLLMENTCOURSEBARCHART_SUCCESS="FETCH_ENROLLMENTCOURSEBARCHART_SUCCESS";
+export const FETCH_ENROLLMENTCOURSEBARCHART_FAILURE="FETCH_ENROLLMENTCOURSEBARCHART_FAILURE";
+
+export const fetchEnrollmentcourseBarchartRequest=(checking)=>({
+  type:FETCH_ENROLLMENTCOURSEBARCHART_REQUEST,
+  payload:checking,
+}
+);
+
+
+export const fetchEnrollmentcourseBarchartSuccess=(enrollmentcoursebarchart)=>({
+  type:FETCH_ENROLLMENTCOURSEBARCHART_SUCCESS,
+  payload:enrollmentcoursebarchart,
+});
+
+export const fetchEnrollmentcourseBarchartFailure=(error)=>({
+  type:FETCH_ENROLLMENTCOURSEBARCHART_FAILURE,
+  payload:error,
+});
