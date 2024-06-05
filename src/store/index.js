@@ -35,6 +35,12 @@ import ApiViewCourseReport  from '../middleware/Admin/ApiViewCourseReport';
 import ViewCoursereportReducers from '../reducers/Admin/ViewCoursereportReducers';
 import QuizReportReducer from '../reducers/Admin/ViewQuizReportReducers';
 import ApiViewQuizReport from '../middleware/Admin/ApiViewQuizReport';
+import ApiDashboardTopLearners from '../middleware/Admin/ApiDashboardTopLearners';
+import DashboardTopLearnersReducer from '../reducers/Admin/DashboardTopLearnersReducer';
+import ApiDashboardHighestEnrolledCourse from '../middleware/Admin/ApiDashboardHighestEnrolledCourse';
+import DashboardHighestEnrolledCourseReducer from '../reducers/Admin/DashboardHighestEnrolledCourseReducer';
+import ApiRecentFeedbackresponse from '../middleware/Admin/ApiRecentFeedbackresponse';
+import DashboardRecentFeedbackReducer from '../reducers/Admin/DashboardRecentFeedbackReducer';
 
 // import LearnerPostEnrollReducer from '../components/LearnerComponent/LearnerCourse'
 
@@ -82,9 +88,13 @@ const rootReducer = combineReducers({
   coursereport:ViewCoursereportReducers,
   quizreport:QuizReportReducer,
   email:emailReducer,
+  toplearners:DashboardTopLearnersReducer,
+  highestenrolledcourse:DashboardHighestEnrolledCourseReducer,
+  recentfeedbackresponse:DashboardRecentFeedbackReducer,
+
+  //learner module
   // enrolledCourses:LearnerPostEnrollReducer,
   fetchcourse: LearnerGetCourseReducer,
-
   passwordchangereducer : PasswordChangeReducer,
   user: userReducer,
   course: courseReducer,
@@ -107,7 +117,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,FetchRegisterApi )
+  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners,ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse, GetProfileCard, GetProfileCourses, LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,FetchRegisterApi )
 );
 
 export default store;

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     /* Align items horizontally */
 }
 
@@ -11,7 +12,6 @@
     /* Adjust as needed */
     width: 100%;
 }
-
 .card {
     flex: 0 0 30%;
     /* Adjust card width */
@@ -19,9 +19,9 @@
     /* Adjust spacing between cards */
     text-align: center;
     /* Center text inside cards */
-    border: 1px solid #ddd;
+    border: 3px solid #ddd;
     /* Add border for better visibility */
-    border-radius: 5px;
+    border-radius: 20px;
     /* Add border radius for rounded corners */
     padding: 10px;
     /* Add padding inside cards */
@@ -31,14 +31,42 @@
 
 .card-title {
     margin-top: 10px;
-    /* Adjust spacing above title */
+   
     font-size: 1.2em;
-    /* Adjust title font size */
+   
 }
 
 .card-text {
     margin-top: 5px;
-    /* Adjust spacing above text */
     font-size: 1em;
-    /* Adjust text font size */
+
 }
+/* Top learners */
+.fade-enter {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms ease-in, transform 500ms ease-in-out; 
+  }
+  
+  .fade-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 2000ms ease-out, transform 2000ms ease-in-out; 
+  }
+
+ 
+
+
+
+
+

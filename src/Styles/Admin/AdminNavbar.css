@@ -34,7 +34,7 @@
     /* width: 50%; */
     /* Collapsed width */
     height: 100%;
-    background-color: #23275c;
+    background-color: #f4f6fc;
     position: fixed;
     top: 0;
     left: 0;
@@ -44,12 +44,12 @@
     /* Hide overflowing icons */
 }
 .drawerheader{
-    background-color: #23275c;
+    background-color: #f4f6fc;
   
 }
 .iconDrawer
 {
-  color: #fff;
+  color: #23275c;
 }
 
 .side-nav.open {
@@ -65,7 +65,7 @@
 
 .side-nav ul li {
     padding: 15px;
-    color: #fff;
+    color: #23275c;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -74,8 +74,12 @@
 .side-nav ul .icon{
     margin-right: 6px;
 }
+
+.side-nav ul li:hover {
+    background-color: #CCCCCC;
+}
 .side-nav ul li.active {
-    /* background-color: #524f7d; */
+    background-color: #CCCCCC;
 }
 
 
@@ -99,11 +103,8 @@
     color: #fff;
    
 }
-/* .submenu ul li.active {
-    background-color: #524f7d;
-} */
 
-
-.submenu li:hover {
-    background-color: #524f7d;
+.submenu.active {
+    background-color: #8b2222;
 }
+

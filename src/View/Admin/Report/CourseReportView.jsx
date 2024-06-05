@@ -27,7 +27,6 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import  ReportSkeleton from '../../../components/Loading/Reportskeleton'
 
 const CourseReportView = ({FetchCoursereportRequest,coursereport}) => {
-  
   const [loading, setLoading] = useState(true);
   useEffect(() => {
       const timer = setTimeout(() => {

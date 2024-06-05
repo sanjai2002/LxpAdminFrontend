@@ -142,7 +142,7 @@ export default function AdminNavbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={showSideNav}>
+      <Drawer variant="permanent" open={showSideNav} >
         <DrawerHeader className="drawerheader">
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -160,7 +160,7 @@ export default function AdminNavbar() {
                 className={activePage === "home" ? "active" : ""}
                 onClick={() => handlePageChange("home")}
               >
-                <FaHome className="icon" /> {/* Icon for Home */}
+                <FaHome className="icon" /> 
                 {showSideNav && <span>Home</span>}
               </li>
             </Link>
@@ -178,7 +178,7 @@ export default function AdminNavbar() {
                 className={activePage === "learner" ? "active" : ""}
                 onClick={() => handlePageChange("learner")}
               >
-                <FaUserGraduate className="icon" /> {/* Icon for Tracking */}
+                <FaUserGraduate className="icon" /> 
                 {showSideNav && <span>Learner</span>}
               </li>
             </Link>
