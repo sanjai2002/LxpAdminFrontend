@@ -120,7 +120,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                 active={orderBy === headCell.id}
                 direction={orderBy === headCell.id ? order : "asc"}
                 onClick={createSortHandler(headCell.id)}
-                style={{color:"white"}}
+                style={{ color: "white" }}
               >
                 {headCell.label}
                 {orderBy === headCell.id ? (
@@ -238,13 +238,13 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     useEffect(() => {
-        setFilteredUser(
-          visibleRows.filter((row) =>
-            Object.values(row).some((value) =>
-              value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-            )
+      setFilteredUser(
+        visibleRows.filter((row) =>
+          Object.values(row).some((value) =>
+            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
           )
-        );
+        )
+      );
     });
 
     const visibleRows = React.useMemo(
@@ -281,7 +281,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
             <Table
               sx={{ minWidth: 100 }}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={dense ? "medium" : "medium"}
             >
               <EnhancedTableHead
                 numSelected={selected.length}
@@ -305,6 +305,8 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                       key={row.index}
                       selected={isItemSelected}
                       sx={{ cursor: "pointer" }}
+                      style={{textDecoration:'none'}}
+                      component={Link} to={'/individuallearner/' + row.learnerID}
                     >
                       <TableCell align="left">{index + 1}</TableCell>
                       <TableCell
@@ -314,7 +316,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                         align="left"
                         padding="none"
                       >
-                        {row.learnerName}
+                      {row.learnerName}
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">

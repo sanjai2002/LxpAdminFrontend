@@ -27,7 +27,11 @@ import PDFViewer from "../../components/LearnerComponent/PDFViewer";
 import PptViewerComponent from "../../components/LearnerComponent/Pptxday";
 import QuizPassedUsers from "../../View/Admin/Report/QuizPassedUsers";
 import QuizFailedReport from "../../View/Admin/Report/QuizFailedUsers";
-
+import EnrollCourseLearners from "../../components/Admin/EnrollCourseLearners";
+import CourseEnrollmentReportView from "../../View/Admin/Report/CourseEnrollmentReportView";
+import EnrollCoursePassLearners from "../../components/Admin/EnrollCoursePassLearners";
+import EnrollCourseProgressLearners from "../../components/Admin/EnrollCourseProgressLearners";
+import ReportMainView from "../../View/Admin/Report/ReportMainView";
 
 
 function Routing() {
@@ -78,6 +82,11 @@ function Routing() {
           <Route path='/quizpassedusers/:quizId' element={<QuizPassedUsers/>}></Route>
           <Route path="/quizfailedusers/:FailedUserQuizId" element={<QuizFailedReport/>}></Route>
           <Route path='/ReportSkeleton' element={<ReportSkeleton />}></Route>
+          <Route path='/individualenrollcourselearner/:courseId' element={<EnrollCourseLearners />}></Route>
+          <Route path='/individualenrollpasscourselearner/:courseId' element={<EnrollCoursePassLearners />}></Route>
+          <Route path='/individualenrollprogresscourselearner/:courseId' element={<EnrollCourseProgressLearners />}></Route>
+          <Route path="/enrollreport" element={<CourseEnrollmentReportView />}></Route>
+          <Route path="/report" element={<ReportMainView />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

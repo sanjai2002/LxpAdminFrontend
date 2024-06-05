@@ -33,7 +33,6 @@ const QuizFailedReport = ({fetchfailedusers,quizfailesdusers}) => {
 
 
 
-
 useEffect(() => {
 
   setFilteredsearchfailedusers(

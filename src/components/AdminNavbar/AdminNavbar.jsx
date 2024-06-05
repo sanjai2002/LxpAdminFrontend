@@ -142,7 +142,7 @@ export default function AdminNavbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={showSideNav}>
+      <Drawer variant="permanent" open={showSideNav} >
         <DrawerHeader className="drawerheader">
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
@@ -160,7 +160,7 @@ export default function AdminNavbar() {
                 className={activePage === "home" ? "active" : ""}
                 onClick={() => handlePageChange("home")}
               >
-                <FaHome className="icon" /> {/* Icon for Home */}
+                <FaHome className="icon" /> 
                 {showSideNav && <span>Home</span>}
               </li>
             </Link>
@@ -178,12 +178,12 @@ export default function AdminNavbar() {
                 className={activePage === "learner" ? "active" : ""}
                 onClick={() => handlePageChange("learner")}
               >
-                <FaUserGraduate className="icon" /> {/* Icon for Tracking */}
+                <FaUserGraduate className="icon" /> 
                 {showSideNav && <span>Learner</span>}
               </li>
             </Link>
             <li className="reports" onClick={() => handlePageChange("reports")}>
-              <FaChartBar className="icon" />
+            <Link style={{textDecoration:'none',color:'black'}} to='/report'> <FaChartBar  className="icon" /></Link>
               {showSideNav && <span>Reports</span>}
             </li>
           </ul>
@@ -193,7 +193,7 @@ export default function AdminNavbar() {
               Learner Report  
             </li></Link>
             <Link style={{textDecoration:"none"}} to='/coursereport'><li onClick={() => setActivePage("coursereport")}>Course Report</li></Link>
-            {/* <Link  style={{textDecoration:"none"}}to='/enrollmentreport'> <li onClick={() => setActivePage("enroll")}>Enrollment Report</li></Link> */}
+            <Link  style={{textDecoration:"none"}}to='/enrollreport'> <li onClick={() => setActivePage("enroll")}>Enrollment Report</li></Link>
             <Link  style={{textDecoration:"none"}}to='/quizreport'><li onClick={() => setActivePage("quiz")}>Quiz Report</li></Link>
           </ul>
         </div>

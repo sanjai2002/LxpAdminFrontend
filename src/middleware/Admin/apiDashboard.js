@@ -14,6 +14,8 @@ const FetchdashboardData =
       try {
         const response = await axios.get(API_URL);
 
+        console.log("checking the dashboard respone",response);
+
         if (response.status === 200) {
           dispatch(fetchCountSuccess(response.data.data));
           console.log("response", response.data.data);

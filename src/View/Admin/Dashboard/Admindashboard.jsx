@@ -11,9 +11,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCountRequest } from "../../../actions/Admin/AdminDashboardAction";
 import CountUp from "react-countup";
 import { Link } from "react-router-dom";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
 import { CardMedia } from "@mui/material";
 import mockdata from '../../../assets/Admin/logo.png'
-
+import Toplearners from "../../../components/Admin/Toplearners";
+import HighestEnrolledCourse from "../../../components/Admin/HighestEnrolledCourse";
+import Recentfeedbackresponse from '../../../components/Admin/Recentfeedbackresponse';
+import RecordVoiceOverRoundedIcon from '@mui/icons-material/RecordVoiceOverRounded';
+import VoiceOverOffRoundedIcon from '@mui/icons-material/VoiceOverOffRounded';
+import { FaBookOpenReader } from "react-icons/fa6";
+import { FaUserGraduate } from "react-icons/fa";
+import '../../../Styles/Admin/AdminDashboard.css'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -35,56 +44,37 @@ export default function AdminDashboard() {
     dispatch(fetchCountRequest());
   }, []);
   return (
+
     <Box sx={{ flexGrow: 1, mt: 10 }}>
-      <Grid container spacing={4} columnGap={4} marginLeft={5} marginRight={5}>
+      <Grid container spacing={2} >
         <Grid item xs={12} md={3}>
           <Item>
-            <Card
+            <Card className="background"
               style={{
-                borderBottom: "7px solid #0F62FE",
-                // boxShadow: "10px 5px  #378ce7",
-              }}
-              variant=""
-            >
-              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
-                <CardContent>
-                  <Typography
-                    sx={{ fontSize: 18, fontWeight: "bold", color: "#0F62FE" }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Total Learners
-                  </Typography>
-                  <Typography variant="h3" color={"black"} gutterBottom>
-                    <CountUp duration={8} end={dashboard.noOfLearners} />
-                  </Typography>
-                </CardContent>
-              </Link>
-            </Card>
-          </Item>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Item>
-            <Card
-              style={{
-                borderBottom: "7px solid #97247E",
-                // boxShadow: "10px 5px 5px #AC5098",
+                // background:"#DFF5FF"
+                // borderBottom: "7px solid #97247E",
+                // // boxShadow: "10px 5px 5px #AC5098",
               }}
               variant=""
             >
               <Link to={'/adminviewallcourse'} style={{ textDecoration: "none" }}>
                 <CardContent>
+
                   <Typography
-                    sx={{ fontSize: 18, fontWeight: "bold", color: "#97247E" }}
+                    sx={{ fontSize: 18, fontWeight: "bold", color: "#97247e" }}
                     color="text.secondary"
                     gutterBottom
                   >
                     Total Courses
                   </Typography>
-                  <Typography variant="h3" color={"black"} gutterBottom>
-                    <CountUp duration={5.65} end={dashboard.noOfCourse} />
-                  </Typography>
-
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography marginRight={"14% "}>
+                      <FaBookOpenReader style={{ fontSize: '280%', color: '#97247e' }} />
+                    </Typography>
+                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"} >
+                      <CountUp duration={8} end={dashboard.noOfCourse} />
+                    </Typography>
+                  </div>
                 </CardContent>
               </Link>
             </Card>
@@ -93,8 +83,40 @@ export default function AdminDashboard() {
         <Grid item xs={12} md={3}>
           <Item>
             <Card
+              // style={{
+              //   borderBottom: "7px solid #0F62FE",
+              //   // boxShadow: "10px 5px  #378ce7",
+              // }}
+              variant=""
+            >
+              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    Total Learners
+                  </Typography>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography marginRight={"14% "}>
+                      <FaUserGraduate style={{ fontSize: '280%', color: '#524F7D' }} />
+                    </Typography>
+                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
+                      <CountUp duration={8} end={dashboard.noOfLearners} />
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Link>
+            </Card>
+          </Item>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <Item>
+            <Card
               style={{
-                borderBottom: "7px solid #24A148",
+                // borderBottom: "7px solid #24A148",
                 // boxShadow: "10px 5px 5px #1bde52",
               }}
               variant=""
@@ -108,125 +130,59 @@ export default function AdminDashboard() {
                   >
                     Active Learners
                   </Typography>
-                  <Typography variant="h3" color={"black"} gutterBottom>
-                    <CountUp duration={8} end={dashboard.noOfActiveLearners} />
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography marginRight={"14% "}>
+                      <RecordVoiceOverRoundedIcon style={{ fontSize: '280%', color: '#24A148' }} />
+                    </Typography>
+                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
+                      <CountUp duration={8} end={dashboard.noOfActiveLearners} />
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Link>
+            </Card>
+          </Item>
+        </Grid>
+
+        <Grid item xs={12} md={3}>
+          <Item>
+            <Card
+              style={{
+                // borderBottom: "7px solid red",
+
+              }}
+              variant=""
+            >
+              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 18, fontWeight: "bold", color: "#D20062" }}
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    InActive Learners
                   </Typography>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Typography marginRight={"14% "}>
+                      <VoiceOverOffRoundedIcon style={{ fontSize: '280%', color: '#D20062' }} />
+                    </Typography>
+                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
+                      <CountUp duration={8} end={dashboard.noofInactiveLearners} />
+                    </Typography>
+                  </div>
                 </CardContent>
               </Link>
             </Card>
           </Item>
         </Grid>
       </Grid>
-      <Grid container spacing={4} columnGap={4} mt={3} marginLeft={5}>
-        <Grid item xs={12} md={3}>
-          <Item style={{ backgroundColor: "#D5A7CB" }}>
-            <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
-              <Card variant="">
-                <CardContent sx={{ height: "220px" }}>
-                  <Typography
-                    sx={{ fontSize: 18, fontWeight: "bold", color: "#D5A7CB" }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Top Learners
-                  </Typography>
-                  <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
-                    {dashboard.getTopLearners &&
-                      dashboard.getTopLearners.map((learner, index) => (
-                        <React.Fragment key={index}>
-                          {learner}
-                          <hr
-                            style={{ width: "100%", borderTop: "1px solid #ccc" }}
-                          />
-                        </React.Fragment>
-                      ))}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          </Item>
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Item style={{ backgroundColor: "#524F7D" }}>
-            <Link to={'/adminviewallcourse'} style={{ textDecoration: "none" }}>
-              <Card variant="">
-                <CardContent sx={{ height: "220px" }}>
-                  <Typography
-                    sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Highest Enrollment Course
-                  </Typography>
-                  <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
-                    {dashboard.highestEnrolledCourse &&
-                      dashboard.highestEnrolledCourse.map((course, index) => (
-                        <React.Fragment key={index}>
-                          {course}
-                          <hr
-                            style={{ width: "100%", borderTop: "1px solid #ccc" }}
-                          />
-                        </React.Fragment>
-                      ))}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          </Item>
-        </Grid>
-        {/* ......... */}
-        <Grid item xs={12} md={3}>
-          <Item style={{ backgroundColor: "#524F7D" }}>
-            <Link to={'/feedback'} style={{ textDecoration: "none" }}>
-              <Card variant="">
-                <CardContent sx={{ height: "220px" }}>
-                  <Typography
-                    sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
-                    color="text.secondary"
-                    gutterBottom
-                  >
-                    Recent Feedback
-                  </Typography>
-                  <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
-                    {dashboard.highestEnrolledCourse &&
-                      dashboard.highestEnrolledCourse.map((course, index) => (
-                        <React.Fragment key={index}>
-                          {course}
-                          <hr
-                            style={{ width: "100%", borderTop: "1px solid #ccc" }}
-                          />
-                          {/* <CardMedia
-                            component="img"
-                            height="194"
-                            image={mockdata}
-                            alt="Paella dish"
-                          /> */}
-                        </React.Fragment>
-                      ))}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
-          </Item>
-        </Grid>
-
-        {/* <Grid item xs={12} md={4}>
-          <Item>
-            <Card variant="">
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 20, fontWeight: "bold", color: "black" }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  Recent Feedback
-                </Typography>
-                <Typography variant="h6" gutterBottom></Typography>
-              </CardContent>
-            </Card>
-          </Item>
-        </Grid> */}
+      <Grid container spacing={2} mt={3} >
+        <HighestEnrolledCourse />
+        <Toplearners />
+        <Recentfeedbackresponse />
+        {/* <CourseEnrollmentChart/> */}
       </Grid>
     </Box>
+
   );
 }

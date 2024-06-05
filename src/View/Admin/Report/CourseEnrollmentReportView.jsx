@@ -1,9 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { FetchQuizereportRequest } from '../../../actions/Admin/QuizReportAction'
+import { FetchEnrollmentReportRequest } from "../../../actions/Admin/CourseEnrollmentReportAction";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
 import { visuallyHidden } from "@mui/utils";
 import Box from "@mui/material/Box";
@@ -18,36 +17,43 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import PreviewIcon from "@mui/icons-material/Preview";
-import { Col } from "react-bootstrap";
-import { Button } from "bootstrap";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ReportSkeleton from '../../../components/Loading/Reportskeleton'
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ReportSkeleton from "../../../components/Loading/Reportskeleton";
+import { Link } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
 
-const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
-
+const CourseEnrollmentReportView = ({
+  FetchEnrollmentReportRequest,
+  enrollmentreport,
+}) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    FetchQuizereportRequest();
-  }, [FetchQuizereportRequest]);
+    FetchEnrollmentReportRequest();
+  }, [FetchEnrollmentReportRequest]);
+  console.log(enrollmentreport);
 
-  //Pdf 
+  //Pdf
   const pdfRef = React.useRef();
 
-  if (loading || quizreport.length === 0) {
-    return <div> <ReportSkeleton /></div>;
+  if (loading || enrollmentreport.length === 0) {
+    return (
+      <div>
+        {" "}
+        <ReportSkeleton />
+      </div>
+    );
   }
   //Rows for the table
-  const rows = quizreport;
+  const rows = enrollmentreport;
 
   //Descending function
   function descendingComparator(a, b, orderBy) {
@@ -95,49 +101,37 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
       label: "Course Name",
     },
     {
-      id: "topicName",
-      numeric: false,
+      id: "enrolledUsers",
+      numeric: true,
       disablePadding: false,
-      label: "Topic Name",
+      label: "Enrolled Users",
     },
     {
-      id: "quizName",
-      numeric: false,
-      disablePadding: false,
-      label: "Quiz Name",
-    },
-    {
-      id: "noOfPassedUsers",
+      id: "inprogressUsers",
       numeric: true,
       disablePadding: true,
-      label: "No Of PassedUsers",
+      label: "In Progress Users",
     },
     {
-      id: "noOfFailedUsers",
+      id: "completedUsers",
       numeric: true,
       disablePadding: true,
-      label: "No Of Failed Users",
-    },
-    {
-      id: "averageScore",
-      numeric: true,
-      disablePadding: true,
-      label: "Average Score",
+      label: "Completed Users",
     },
   ];
 
   // today date
   let today = new Date();
   today.setDate(today.getDate());
-  let month = String(today.getMonth() + 1).padStart(2, '0');
-  let day = String(today.getDate()).padStart(2, '0');
-  let Dates = day + '-' + month + '-' + today.getFullYear();
+  let month = String(today.getMonth() + 1).padStart(2, "0");
+  let day = String(today.getDate()).padStart(2, "0");
+  let Dates = day + "-" + month + "-" + today.getFullYear();
 
   const Exportreport = () => {
     const input = pdfRef.current;
     html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4', true);
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4", true);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       const imgWidth = canvas.width;
@@ -145,9 +139,16 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
       const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
       const imgX = (pdfWidth - imgWidth * ratio) / 2;
       const imgY = 30;
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save(`CourseReports_${Dates}.pdf`);
-    })
+      pdf.addImage(
+        imgData,
+        "PNG",
+        imgX,
+        imgY,
+        imgWidth * ratio,
+        imgHeight * ratio
+      );
+      pdf.save(`Course_Enrollment_Reports_${Dates}.pdf`);
+    });
   };
 
   //Component for Head in Table
@@ -236,7 +237,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
             component="div"
             align="center"
           >
-            Quiz Report
+            Course Enrollment Report
           </Typography>
         )}
       </Toolbar>
@@ -246,8 +247,6 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
   EnhancedTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
   };
-
-
 
   //Table for the Overall Component
 
@@ -290,16 +289,6 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
     const emptyRows =
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-    useEffect(() => {
-      setFilteredUser(
-        visibleRows.filter((row) =>
-          Object.values(row).some((value) =>
-            value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        )
-      );
-    });
-
     const visibleRows = React.useMemo(
       () =>
         stableSort(rows, getComparator(order, orderBy)).slice(
@@ -308,6 +297,16 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
         ),
       [order, orderBy, page, rowsPerPage]
     );
+    const [count, setCount] = React.useState(0);
+    useEffect(() => {
+      setFilteredUser(
+        visibleRows.filter((row) =>
+          Object.values(row).some((value) =>
+            value !== null && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        )
+      );
+    });
 
     return (
       <Box sx={{ width: "100%" }}>
@@ -318,7 +317,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
           }}
         >
           <EnhancedTableToolbar numSelected={selected.length} />
-          <div style={{ display: 'flex', padding: "10px" }}>
+          <div style={{ display: "flex", padding: "10px" }}>
             <form className="form-inline my-2 my-lg-0">
               <input
                 className="form-control mr-sm-2"
@@ -330,13 +329,20 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </form>
-            <button className="btn btn-success" onClick={Exportreport} style={{ marginLeft: '48%' }}>Download Report<ArrowDownwardIcon /></button>
+            <button
+              className="btn btn-success"
+              onClick={Exportreport}
+              style={{ marginLeft: "48%" }}
+            >
+              Download Report
+              <ArrowDownwardIcon />
+            </button>
           </div>
 
-          <div id="learnersreport">
+          <div id="learnersreport" className="m-2">
             <TableContainer ref={pdfRef}>
               <Table
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 aria-labelledby="tableTitle"
                 size={dense ? "medium" : "medium"}
               >
@@ -350,11 +356,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
                 />
                 <TableBody>
                   {filteredUser.map((row, index) => {
-
-                    const isItemSelected = isSelected(row.id);
-                    const disableLinkPassedUsers = row.noOfPassedUsers === 0; // Check if the number of passed users is zero
-
-                    const disableLinkFailedUsers = row.noOfFailedUsers === 0;  // check if the number of failed users is zero
+                    const isItemSelected = isSelected(row.courseId);
 
                     return (
                       <TableRow
@@ -369,42 +371,73 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
                         <TableCell align="left">{index + 1}</TableCell>
                         <TableCell
                           component="th"
-                          id={row.id}
+                          id={row.courseId}
                           scope="row"
                           align="left"
                           padding="none"
                         >
                           {row.courseName}
                         </TableCell>
-                        <TableCell align="left">{row.topicName}</TableCell>
-                        <TableCell align="left">
+                        <TableCell align="left"
+                          component={Link}
+                          to={'/individualenrollcourselearner/' + row.courseId}
+                          sx={{ textDecoration: "none" }}
+                        >
                           {/* {row.lastLogin.replace("T", " ")} */}
-                          {row.quizName}
-                        </TableCell>
-                        
-                        <TableCell align="left">
-                          {disableLinkPassedUsers ? (
-                            <span style={{ pointerEvents: 'none', color: 'grey' }}>
-                              {row.noOfPassedUsers}
-                            </span>
-                          ) : (
-                            <Link to={'/quizpassedusers/' + row.quizId} style={{ textDecoration: 'none', color: 'green' }}>
-                              {row.noOfPassedUsers}
-                            </Link>
-                          )}
+                          <Tooltip title={row.courseName + ' Enrolled Users'} >
+                            {row.enrolledUsers}
+                          </Tooltip>
                         </TableCell>
 
-                        <TableCell align="left">
+                        {
+                          row.inprogressUsers === 0 ?
+                            <TableCell align="left"
+                            // component={Link}
+                            // to={'/individualenrollprogresscourselearner/' + row.courseId}
+                            // sx={{ textDecoration: "none" }}
+                            >
+                              <Tooltip title={row.courseName + ' In Progress Users'} >
+                                {row.inprogressUsers}
+                              </Tooltip>
+                            </TableCell> :
+                            <TableCell align="left"
+                              component={Link}
+                              to={'/individualenrollprogresscourselearner/' + row.courseId}
+                              sx={{ textDecoration: "none" }}
+                            >
+                              <Tooltip title={row.courseName + ' In Progress Users'} >
+                                {row.inprogressUsers}
+                              </Tooltip>
+                            </TableCell>
+                        } 
 
-                          {disableLinkFailedUsers ? (<span style={{pointerEvents:'none',color:'grey'}}>
-                            {row.noOfFailedUsers}
-                          </span>) : (
-                            <Link to={'/quizfailedusers/'+row.quizId} style={{color:'red',textDecoration:'none'}}>{row.noOfFailedUsers}</Link>
-                          )}
+                        {/* <TableCell align="left"
+                          component={Link}
+                          to={'/individualenrollprogresscourselearner/' + row.courseId}
+                          sx={{ textDecoration: "none" }}
+                        >
+                          <Tooltip title={row.courseName + ' In Progress Users'} >
+                            {row.inprogressUsers}
+                          </Tooltip>
+                        </TableCell> */}
 
-                        </TableCell>
-                        <TableCell align="left">{row.averageScore}</TableCell>
 
+                        {row.completedUsers === 0 ?
+                          <TableCell align="left"
+                            sx={{ textDecoration: "none" }}>
+                            <Tooltip title={row.courseName + ' Completed Users'} >
+                              {row.completedUsers}
+                            </Tooltip>
+                          </TableCell> :
+                          <TableCell align="left"
+                            component={Link}
+                            to={'/individualenrollpasscourselearner/' + row.courseId}
+                            sx={{ textDecoration: "none" }}>
+                            <Tooltip title={row.courseName + ' Completed Users'} >
+                              {row.completedUsers}
+                            </Tooltip>
+                          </TableCell>
+                        }
                       </TableRow>
                     );
                   })}
@@ -435,7 +468,6 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
     );
   }
 
-
   return (
     <>
       <EnhancedTable />
@@ -444,12 +476,14 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
 };
 
 const mapStateToProps = (state) => ({
-  quizreport: state.quizreport.quizreport,
+  enrollmentreport: state.fetchenrollmentreport.enrollmentreport,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  FetchQuizereportRequest: () => dispatch(FetchQuizereportRequest()),
+  FetchEnrollmentReportRequest: () => dispatch(FetchEnrollmentReportRequest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuizReportView);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CourseEnrollmentReportView);
