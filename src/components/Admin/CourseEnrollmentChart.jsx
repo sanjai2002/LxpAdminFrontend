@@ -58,15 +58,14 @@ let day = String(today.getDate()).padStart(2, '0');
 
   const checking =selectedOption ;
   console.log("check", checking);
-
-//   const dispatch=useDispatch();
-
-//   useEffect(() => {
-//     dispatch(fetchEnrollmentcourseBarchartRequest(checking))
-// }, [checking]);
-
-
-  var barColors = ["red", "yellow", "blue", "orange", "brown"];
+  var barColors = ["#003f5c",
+"#2f4b7c",
+"#665191",
+"#a05195",
+"#d45087",
+"#f95d6a",
+"#ff7c43",
+"#ffa600]"];
   const barData = {
     datasets: [
       {
@@ -92,19 +91,6 @@ let day = String(today.getDate()).padStart(2, '0');
   return (
     <Grid item xs={12} md={6}>
       <Item>
-        {/* {Array.isArray(dashboard > 0 ? (
-          <select value={selectedOption} onChange={handleSelectChange}>
-            <option disabled>Choose a Year</option>
-            {dashboard.enrollmentYears.map((opt, index) => (
-              <option key={index} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-        ) : (
-          "null"
-        ))} */}
-
         <div>
           <select value={selectedOption} onChange={handleSelectChange}>
             <option disabled>Choose a Year</option>
@@ -119,15 +105,6 @@ let day = String(today.getDate()).padStart(2, '0');
 
         <Card variant="">
           <CardContent sx={{ height: "300px" }}>
-            {/* <Typography
-                sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Top Learners
-                &nbsp; 
-                <MilitaryTechIcon/>
-              </Typography> */}
             <Bar data={barData} options={barOptions} />
           </CardContent>
         </Card>
@@ -138,7 +115,6 @@ let day = String(today.getDate()).padStart(2, '0');
 
 const mapStoreToProps = (state) => ({
   enrollmentcoursebarchart: state.enrollmentcoursebarchart,
-  //   sample :state.fetchdata.data.enrollmentYears,
 });
 
 debugger  
@@ -153,4 +129,4 @@ export default connect(
   mapDispatchToProps
 )(CourseEnrollmentChart);
 
-// export default CourseEnrollmentChart;
+

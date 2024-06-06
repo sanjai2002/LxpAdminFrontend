@@ -45,22 +45,26 @@ export default function AdminDashboard() {
     dispatch(fetchCountRequest());
   }, []);
   return (
-
     <Box sx={{ flexGrow: 1, mt: 10 }}>
-      <Grid container spacing={2} >
+      <Grid container spacing={2}>
         <Grid item xs={12} md={3}>
           <Item>
-            <Card className="background"
-              style={{
-                // background:"#DFF5FF"
-                // borderBottom: "7px solid #97247E",
-                // // boxShadow: "10px 5px 5px #AC5098",
-              }}
+            <Card
+              className="background"
+              style={
+                {
+                  // background:"#DFF5FF"
+                  // borderBottom: "7px solid #97247E",
+                  // // boxShadow: "10px 5px 5px #AC5098",
+                }
+              }
               variant=""
             >
-              <Link to={'/adminviewallcourse'} style={{ textDecoration: "none" }}>
+              <Link
+                to={"/adminviewallcourse"}
+                style={{ textDecoration: "none" }}
+              >
                 <CardContent>
-
                   <Typography
                     sx={{ fontSize: 18, fontWeight: "bold", color: "#97247e" }}
                     color="text.secondary"
@@ -68,11 +72,18 @@ export default function AdminDashboard() {
                   >
                     Total Courses
                   </Typography>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <FaBookOpenReader style={{ fontSize: '280%', color: '#97247e' }} />
+                      <FaBookOpenReader
+                        style={{ fontSize: "280%", color: "#97247e" }}
+                      />
                     </Typography>
-                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"} >
+                    <Typography
+                      variant="h3"
+                      color={"#000000"}
+                      gutterBottom
+                      paddingRight={"40%"}
+                    >
                       <CountUp duration={8} end={dashboard.noOfCourse} />
                     </Typography>
                   </div>
@@ -90,7 +101,7 @@ export default function AdminDashboard() {
               // }}
               variant=""
             >
-              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
+              <Link to={"/learnerviewall"} style={{ textDecoration: "none" }}>
                 <CardContent>
                   <Typography
                     sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
@@ -99,11 +110,18 @@ export default function AdminDashboard() {
                   >
                     Total Learners
                   </Typography>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <FaUserGraduate style={{ fontSize: '280%', color: '#524F7D' }} />
+                      <FaUserGraduate
+                        style={{ fontSize: "280%", color: "#524F7D" }}
+                      />
                     </Typography>
-                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
+                    <Typography
+                      variant="h3"
+                      color={"#000000"}
+                      gutterBottom
+                      paddingRight={"40%"}
+                    >
                       <CountUp duration={8} end={dashboard.noOfLearners} />
                     </Typography>
                   </div>
@@ -116,13 +134,15 @@ export default function AdminDashboard() {
         <Grid item xs={12} md={3}>
           <Item>
             <Card
-              style={{
-                // borderBottom: "7px solid #24A148",
-                // boxShadow: "10px 5px 5px #1bde52",
-              }}
+              style={
+                {
+                  // borderBottom: "7px solid #24A148",
+                  // boxShadow: "10px 5px 5px #1bde52",
+                }
+              }
               variant=""
             >
-              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
+              <Link to={"/learnerviewall"} style={{ textDecoration: "none" }}>
                 <CardContent>
                   <Typography
                     sx={{ fontSize: 18, fontWeight: "bold", color: "#24A148" }}
@@ -131,12 +151,22 @@ export default function AdminDashboard() {
                   >
                     Active Learners
                   </Typography>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <RecordVoiceOverRoundedIcon style={{ fontSize: '280%', color: '#24A148' }} />
+                      <RecordVoiceOverRoundedIcon
+                        style={{ fontSize: "280%", color: "#24A148" }}
+                      />
                     </Typography>
-                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
-                      <CountUp duration={8} end={dashboard.noOfActiveLearners} />
+                    <Typography
+                      variant="h3"
+                      color={"#000000"}
+                      gutterBottom
+                      paddingRight={"40%"}
+                    >
+                      <CountUp
+                        duration={8}
+                        end={dashboard.noOfActiveLearners}
+                      />
                     </Typography>
                   </div>
                 </CardContent>
@@ -148,13 +178,14 @@ export default function AdminDashboard() {
         <Grid item xs={12} md={3}>
           <Item>
             <Card
-              style={{
-                // borderBottom: "7px solid red",
-
-              }}
+              style={
+                {
+                  // borderBottom: "7px solid red",
+                }
+              }
               variant=""
             >
-              <Link to={'/learnerviewall'} style={{ textDecoration: "none" }}>
+              <Link to={"/learnerviewall"} style={{ textDecoration: "none" }}>
                 <CardContent>
                   <Typography
                     sx={{ fontSize: 18, fontWeight: "bold", color: "#D20062" }}
@@ -163,12 +194,22 @@ export default function AdminDashboard() {
                   >
                     InActive Learners
                   </Typography>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <VoiceOverOffRoundedIcon style={{ fontSize: '280%', color: '#D20062' }} />
+                      <VoiceOverOffRoundedIcon
+                        style={{ fontSize: "280%", color: "#D20062" }}
+                      />
                     </Typography>
-                    <Typography variant="h3" color={"#000000"} gutterBottom paddingRight={"40%"}>
-                      <CountUp duration={8} end={dashboard.noofInactiveLearners} />
+                    <Typography
+                      variant="h3"
+                      color={"#000000"}
+                      gutterBottom
+                      paddingRight={"40%"}
+                    >
+                      <CountUp
+                        duration={8}
+                        end={dashboard.noofInactiveLearners}
+                      />
                     </Typography>
                   </div>
                 </CardContent>
@@ -177,13 +218,14 @@ export default function AdminDashboard() {
           </Item>
         </Grid>
       </Grid>
-      <Grid container spacing={2} mt={3} >
-        <CourseEnrollmentChart/>
+      <Grid container spacing={2} mt={3}>
+        <CourseEnrollmentChart />
         <HighestEnrolledCourse />
         <Toplearners />
+      </Grid>
+      <Grid container spacing={2} mt={3}>
         <Recentfeedbackresponse />
       </Grid>
     </Box>
-
   );
 }
