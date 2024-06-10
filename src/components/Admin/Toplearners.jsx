@@ -27,8 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
 }));
 
-const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
-
+const Toplearners = ({fetchToplearnersRequest, toplearners }) => {
   useEffect(() => {
     fetchToplearnersRequest();
   }, [fetchToplearnersRequest]);
@@ -50,7 +49,6 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
                 &nbsp; 
                 <MilitaryTechIcon/>
               </Typography>
-              
               <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }} style={{marginTop:"30px"}}>
                 <TransitionGroup>
                   {rows.map((toplearner,index) => (
