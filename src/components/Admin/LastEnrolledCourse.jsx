@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
+import CardMedia from '@mui/material/CardMedia';
 const LastEnrolledCourse = ({ fetchLastEnrolledCourse, enrolledcourse }) => {
     const learnerid = useParams();
     useEffect(() => {
@@ -16,7 +17,7 @@ const LastEnrolledCourse = ({ fetchLastEnrolledCourse, enrolledcourse }) => {
             <>
                 <Grid item xs>
                     <Card sx={{ display: 'flex' }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', height: 150 ,padding:'25px'}}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', height: 200 ,padding:'25px'}}>
                             <Typography component="div" variant="h5" sx={{color:'#23275c' ,fontWeight:'bold'}}>
                                 Last Enrolled course
                             </Typography>
@@ -34,12 +35,18 @@ const LastEnrolledCourse = ({ fetchLastEnrolledCourse, enrolledcourse }) => {
             <>
                 <Grid item xs>
                     <Card sx={{ display: 'flex' }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column',  height: 150 ,padding:'25px' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column',  height: 200 ,padding:'25px' }}>
                             <Typography component="div" variant="h5" sx={{color:'#23275c' ,fontWeight:'bold'}}>
                                 Last Enrolled course
                             </Typography>
                             <Typography sx={{ display: 'flex', flexDirection: 'row',fontStyle:'italic' }} component="div" variant="h5">
-                                {enrolledcourse.lastenrolledCourse.enrolledcourse}
+                    
+                             <CardMedia
+                            component="img"
+                            sx={{ width: 230, }}
+                            image={enrolledcourse.lastenrolledCourse.courseImage}
+                            alt="Profile"
+                        />
                             </Typography>
                         </Box>
                     </Card>
