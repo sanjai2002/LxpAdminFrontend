@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
 }
+.ssss{
+    background: #23275c;
+  }
 
 .top-nav {
     display: flex;

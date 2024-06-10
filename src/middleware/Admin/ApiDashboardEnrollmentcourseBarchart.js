@@ -7,7 +7,7 @@ import { baseUrl } from "./api";
 const ApiDashboardEnrollmentcourseBarchart=({dispatch})=>(next)=>async(action)=>{
     if(action.type==FETCH_ENROLLMENTCOURSEBARCHART_REQUEST){
         try{
-            debugger
+
             const output=action.payload;
             console.log("outputssss",output);
             

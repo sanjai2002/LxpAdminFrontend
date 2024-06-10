@@ -230,15 +230,8 @@ const CourseEnrollmentReportView = ({
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography
-            sx={{ flex: "1 1 100%" }}
-            variant="h4"
-            id="tableTitle"
-            component="div"
-            align="center"
-          >
-            Course Enrollment Report
-          </Typography>
+         <>
+         </>
         )}
       </Toolbar>
     );
@@ -338,9 +331,18 @@ const CourseEnrollmentReportView = ({
               <ArrowDownwardIcon />
             </button>
           </div>
-
           <div id="learnersreport" className="m-2">
             <TableContainer ref={pdfRef}>
+            <Typography
+            sx={{ flex: "1 1 100%" }}
+            variant="h4"
+            id="tableTitle"
+            component="div"
+            align="center"
+            style={{marginBottom:"15px"}}
+          >
+            Course Enrollment Report
+          </Typography>
               <Table
                 sx={{ width: "100%" }}
                 aria-labelledby="tableTitle"
@@ -455,7 +457,12 @@ const CourseEnrollmentReportView = ({
             </TableContainer>
           </div>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 20, 40]}
+            rowsPerPageOptions={[
+              { label: '5 Rows', value: 5 },
+              { label: '10 rows', value: 10 },
+              { label: '25 rows', value: 25 },
+              { label: 'All', value: rows.length },
+            ]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}

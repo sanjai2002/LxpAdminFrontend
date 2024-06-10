@@ -32,6 +32,7 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
   }
   //Rows for the table
   const rows = learners.learners;
+  console.log("ssss",rows);
 
   //Descending function
   function descendingComparator(a, b, orderBy) {
@@ -91,10 +92,10 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
       label: "Last Login",
     },
     {
-      id: "view_details",
-      numeric: false,
+      id: "learnerStatus",
+      numeric: true,
       disablePadding: true,
-      label: "View Details",
+      label: "Learner status",
     },
   ];
 
@@ -320,12 +321,12 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">
-                        {row.lastLogin.replace("T", " ")}
+                        {/* {row.lastLogin.replace("T", " ")}  */}
+                        {row.lastLogin.split("-").reverse().join("-")} 
+                        
                       </TableCell>
                       <TableCell align="left">
-                        <Link to={`/individuallearner/${row.learnerID}`}>
-                          <PreviewIcon />
-                        </Link>
+                       { row.learnerStatus==true?<h6 style={{color:"green"}}>Active</h6>:<h6 style={{color:"red"}}>InActive</h6>}
                       </TableCell>
                     </TableRow>
                   );
@@ -343,7 +344,12 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 20, 40]}
+            rowsPerPageOptions={[
+              { label: '5 Rows', value: 5 },
+              { label: '10 rows', value: 10 },
+              { label: '25 rows', value: 25 },
+              { label: 'All', value: rows.length },
+            ]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}

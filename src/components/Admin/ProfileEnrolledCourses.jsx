@@ -10,8 +10,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchProfileCoursesRequest } from "../../actions/Admin/LearnersViewAction";
-
-
 const ProfileEnrolledCourses = ({ fetchProfileCourses, profilecourses }) => {
     const learnerid = useParams();
     useEffect(() => {

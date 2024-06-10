@@ -33,13 +33,14 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
     fetchToplearnersRequest();
   }, [fetchToplearnersRequest]);
 
-  const rows = toplearners;
+  const rows = toplearners.toplearners;
+  console.log("top",rows);
   return (
     <>
       <Grid item xs={12} md={3}>
-        <Item>
+        <Item style={{borderRadius:"15px"}} >
           <Card variant="">
-            <CardContent sx={{ height: "300px" }}>
+            <CardContent sx={{ height: "360px" }}>
             <Typography
                 sx={{ fontSize: 18, fontWeight: "bold", color: "#524F7D" }}
                 color="text.secondary"
@@ -50,11 +51,11 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
                 <MilitaryTechIcon/>
               </Typography>
               
-              <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
+              <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }} style={{marginTop:"30px"}}>
                 <TransitionGroup>
-                  {rows.map((learner) => (
+                  {rows.map((toplearner) => (
                     <CSSTransition
-                      key={learner.learnerid}
+                      key={toplearner.learnerid}
                       timeout={1000}
                       classNames="fade"
                     >
@@ -65,21 +66,21 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
                         }}
                       >
                         <Link
-                          to={`/individuallearner/${learner.learnerid}`}
+                          to={`/individuallearner/${toplearner.learnerid}`}
                           style={{ textDecoration: "none", color: "black" }}
                         >
                           <React.Fragment>
                             <img
-                              src={learner.profilePhoto}
+                              src={toplearner.profilePhoto}
                               style={{
                                 width: "50px",
                                 height: "50px",
                                 borderRadius: "50%",
-                                marginRight: "10px",
+                                marginRight: "15px",
                               }}
                             />
                             <span className="name-animation">
-                              {<b>{learner.learnerName}</b>}
+                              {<b>{toplearner.learnerName}</b>}
                             </span>
                             <hr
                               style={{
@@ -94,7 +95,7 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
                   ))}
                 </TransitionGroup>
               </Typography>
-            </CardContent>
+            </CardContent> 
           </Card>
         </Item>
       </Grid>
@@ -103,7 +104,7 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
 };
 
 const mapStoreToProps = (state) => ({
-  toplearners: state.toplearners.toplearners,
+  toplearners: state.toplearners,
 });
 
 const mapDispatchToProps = (dispatch) => ({

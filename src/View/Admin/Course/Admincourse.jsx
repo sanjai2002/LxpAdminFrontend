@@ -17,21 +17,21 @@ const Admincourse = ({ fetchCourses, courses }) => {
     const [loading, setLoading] = useState(true);
     const rootRef = React.useRef(null);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false)
-        }, 1000);
-        return () => clearTimeout(timer);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000);
+    //     return () => clearTimeout(timer);
 
-    }, []);
+    // }, []);
     
     useEffect(() => {
         fetchCourses();
     }, [fetchCourses]);
 
-    if ( loading||courses.length === 0) {
-        return <div className='spinnerclass'> <Spinner /></div>;
-    }
+    // if ( loading||courses.length === 0) {
+    //     return <div className='spinnerclass'> <Spinner /></div>;
+    // }
     return (
         <>
             {

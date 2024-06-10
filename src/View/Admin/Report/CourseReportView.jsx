@@ -224,15 +224,8 @@ const Exportreport=()=>{
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography
-            sx={{ flex: "1 1 100%" }}
-            variant="h4"
-            id="tableTitle"
-            component="div"
-            align="center"
-          >
-            Course Report
-          </Typography>
+         <>
+         </>
         )}
       </Toolbar>
     );
@@ -325,10 +318,18 @@ const Exportreport=()=>{
          </form>         
          <button className="btn btn-success"  onClick={Exportreport} style={{marginLeft:'48%'}}>Download Report<ArrowDownwardIcon/></button>   
           </div>
-             
-
          <div id="learnersreport">
           <TableContainer ref={pdfRef}>
+          <Typography
+            sx={{ flex: "1 1 100%" }}
+            variant="h4"
+            id="tableTitle"
+            component="div"
+            align="center"
+            style={{marginBottom:"15px"}}
+          >
+            Course Report
+          </Typography>
             <Table
               sx={{width:'100%'}}
               aria-labelledby="tableTitle"
@@ -391,7 +392,12 @@ const Exportreport=()=>{
           </TableContainer>
           </div>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 20, 40]}
+            rowsPerPageOptions={[
+              { label: '5 Rows', value: 5 },
+              { label: '10 rows', value: 10 },
+              { label: '25 rows', value: 25 },
+              { label: 'All', value: rows.length },
+            ]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}

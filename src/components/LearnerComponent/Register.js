@@ -10,10 +10,6 @@ import { userEmailRequest } from '../..//actions/LearnerAction/Fetchemail';
 import { userOTPRequest } from '../../actions/LearnerAction/OTPAction';
 
 
-
-
-
-
 const options = [
     { value: 'C++', label: 'C++' },
     { value: 'LINQ', label: 'LINQ' },

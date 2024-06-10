@@ -38,10 +38,9 @@
 
 
 
- import { LOGIN_REQUEST, loginSuccessadmin, loginSuccessuser, loginError } from '../../actions/Admin/loginAction';
-
+import { LOGIN_REQUEST, loginSuccessadmin, loginSuccessuser, loginError } from '../../actions/Admin/loginAction';
 import axios from "axios";
- 
+
 // import { baseUrl } from "../../middleware/api";
  import { baseUrl } from "./api";
 
@@ -56,25 +55,17 @@ const loginUser = ({ dispatch }) => (next) => async (action) => {
  
       if (response.data.email === true && response.data.password === true && response.data.role === "Admin") {
         console.log("Admin", response.data)
- 
-     
         const adminId = response.data.getLearnerId;
- 
-       
         // Store user ID in session
-        sessionStorage.setItem('AdmminSessionId', adminId);
- 
- 
+        sessionStorage.setItem('AdminSessionId', adminId);
+        sessionStorage.setItem('Role',response.data.role);
         dispatch(loginSuccessadmin(response.data));
       }
       else if (response.data.email === true && response.data.password === true && response.data.role === "Learner") {
-        console.log("user", response.data)
-       
- 
+        console.log("user", response.data) 
         const learnerId = response.data.getLearnerId;
         // Store user ID in session
         sessionStorage.setItem('UserSessionID', learnerId);
- 
         dispatch(loginSuccessuser(response.data))
       }
       else {

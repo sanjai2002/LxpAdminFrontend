@@ -30,10 +30,7 @@ export default function EnrollCourseProgressLearners() {
 
 
     const [filterenrolledprogressusers, setFilterprogressusers] = useState([]);
-
-
     // Impletement useEffect for the serchfiltered courses
-
     useEffect(() => {
         setFilterprogressusers((
             enrolledlearners.filter((filterenrolledprogresslearners) =>

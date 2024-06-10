@@ -3,9 +3,8 @@ import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 function Adminrouting() {
-  // let auth = {'role': Cookies.get('Role')}
-  let auth = { role: "Admin" };
-  return auth.role == "Admin" ? (
+  const storedValue = sessionStorage.getItem('Role');
+  return storedValue == "Admin" ? (
     <>
       <Box sx={{ display: "flex" }}>
         <AdminNavbar />
@@ -15,7 +14,7 @@ function Adminrouting() {
       </Box>
     </>
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/PageNotFound" />
   );
 }
 export default Adminrouting;

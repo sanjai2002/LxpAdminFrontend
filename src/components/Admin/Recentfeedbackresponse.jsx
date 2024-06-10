@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
+import { Link } from "react-router-dom";
 import {
   Paper,
   Typography,
@@ -24,25 +25,39 @@ const RecentFeedbackCarousel = ({
     <div style={{ width: "100%", height: "300%" }}>
       <Carousel>
         {recentFeedback.map((feedback, index) => (
-          <Paper key={index} style={{ padding: "20px" }}>
-            <ListItem alignItems="flex-start">
+          <Paper key={index} style={{ padding: "20px",marginLeft:"15px",borderRadius:"15px" }}>
+            <ListItem alignItems="flex-start" style={{marginLeft:"30%"}}>
               <ListItemAvatar>
+              <Link to={`/individuallearner/${feedback.learnerid}`}
+                          style={{ textDecoration: "none", color: "black" }}
+                        >
                 <Avatar alt="Learner profile" src={feedback.profilephoto} />
+                </Link>
               </ListItemAvatar>
+              
               <ListItemText
                 primary={
+                  <Link to={`/individuallearner/${feedback.learnerid}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <Typography variant="h5">{feedback.learnerName}</Typography>
+                  </Link>
                 }
+
                 secondary={
                   <>
                     <Typography variant="body1" sx={{ color: "#23275c",fontWeight:"bold",fontStyle:"italic" }}>
                       "{feedback.feedbackresponse}"
                     </Typography>
+                    
+                    <Typography variant="body3" sx={{ color: "GrayText",fontWeight:"bold",fontStyle:"italic" }}>
+                   
+                      {new Date(feedback.dateoftheResponse).toLocaleString()}
+                    </Typography>
                     <br></br>
                     <Typography variant="body2"  sx={{ color: "GrayText",fontWeight:"bold",fontStyle:"italic" }}>
                       <b>Course:</b> {feedback.coursename} | <b>Topic:</b>{" "}
-                      {feedback.topicName} | <b>Date:</b>{" "}
-                      {new Date(feedback.dateoftheResponse).toLocaleString()}
+                      {feedback.topicName} 
                     </Typography>
                   </>
                 }

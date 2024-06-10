@@ -25,6 +25,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ReportSkeleton from '../../../components/Loading/Reportskeleton'
+import '../../../Styles/Admin/Pagenotfound.css'
 
 const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
 
@@ -145,8 +146,8 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
       const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
       const imgX = (pdfWidth - imgWidth * ratio) / 2;
       const imgY = 30;
-      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
-      pdf.save(`CourseReports_${Dates}.pdf`);
+      pdf.addImage(imgData,'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      pdf.save(`QuizReports_${Dates}.pdf`);
     })
   };
 
@@ -229,15 +230,8 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography
-            sx={{ flex: "1 1 100%" }}
-            variant="h4"
-            id="tableTitle"
-            component="div"
-            align="center"
-          >
-            Quiz Report
-          </Typography>
+         <>
+         </>
         )}
       </Toolbar>
     );
@@ -318,7 +312,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
           }}
         >
           <EnhancedTableToolbar numSelected={selected.length} />
-          <div style={{ display: 'flex', padding: "10px" }}>
+          <div style={{ display: 'flex', paddingLeft:"20px"}}>
             <form className="form-inline my-2 my-lg-0">
               <input
                 className="form-control mr-sm-2"
@@ -332,9 +326,18 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
             </form>
             <button className="btn btn-success" onClick={Exportreport} style={{ marginLeft: '48%' }}>Download Report<ArrowDownwardIcon /></button>
           </div>
-
           <div id="learnersreport">
             <TableContainer ref={pdfRef}>
+            <Typography
+            sx={{ flex: "1 1 100%" }}
+            variant="h4"
+            id="tableTitle"
+            component="div"
+            align="center"
+              style={{marginBottom:"15px"}}
+          >
+            Quiz Report
+          </Typography>
               <Table
                 sx={{ width: '100%' }}
                 aria-labelledby="tableTitle"
@@ -353,9 +356,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
 
                     const isItemSelected = isSelected(row.id);
                     const disableLinkPassedUsers = row.noOfPassedUsers === 0; // Check if the number of passed users is zero
-
                     const disableLinkFailedUsers = row.noOfFailedUsers === 0;  // check if the number of failed users is zero
-
                     return (
                       <TableRow
                         hover
@@ -381,7 +382,6 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
                           {/* {row.lastLogin.replace("T", " ")} */}
                           {row.quizName}
                         </TableCell>
-                        
                         <TableCell align="left">
                           {disableLinkPassedUsers ? (
                             <span style={{ pointerEvents: 'none', color: 'grey' }}>
@@ -393,9 +393,7 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
                             </Link>
                           )}
                         </TableCell>
-
                         <TableCell align="left">
-
                           {disableLinkFailedUsers ? (<span style={{pointerEvents:'none',color:'grey'}}>
                             {row.noOfFailedUsers}
                           </span>) : (
@@ -422,8 +420,13 @@ const QuizReportView = ({ FetchQuizereportRequest, quizreport }) => {
             </TableContainer>
           </div>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 20, 40]}
-            component="div"
+            rowsPerPageOptions={[
+              { label: '5 Rows', value: 5 },
+              { label: '10 rows', value: 10 },
+              { label: '25 rows', value: 25 },
+              { label: 'All', value: rows.length },
+            ]}
+            component="sanjai"
             count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}

@@ -47,7 +47,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -115,10 +114,9 @@ export default function AdminNavbar() {
       setShowReportDropdown(!showReportDropdown);
     }
   };
-
   return (
     <>
-     <CssBaseline />
+     <CssBaseline/>
       <AppBar position="fixed" open={showSideNav}>
         <Toolbar className="top-nav">
           <IconButton
@@ -134,11 +132,12 @@ export default function AdminNavbar() {
           <MenuIcon />
           </IconButton>
           <Box component="div">
-            <img src={logo} alt="logo"/> <KeyboardBackspaceIcon style={{position:"absolute",marginLeft:'70%',marginTop:'10px',cursor:"pointer"}} onClick={() => navigate(-1)} />
-            <span >
-              {/* <ArrowBackIosIcon style={{marginLeft:'90%'}} onClick={() => navigate(-1)} /> */}
-              {/* <ArrowForwardIosIcon onClick={( ) => navigate(1)} /> */}
-            </span>
+            <img src={logo} alt="logo"/> 
+            <KeyboardBackspaceIcon style={{position:"absolute",marginLeft:'70%',marginTop:'10px',cursor:"pointer"}} onClick={() => navigate(-1)} />
+            {/* <span >
+              <ArrowBackIosIcon style={{marginLeft:'90%'}} onClick={() => navigate(-1)} />
+              <ArrowForwardIosIcon onClick={( ) => navigate(1)} />
+            </span> */}
           </Box>
         </Toolbar>
       </AppBar>
@@ -153,6 +152,7 @@ export default function AdminNavbar() {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <div className="ssss">
         <div className={`side-nav ${showSideNav ? "open" : ""}`}>
           <ul>
             <Link to="/admindashboard" style={{textDecoration:"none"}}>
@@ -196,6 +196,7 @@ export default function AdminNavbar() {
             <Link  style={{textDecoration:"none"}}to='/enrollreport'> <li onClick={() => setActivePage("enroll")}>Enrollment Report</li></Link>
             <Link  style={{textDecoration:"none"}}to='/quizreport'><li onClick={() => setActivePage("quiz")}>Quiz Report</li></Link>
           </ul>
+        </div>
         </div>
         <Divider />
       </Drawer>

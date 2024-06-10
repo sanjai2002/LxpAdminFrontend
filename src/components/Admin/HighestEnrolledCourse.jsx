@@ -45,9 +45,9 @@ const HighestEnrolledCourse = ({
   return (
     <>
       <Grid item xs={12} md={3}>
-        <Item >
+        <Item  style={{borderRadius:"15px"}} >
           <Card variant="">
-            <CardContent sx={{ height: "300px" }}>
+            <CardContent sx={{ height: "360px" }}>
               <Typography
                 sx={{ fontSize: 18, fontWeight: "bold", color: "#97247e" }}
                 color="text.secondary"
@@ -115,7 +115,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchHighestenrolledRequest: () => dispatch(fetchHighestenrolledRequest()),
 });
 
-export default connect(
-  mapStoreToProps,
-  mapDispatchToProps
-)(HighestEnrolledCourse);
+export default connect( mapStoreToProps,mapDispatchToProps)(HighestEnrolledCourse);

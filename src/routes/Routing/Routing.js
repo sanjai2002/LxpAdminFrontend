@@ -15,6 +15,7 @@ import { IndividualLearner } from "../../View/Admin/Learner/IndividualLearner";
 import LearnerReportView from "../../View/Admin/Report/LearnerReportView";
 import CourseReportView from '../../View/Admin/Report/CourseReportView';
 import QuizReportView from '../../View/Admin/Report/QuizReportView';
+import PageNotFound from '../../components/Admin/PageNotFound';
 
 import ReportSkeleton from '../../components/Loading/Reportskeleton'
 import UpdateUserProfileComponent from "../../components/LearnerComponent/UpdateUserProfile";
@@ -51,7 +52,8 @@ function Routing() {
         {/* <Route exact path="/" element={<Loginpage />} />
         <Route path="/email" element={<Email />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
-
+        <Route path='/PageNotFound' element={<PageNotFound />} />
+        <Route path='*' element={< PageNotFound/>}></Route>
         <Route path='/passwordchange' element={<PasswordChange />} />
         <Route path='/updateuserprofile' element={<UpdateUserProfileComponent />} />
         <Route exact path="/" element={<Loginpage />} />
@@ -73,6 +75,7 @@ function Routing() {
           <Route path="/admincourse" element={<Admincourse />} />
           <Route path="/adminviewallcourse" element={<Adminviewcourse />} ></Route>
           <Route path="/admindashboard" element={<Admindashboard />}></Route>
+        
           <Route path="/admindupdatecourse/:courseId" element={<Courseupdate />} ></Route>
           <Route path="/learnerviewall" element={<LearnerReduxView />} ></Route>
           <Route path="/individuallearner/:learnerId" element={<IndividualLearner />}></Route>

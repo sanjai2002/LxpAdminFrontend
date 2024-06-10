@@ -22,7 +22,11 @@ import RecordVoiceOverRoundedIcon from '@mui/icons-material/RecordVoiceOverRound
 import VoiceOverOffRoundedIcon from '@mui/icons-material/VoiceOverOffRounded';
 import { FaBookOpenReader } from "react-icons/fa6";
 import { FaUserGraduate } from "react-icons/fa";
-import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart'
+import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart';
+import { FaUserCheck } from "react-icons/fa";
+import { FaUserMinus } from "react-icons/fa";
+
+
 import '../../../Styles/Admin/AdminDashboard.css'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -45,19 +49,11 @@ export default function AdminDashboard() {
     dispatch(fetchCountRequest());
   }, []);
   return (
-    <Box sx={{ flexGrow: 1, mt: 10 }}>
+    <Box sx={{ flexGrow: 1, mt: 10}} >
       <Grid container spacing={2}>
-        <Grid item xs={12} md={3}>
-          <Item>
+        <Grid item sx={12} md={3}   >
+          <Item style={{borderRadius:"15px"}}>
             <Card
-              className="background"
-              style={
-                {
-                  // background:"#DFF5FF"
-                  // borderBottom: "7px solid #97247E",
-                  // // boxShadow: "10px 5px 5px #AC5098",
-                }
-              }
               variant=""
             >
               <Link
@@ -74,7 +70,7 @@ export default function AdminDashboard() {
                   </Typography>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <FaBookOpenReader
+                      <FaBookOpenReader className="rotatinganimation"
                         style={{ fontSize: "280%", color: "#97247e" }}
                       />
                     </Typography>
@@ -93,7 +89,7 @@ export default function AdminDashboard() {
           </Item>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Item>
+          <Item style={{borderRadius:"15px"}}>
             <Card
               // style={{
               //   borderBottom: "7px solid #0F62FE",
@@ -112,7 +108,7 @@ export default function AdminDashboard() {
                   </Typography>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <FaUserGraduate
+                      <FaUserGraduate className="rotatinganimation"
                         style={{ fontSize: "280%", color: "#524F7D" }}
                       />
                     </Typography>
@@ -132,7 +128,7 @@ export default function AdminDashboard() {
         </Grid>
 
         <Grid item xs={12} md={3}>
-          <Item>
+          <Item style={{borderRadius:"15px"}}>
             <Card
               style={
                 {
@@ -153,9 +149,8 @@ export default function AdminDashboard() {
                   </Typography>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <Typography marginRight={"14% "}>
-                      <RecordVoiceOverRoundedIcon
-                        style={{ fontSize: "280%", color: "#24A148" }}
-                      />
+                      
+                      <FaUserCheck className="rotatinganimation" style={{ fontSize: "330%", color: "#24A148" }} />
                     </Typography>
                     <Typography
                       variant="h3"
@@ -176,7 +171,7 @@ export default function AdminDashboard() {
         </Grid>
 
         <Grid item xs={12} md={3}>
-          <Item>
+          <Item style={{borderRadius:"15px"}}  >
             <Card
               style={
                 {
@@ -194,11 +189,13 @@ export default function AdminDashboard() {
                   >
                     InActive Learners
                   </Typography>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ display: "flex", justifyContent: "center"}}>
                     <Typography marginRight={"14% "}>
-                      <VoiceOverOffRoundedIcon
-                        style={{ fontSize: "280%", color: "#D20062" }}
-                      />
+                    {/* <div className="voice-over-icon">
+                      <div className="dotted-ring"></div>
+                           <VoiceOverOffRoundedIcon className="rotatinganimation" style={{ fontSize: "320%", color: "#D20062" }}  />
+                      </div> */}
+                       <VoiceOverOffRoundedIcon className="rotatinganimation" style={{ fontSize: "320%", color: "#D20062" }}  />
                     </Typography>
                     <Typography
                       variant="h3"

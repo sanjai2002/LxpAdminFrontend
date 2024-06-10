@@ -5,7 +5,6 @@
     width: 100%;
     /* Align items horizontally */
 }
-
 .row {
     display: flex;
     justify-content: space-around;
@@ -89,9 +88,57 @@
       font-style: italic;
     }
 
- 
 
 
+    
+    .voice-over-icon {
+      position: relative;
+      display: inline-block;
+    }
+    .dotted-ring {
+      position: absolute;
+      top: -20%;
+      left: -25%;
+      width: 150%;
+      height: 150%;
+      border-radius: 50%;
+      border: 3px dotted #D20062;
+      animation: rotateDots 5s linear infinite;
+    }
+  
+    .dotted-ring::before {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .dotted-ring::after {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }    
+  
+    .rotatinganimation {
+      transition: transform 0.5s ease;
+    }      
+    @keyframes rotating {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .rotatinganimation:hover {
+      animation: rotating 5s linear infinite;
+    } 
 
-
-
+    @keyframes rotateDots {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
