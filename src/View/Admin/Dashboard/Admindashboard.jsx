@@ -54,6 +54,10 @@ export default function AdminDashboard() {
         <Grid item sx={12} md={3}   >
           <Item style={{borderRadius:"15px"}}>
             <Card
+              // style={{
+              //   borderBottom: "7px solid #0F62FE",
+              //   // boxShadow: "10px 5px  #378ce7",
+              // }}
               variant=""
             >
               <Link

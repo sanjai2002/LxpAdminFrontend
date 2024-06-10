@@ -8,7 +8,7 @@
 .row {
     display: flex;
     justify-content: space-around;
-    /* Adjust as needed */
+  
     width: 100%;
 }
 .card {
@@ -40,6 +40,7 @@
     font-size: 1em;
 
 }
+
 /* Top learners */
 .fade-enter {
     opacity: 0;

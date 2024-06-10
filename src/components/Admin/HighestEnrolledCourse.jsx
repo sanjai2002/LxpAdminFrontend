@@ -59,9 +59,9 @@ const HighestEnrolledCourse = ({
               </Typography>
               { <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }}>
                 <TransitionGroup>
-                  {rows.map((enrolledcourse) => (
+                  {rows.map((enrolledcourse,index) => (
                     <CSSTransition
-                      // key={enrolledcourse.courseid}
+                       key={index}
                       timeout={500}
                       classNames="fade"
                     >

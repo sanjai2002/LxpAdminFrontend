@@ -32,8 +32,8 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
   useEffect(() => {
     fetchToplearnersRequest();
   }, [fetchToplearnersRequest]);
-
-  const rows = toplearners.toplearners;
+  
+  const rows = Object.values(toplearners.toplearners);
   console.log("top",rows);
   return (
     <>
@@ -53,9 +53,9 @@ const Toplearners = ({ fetchToplearnersRequest, toplearners }) => {
               
               <Typography variant="h6" gutterBottom sx={{ fontSize: 15 }} style={{marginTop:"30px"}}>
                 <TransitionGroup>
-                  {rows.map((toplearner) => (
+                  {rows.map((toplearner,index) => (
                     <CSSTransition
-                      key={toplearner.learnerid}
+                      key={index}
                       timeout={1000}
                       classNames="fade"
                     >
