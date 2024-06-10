@@ -384,11 +384,12 @@ const LearnerReportView = ({ fetchlearnersreport, learnerreport }) => {
                         </TableCell>
                         <TableCell align="left">{row.enrolledCourse}</TableCell>
                         <TableCell align="left">
-                          {/* {row.lastLogin.replace("T", " ")} */}
+                      
                           {row.completedCourse}
                         </TableCell>
                         <TableCell align="left">
-                          {row.lastLogin.replace("T", " ")}
+                        {row.lastLogin.split('T')[0].split('-').reverse().join('-') + ' ' + row.lastLogin.split('T')[1]}
+                      
                         </TableCell>
                       </TableRow>
                     );

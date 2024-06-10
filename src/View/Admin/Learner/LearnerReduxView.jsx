@@ -321,8 +321,9 @@ const LearnerReduxView = ({ fetchLearners, learners }) => {
                       </TableCell>
                       <TableCell align="left">{row.email}</TableCell>
                       <TableCell align="left">
-                        {/* {row.lastLogin.replace("T", " ")}  */}
-                        {row.lastLogin.split("-").reverse().join("-")} 
+                       
+                        {row.lastLogin.split('T')[0].split('-').reverse().join('-') + ' ' + row.lastLogin.split('T')[1]}
+                      
                         
                       </TableCell>
                       <TableCell align="left">

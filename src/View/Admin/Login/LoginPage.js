@@ -57,7 +57,7 @@ const Loginpage = () => {
                   placeholder='Email'
                 />
               </div>
-              <p>{errors.email?.message}</p>
+              <p className='errormessgae'>{errors.email?.message}</p>
               <div>
                 <input
                   {...register('password', {
@@ -74,7 +74,7 @@ const Loginpage = () => {
                   type='password'
                   placeholder='Password'
                 />
-              <p>{errors.password?.message}</p>
+              <p className='errormessgae'>{errors.password?.message}</p>
               </div>
               <Link to={'/email'} >Forgot password?</Link>
               <div className='button-login'>

@@ -63,7 +63,7 @@ export default function ForgotPassword() {
                 readOnly
               />
             </div>
-            <p>{errors.email?.message}</p>
+            <p className='errormessgae'>{errors.email?.message}</p>
             <div>
               <input
                 {...register("oldPassword", {
@@ -81,7 +81,7 @@ export default function ForgotPassword() {
                 placeholder="Received Password"
               />
             </div>
-            <p>{errors.oldPassword?.message}</p>
+            <p className='errormessgae'>{errors.oldPassword?.message}</p>
             <div>
               <input
                 {...register("newPassword", {
@@ -99,7 +99,7 @@ export default function ForgotPassword() {
                 placeholder="New Password"
               />
             </div>
-            <p>{errors.newPassword?.message}</p>
+            <p className='errormessgae'>{errors.newPassword?.message}</p>
             <div className="button-login">
               <button className="btn">Update password</button>
             </div>

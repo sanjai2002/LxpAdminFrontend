@@ -52,7 +52,7 @@ function Email() {
                              
                             />
                         </div>
-                        <p>{errors.email?.message}</p>
+                        <p className='errormessgae'>{errors.email?.message}</p>
                         <div className='button-login'>
                             <button className='btn'>Send Email</button>
                         </div>

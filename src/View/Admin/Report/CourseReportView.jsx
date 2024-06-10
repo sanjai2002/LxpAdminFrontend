@@ -372,8 +372,13 @@ const Exportreport=()=>{
                         {/* {row.lastLogin.replace("T", " ")} */}
                         {row.level}
                       </TableCell>
-                      <TableCell align="left">{row.createdAt.replace("T", " ")}</TableCell>
-                      <TableCell align="left">{row.modifiedAt.replace("T", " ")}</TableCell>
+                      <TableCell align="left">
+                      {row.createdAt.split('T')[0].split('-').reverse().join('-') + ' ' + row.createdAt.split('T')[1]}
+                      </TableCell>
+                      <TableCell align="left">
+
+                        {row.modifiedAt.split(' ')[0].split('-').reverse().join('-') + ' ' + row.modifiedAt.split(' ')[1]}
+                        </TableCell>
                     
                     </TableRow>
                   );
@@ -392,6 +397,7 @@ const Exportreport=()=>{
           </TableContainer>
           </div>
           <TablePagination
+           style={{color:'black'}}
             rowsPerPageOptions={[
               { label: '5 Rows', value: 5 },
               { label: '10 rows', value: 10 },
@@ -405,6 +411,7 @@ const Exportreport=()=>{
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
+   
         </Paper>
       </Box>
     );

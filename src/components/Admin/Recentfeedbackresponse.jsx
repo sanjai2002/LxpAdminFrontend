@@ -52,7 +52,9 @@ const RecentFeedbackCarousel = ({
                     
                     <Typography variant="body3" sx={{ color: "GrayText",fontWeight:"bold",fontStyle:"italic" }}>
                    
-                      {new Date(feedback.dateoftheResponse).toLocaleString()}
+                      {/* {new Date(feedback.dateoftheResponse).toLocaleString()} */}
+                    
+                      {feedback.dateoftheResponse.split('T')[0].split('-').reverse().join('-') + ' ' + feedback.dateoftheResponse.split('T')[1]}
                     </Typography>
                     <br></br>
                     <Typography variant="body2"  sx={{ color: "GrayText",fontWeight:"bold",fontStyle:"italic" }}>

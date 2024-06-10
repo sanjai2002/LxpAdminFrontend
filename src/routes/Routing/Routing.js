@@ -46,7 +46,6 @@ function Routing() {
   // }));
 
   return (
-
     <BrowserRouter>
       <Routes>
         {/* <Route exact path="/" element={<Loginpage />} />
@@ -75,7 +74,6 @@ function Routing() {
           <Route path="/admincourse" element={<Admincourse />} />
           <Route path="/adminviewallcourse" element={<Adminviewcourse />} ></Route>
           <Route path="/admindashboard" element={<Admindashboard />}></Route>
-        
           <Route path="/admindupdatecourse/:courseId" element={<Courseupdate />} ></Route>
           <Route path="/learnerviewall" element={<LearnerReduxView />} ></Route>
           <Route path="/individuallearner/:learnerId" element={<IndividualLearner />}></Route>

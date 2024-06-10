@@ -15,6 +15,8 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
     useEffect(() => {
         fetchProfileCard(learnerid);
     }, [fetchProfileCard]);
+    const{learnerprofile,learnerFirstName,learnerLastName,learnerStream,learnerEmail,learnerDob,learnerContactNumber,learnerGender,learnerLastlogin}=profilecard.profilecard;
+
     if (profilecard.profilecard.learnerprofile === "http://localhost:5199/wwwroot/LearnerProfileImages/") {
         return (
             <>
@@ -29,24 +31,25 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 0 auto' }}>
                                 <Typography variant="h4" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: '#23275c' }}>{profilecard.profilecard.learnerFirstName} {profilecard.profilecard.learnerLastName} </span>
-                                    <span style={{ fontStyle: 'italic', fontWeight: 'lighter', fontSize: '15px' }}>({profilecard.profilecard.learnerStream})</span>
+                                    <span style={{ fontWeight: 'bold', color: '#23275c' }}>{learnerFirstName} {learnerLastName} </span>
+                                    <span style={{ fontStyle: 'italic', fontWeight: 'lighter', fontSize: '15px' }}>({learnerStream})</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Email : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerEmail}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Email : </span> <span style={{ fontStyle: 'italic' }}>{learnerEmail}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>DOB : </span><span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerDob}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>DOB : </span><span style={{ fontStyle: 'italic' }}>{learnerDob}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Contact Number : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerContactNumber}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{profilecard.profilecard.learnerGender}</span>
-                                    <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '20em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>{profilecard.profilecard.learnerLastlogin}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{learnerGender}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '20em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>
+                                       {learnerLastlogin?.split('T')[0]?.split('-').reverse().join('-')+ ' '+learnerLastlogin?.split('T')[1]|| ''}
+                        
+                                        </span>
                                 </Typography>
                             </CardContent>
-
                         </Box>
                     </Card>
                 </Grid>
@@ -62,27 +65,30 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
                         <CardMedia
                             component="img"
                             sx={{ width: 151, }}
-                            image={profilecard.profilecard.learnerprofile}
+                            image={learnerprofile}
                             alt="Profile"
                         />
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 0 auto' }}>
                                 <Typography variant="h4" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: '#23275c' }}>{profilecard.profilecard.learnerFirstName} {profilecard.profilecard.learnerLastName} </span>
-                                    <span style={{ fontStyle: 'italic', fontWeight: 'lighter', fontSize: '15px' }}>({profilecard.profilecard.learnerStream})</span>
+                                    <span style={{ fontWeight: 'bold', color: '#23275c' }}>{learnerFirstName} {learnerLastName} </span>
+                                    <span style={{ fontStyle: 'italic', fontWeight: 'lighter', fontSize: '15px' }}>({learnerStream})</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Email : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerEmail}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Email : </span> <span style={{ fontStyle: 'italic' }}>{learnerEmail}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>DOB : </span><span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerDob}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>DOB : </span><span style={{ fontStyle: 'italic' }}>{learnerDob}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Contact Number : </span> <span style={{ fontStyle: 'italic' }}>{profilecard.profilecard.learnerContactNumber}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Contact Number : </span> <span style={{ fontStyle: 'italic' }}>{learnerContactNumber}</span>
                                 </Typography>
                                 <Typography variant="subtitle1" color="text.secondary" component="div">
-                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{profilecard.profilecard.learnerGender}</span>
-                                    <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '20em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>{profilecard.profilecard.learnerLastlogin}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{learnerGender}</span>
+                                    <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '20em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>
+                                 {learnerLastlogin?.split('T')[0]?.split('-').reverse().join('-')+ ' '+learnerLastlogin?.split('T')[1]|| ''}
+                            
+                                    </span>
                                 </Typography>
                             </CardContent>
 

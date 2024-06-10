@@ -371,6 +371,7 @@ const CourseEnrollmentReportView = ({
                         sx={{ cursor: "pointer" }}
                       >
                         <TableCell align="left">{index + 1}</TableCell>
+                        
                         <TableCell
                           component="th"
                           id={row.courseId}

@@ -26,9 +26,10 @@
     padding: 10px;
   }
   
-  p {
+  .errormessgae  {
     color: #ff1818; 
   }
+
   input {
     width: 100%;
     padding: 10px;
