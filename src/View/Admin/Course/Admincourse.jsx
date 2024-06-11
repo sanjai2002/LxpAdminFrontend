@@ -36,6 +36,7 @@ const Admincourse = ({ fetchCourses, courses }) => {
         <>
             {
                 courses.length > 0 ? (
+                    
                     <Container fluid className='coursepagebody'>
                         {/* <Row className='mb-5'>
                         </Row> */}
@@ -62,6 +63,7 @@ const Admincourse = ({ fetchCourses, courses }) => {
                                                     // width="80"
                                                     image={course.thumbnailimage}
                                                     alt={course.title || 'Course image'}
+                                                    style={{objectFit:"contain"}}
                                                 />
                                                 <CardContent>
                                                     <Typography gutterBottom variant="h5" component="div">

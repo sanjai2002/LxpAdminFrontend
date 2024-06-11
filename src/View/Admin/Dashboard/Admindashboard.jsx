@@ -25,9 +25,8 @@ import { FaUserGraduate } from "react-icons/fa";
 import CourseEnrollmentChart from '../../../components/Admin/CourseEnrollmentChart';
 import { FaUserCheck } from "react-icons/fa";
 import { FaUserMinus } from "react-icons/fa";
-
-
 import '../../../Styles/Admin/AdminDashboard.css'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -49,6 +48,7 @@ export default function AdminDashboard() {
     dispatch(fetchCountRequest());
   }, []);
   return (
+  <div className="admindashboard">
     <Box sx={{ flexGrow: 1, mt: 10}} >
       <Grid container spacing={2}>
         <Grid item sx={12} md={3}   >
@@ -228,5 +228,6 @@ export default function AdminDashboard() {
         <Recentfeedbackresponse />
       </Grid>
     </Box>
+    </div>
   );
 }

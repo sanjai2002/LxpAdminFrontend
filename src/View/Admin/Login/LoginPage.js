@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,34 +7,123 @@ import Relevantz from '../../../assets/Admin/Images/Relevantz.png'
 import loginUser from '../../../middleware/Admin/apiLogin'
 import { Link } from 'react-router-dom';
 import { emailRegex, passwordRegex, validationMessages } from '../../../utils/Admin/Validation';
-import { loginRequest } from '../../../actions/Admin/loginAction';
+import { loginRequest,loginPasswordMessage,loginEmaildMessage } from '../../../actions/Admin/loginAction';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { Alert } from '@mui/material';
+ 
 const Loginpage = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const navigate=useNavigate(); 
-
-  const isSuccessadmin  = useSelector((state) => state.user.isSuccessadmin) ;
-  const  isSuccessuser  = useSelector((state) => state.user.isSuccessuser);
-  useEffect(() => {
-    if (isSuccessadmin) {
-      navigate('/admindashboard'); // Navigate to the next page on success
-    }
-  }, [isSuccessadmin, navigate]);
-
-
+ 
+  const navigate = useNavigate();
+ 
+  const isSuccessadmin = useSelector((state) => state.user.isSuccessadmin);
+ 
+  const isSuccessuser = useSelector((state) => state.user.isSuccessuser)
+ 
+  const [altermessage, setAlertmessage] = useState(false);
+ 
+ 
+  // Handle the function for the navigation
+ 
+  const handlnavigation = (path) => {
+    setAlertmessage(true);
+ 
+    const timer = setTimeout(() => {
+      setAlertmessage(false)
+      navigate(path);
+    }, 1000);
+ 
+    return () => clearTimeout(timer);
+  }
+ 
+ 
+  // useEffect(() => {
+  //   if (isSuccessadmin) {
+  //     handlnavigation('/admindashboard'); // Navigate to the next page on success
+  //   }
+  // }, [isSuccessadmin]);
+ 
+ 
   useEffect(() => {
     if (isSuccessuser) {
-      navigate('/LearnerDashboard'); // Navigate to the next page on success
+      handlnavigation('/LearnerDashboard'); // Navigate to the next page on success
     }
-  }, [isSuccessuser, navigate]);
-
+  }, [isSuccessuser]);
+ 
+ 
+ 
+  const [passwordfailuremessage, setpasswordfailureAlertmessage] = useState(false)
+ 
+  const isPasswordMessage = useSelector((state) => state.user.failuremessage);
+ 
+  console.log("passwordmessage", isPasswordMessage);
+ 
+  useEffect(() => {
+    let timer;
+    if (isSuccessadmin) {
+      setAlertmessage(true);
+      timer = setTimeout(() => {
+        setAlertmessage(false);
+        navigate('/admindashboard');
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+ 
+  }, [isSuccessadmin, navigate]);
+ 
+ 
+ 
+  useEffect(() => {
+    let times;
+    if (isPasswordMessage) {
+      setpasswordfailureAlertmessage(true);
+      times = setTimeout(() => {
+        setpasswordfailureAlertmessage(false);
+        const data="invalid password";
+        dispatch(loginPasswordMessage(data));
+      }, 2000);
+    }
+    return () => clearTimeout(times);
+  }, [isPasswordMessage]);
+ 
+ 
+  // Email Faliliure Messare
+ 
+  const isEmailfailuremessage=useSelector((state)=>state.user.emailfailuremessage)
+ 
+  console.log("emailmessage", isEmailfailuremessage);
+ 
+ 
+  const [emailfailurealertmessage,setEmailfailurealertmessage]=useState(false);
+ 
+ 
+  useEffect(()=>
+  {
+    let emailmessgeclosingtime;
+ 
+    if(isEmailfailuremessage)
+    {
+      setEmailfailurealertmessage(true);
+ 
+      emailmessgeclosingtime =setTimeout(() => {
+        setEmailfailurealertmessage(false);
+      }, 2000);
+ 
+     
+ 
+    }
+    return ()=>clearTimeout(emailmessgeclosingtime)
+  },[isEmailfailuremessage]);
+ 
+ 
+ 
   const onSubmit = data => {
     dispatch(loginRequest(data));
   };
+ 
+ 
   return (
     <>
       <div className='login-app'>
@@ -43,8 +132,26 @@ const Loginpage = () => {
             <div className="login-header">
               <img src={Relevantz} alt="Logo" />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>  
-              <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              {altermessage && <Alert variant="outlined" severity="success">
+                Login successful! Redirecting...
+              </Alert>}
+              {
+                passwordfailuremessage && <Alert variant="outlined" severity="error">
+                  Incorrect Passwod
+                </Alert>
+              }
+                 {
+                emailfailurealertmessage && <Alert variant="outlined" severity="error">
+                Incorrect Email
+                </Alert>
+              }
+ 
+ 
+            </div>
+              <div style={{marginTop:'5px'}}>
+ 
                 <input
                   {...register('email', {
                     required: validationMessages.email.required,
@@ -57,7 +164,7 @@ const Loginpage = () => {
                   placeholder='Email'
                 />
               </div>
-              <p className='errormessgae'>{errors.email?.message}</p>
+              <p>{errors.email?.message}</p>
               <div>
                 <input
                   {...register('password', {
@@ -74,7 +181,7 @@ const Loginpage = () => {
                   type='password'
                   placeholder='Password'
                 />
-              <p className='errormessgae'>{errors.password?.message}</p>
+                <p>{errors.password?.message}</p>
               </div>
               <Link to={'/email'} >Forgot password?</Link>
               <div className='button-login'>
@@ -87,5 +194,6 @@ const Loginpage = () => {
     </>
   );
 };
-
+ 
 export default Loginpage;
+ 

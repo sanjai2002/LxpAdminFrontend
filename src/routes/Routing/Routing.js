@@ -34,6 +34,20 @@ import EnrollCoursePassLearners from "../../components/Admin/EnrollCoursePassLea
 import EnrollCourseProgressLearners from "../../components/Admin/EnrollCourseProgressLearners";
 import ReportMainView from "../../View/Admin/Report/ReportMainView";
 
+// quizandfeedback
+import CreateQuizView from "../../View/Quiz And Feedback Module/CreateQuizView";
+import UploadBulkQuiz from "../../components/Quiz And Feedback Module/QuizComponents/Admin/UploadBulkQuiz";
+import ReviewQuestions from "../../components/Quiz And Feedback Module/QuizComponents/Admin/ReviewQuestions";
+import GetAllFeedbacks from "../../components/Quiz And Feedback Module/QuizComponents/Admin/GetAllFeedbacks";
+import CoursePageView from "../../View/Quiz And Feedback Module/CoursePageView";
+import QuestionTemplateView from "../../View/Quiz And Feedback Module/QuestionTemplateView";
+import LearnerCoursepageView from "../../View/Quiz And Feedback Module/LearnerCoursepageview";
+import QuizInstruction from "../../components/Quiz And Feedback Module/QuizComponents/Learner/QuizInstruction";
+import AttemptQuiz from "../../components/Quiz And Feedback Module/QuizComponents/Learner/AttemptQuiz";
+import ReviewAnswers from "../../components/Quiz And Feedback Module/QuizComponents/Learner/ReviewAnswers";
+import LearnerScorePage from "../../components/Quiz And Feedback Module/QuizComponents/Learner/LearnerScorePage";
+import QuizFeedback from "../../components/Quiz And Feedback Module/QuizComponents/Admin/QuizFeedback";
+import TopicFeedback from "../../components/Quiz And Feedback Module/QuizComponents/Admin/TopicFeedback";
 
 function Routing() {
   // const DrawerHeader = styled('div')(({ theme }) => ({
@@ -67,8 +81,6 @@ function Routing() {
 
         {/* <Route path="/PDF" element={<PDFViewer />}></Route>
         <Route path="/PPT" element={<PptViewerComponent />}></Route> */}
-
-
         <Route element={<Adminrouting />}>
           <Route path="/home" element={<Admindashboard />} />
           <Route path="/admincourse" element={<Admincourse />} />
@@ -88,10 +100,30 @@ function Routing() {
           <Route path='/individualenrollprogresscourselearner/:courseId' element={<EnrollCourseProgressLearners />}></Route>
           <Route path="/enrollreport" element={<CourseEnrollmentReportView />}></Route>
           <Route path="/report" element={<ReportMainView />}></Route>
+
+
+          {/* updatequizintoadminnavbar */}
+          <Route path="/coursepageview" element={<CoursePageView />} />
+        <Route path="/createquiz" element={<CreateQuizView />} />
+       
+        <Route path="/topicfeedback" element={<TopicFeedback />} />
+        <Route path="/questiontemplate" element={<QuestionTemplateView />} />
+        <Route path="/getallfeedback" element={<GetAllFeedbacks />} />
+        <Route path="/reviewquestions" element={<ReviewQuestions />} />
+        <Route path="/quizfeedback" element={<QuizFeedback />} />
+        <Route path="/upload" element={<UploadBulkQuiz />} />
         </Route>
+
+         {/* quiz  */}
+
+
+        <Route path="/quizengine" element={<LearnerCoursepageView />} />
+        <Route path="/instruction" element={<QuizInstruction/>} />
+        <Route path="/attemptquiz" element={<AttemptQuiz />} />
+        <Route path="/reviewanswer" element={<ReviewAnswers />} />
+        <Route path="/learnerscorepage" element={<LearnerScorePage />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 

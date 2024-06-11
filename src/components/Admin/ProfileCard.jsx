@@ -46,14 +46,12 @@ const ProfileCard = ({ fetchProfileCard, profilecard }) => {
                                     <span style={{ fontWeight: 'bold', color: 'black' }}>Gender : </span> <span style={{ fontStyle: 'italic', textTransform: 'capitalize' }}>{learnerGender}</span>
                                     <span style={{ fontWeight: 'bold', color: 'black', marginLeft: '20em' }}> Last Login : </span> <span style={{ fontStyle: 'italic', color: 'red' }}>
                                        {learnerLastlogin?.split('T')[0]?.split('-').reverse().join('-')+ ' '+learnerLastlogin?.split('T')[1]|| ''}
-                        
                                         </span>
                                 </Typography>
                             </CardContent>
                         </Box>
                     </Card>
                 </Grid>
-
             </>
         )
     }

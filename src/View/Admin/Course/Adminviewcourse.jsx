@@ -34,7 +34,7 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { updateCoursesRequest } from "../../../actions/Admin/Updatecourse";
 import ClearIcon from "@mui/icons-material/Clear";
-
+ 
 const Adminviewcourse = ({
   fetchCourses,
   deleteCourse,
@@ -42,10 +42,10 @@ const Adminviewcourse = ({
   enableordisable,
 }) => {
   console.log("Checking the courses", courses);
-
+ 
   // State for update course dialog
   const [openDialog, setOpenDialog] = useState(false);
-
+ 
   const [selectedcourse, setSelectedcourse] = useState({
     courseId: "",
     title: "",
@@ -58,12 +58,12 @@ const Adminviewcourse = ({
     levelId: "",
     categoryId: "",
   });
-
+ 
   console.log("selected courses", selectedcourse);
   console.log(selectedcourse.category);
-
-  const [thumbnail, setThumbnail] = useState(null);
-
+ 
+  const [thumbnail, setThumbnail] = useState();
+ 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
@@ -74,33 +74,41 @@ const Adminviewcourse = ({
       );
       setSelectedcourse({
         ...selectedcourse,
-        thumbnailimage:acceptedFiles[0],
+        thumbnailimage: acceptedFiles[0],
       });
     },
   });
-
-
-
-
-
-console.log("thumbnailimageinuput", thumbnail);
-
+ 
+ 
+ 
+ 
+ 
+  console.log("thumbnailimageinuput", thumbnail);
+ 
   // Remove image .......
-
+ 
   const [removeImage, setRemoveImage] = useState(false);
-
+ 
   const handleRemoveImage = () => {
     setThumbnail(null);
     setSelectedcourse({ ...selectedcourse, thumbnailimage: null });
     setRemoveImage(true);
   };
-
+ 
   /////
-
+ 
   const handleupdatecourse = (course) => {
+ 
     console.log("check and check", course);
-
-    
+ 
+ 
+    const blob = new Blob([course.thumbnailimage]);
+ 
+    console.log("caadasd", blob)
+ 
+    const objecturl = URL.createObjectURL(blob);
+ 
+ 
     setSelectedcourse({
       courseId: course.courseId,
       title: course.title,
@@ -109,13 +117,13 @@ console.log("thumbnailimageinuput", thumbnail);
       description: course.description,
       duration: course.duration,
       modifiedby: "Kavin",
-      thumbnailimage:course.thumbnailimage,
+      thumbnailimage: course.thumbnailimage,
     });
-
-    setThumbnail({ preview: course.thumbnailimage });
+ 
+    setThumbnail({ preview: objecturl });
     setOpenDialog(true);
   };
-
+ 
   const closedialog = () => {
     setOpenDialog(false);
     setSelectedcourse({
@@ -126,13 +134,13 @@ console.log("thumbnailimageinuput", thumbnail);
       description: "",
       duration: "",
       modifiedby: "Kavin",
-      thumbnailimage: null,
+      thumbnailimage: "",
     });
-    setThumbnail(null);
+    setThumbnail("");
   };
   const [coursecategory, setCategory] = useState([]);
   const [courselevel, setLevel] = useState([]);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -140,7 +148,7 @@ console.log("thumbnailimageinuput", thumbnail);
           "http://localhost:5199/lxp/course/category"
         );
         setCategory(categoryResponse.data.data);
-
+ 
         const levelResponse = await axios.get(
           "http://localhost:5199/lxp/course/courselevel/kavin"
         );
@@ -151,16 +159,16 @@ console.log("thumbnailimageinuput", thumbnail);
     };
     fetchData();
   }, []);
-
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSelectedcourse({ ...selectedcourse, [name]: value });
   };
-
+ 
   useEffect(() => {
     fetchCourses();
   }, [fetchCourses]);
-
+ 
   // Form Validation
   const validationform = () => {
     const { title, level, category, description, duration } = selectedcourse;
@@ -172,56 +180,70 @@ console.log("thumbnailimageinuput", thumbnail);
       duration > 0
     );
   };
-
+ 
   // check the the values in the dialog box container when its open
-
+ 
   useEffect(() => {
     if (openDialog) {
       console.log("Current selected value", selectedcourse);
     }
   }, [openDialog, selectedcourse]);
-
-  //Form Submission for the Update course 
+ 
+  //Form Submission for the Update course
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+ 
     const checkcoursevalidform = validationform();
-
+ 
     if (!checkcoursevalidform) {
       setDialogMessage("All the fields are required for validation");
       setOpen(true);
       return;
     }
-
+ 
     const formData = new FormData();
+ 
     formData.append("CourseId", selectedcourse.courseId);
     // console.log("checking the courseID", selectedcourse.courseId);
-
+ 
     formData.append("Title", selectedcourse.title);
     formData.append("LevelId", selectedcourse.level);
     formData.append("CategoryId", selectedcourse.category);
     formData.append("Description", selectedcourse.description);
     formData.append("Duration", selectedcourse.duration);
     formData.append("ModifiedBy", selectedcourse.modifiedby);
-
-    console.log(
-      "Selected course thumbnail image:",
-      selectedcourse.thumbnailimage
-    );
-
+ 
+    // console.log(
+    //   "Selected course thumbnail image:",
+    //   selectedcourse.thumbnailimage
+    // );
+ 
+ 
     if (thumbnail && thumbnail.preview) {
-      formData.append("Thumbnailimage", thumbnail);
+ 
+      formData.append("Thumbnailimage", selectedcourse.thumbnailimage);
     } else {
+ 
       formData.append("Thumbnailimage", selectedcourse.thumbnailimage);
     }
-
+ 
     try {
       console.log("updatecourse", formData);
+ 
+ 
+ 
+      // Debugging: Log the formData contents
+ 
+      for (let [key, value] of formData.entries()) {
+        console.log("kkakakakaakakaa", `${key}: ${value}`)
+      };
+ 
+ 
       console.log("Action payload:", {
         courseId: selectedcourse.courseId,
         formData,
       });
-
+ 
       dispatch(
         updateCoursesRequest({ courseId: selectedcourse.courseId, formData })
       );
@@ -230,35 +252,36 @@ console.log("thumbnailimageinuput", thumbnail);
       console.error("Error updating course:", error);
     }
   };
-
+ 
+ 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredCourses, setFilteredCourses] = useState([]);
-
+ 
   console.log("filtered courses:", filteredCourses);
-
+ 
   const [showModal, setShowModal] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   // State to control the open status of the dialog
   const [open, setOpen] = React.useState(false);
   const [dialogMessage, setDialogMessage] = useState("");
-
+ 
   const istrue = useSelector((state) => state.deletecourse.isdeleted);
   const mes = useSelector((state) => state.deletecourse.message);
-
+ 
   const isfalse = useSelector((state) => state.deletecourse.isnotdelete);
   const failuremessage = useSelector((state) => state.deletecourse.message);
-
+ 
   // Update successfull Message-----//
-
+ 
   const isUpdated = useSelector((state) => state.updatecourse.isUpdated);
   console.log("check the updatestatues", isUpdated);
   const courseupdatesuccessfullmessage = useSelector(
     (state) => state.updatecourse.message
   );
   console.log("message", courseupdatesuccessfullmessage);
-
+ 
   const updatefailuremessage = "Updated was not successfull";
-
+ 
   useEffect(() => {
     if (isUpdated) {
       setOpen(true);
@@ -268,13 +291,13 @@ console.log("thumbnailimageinuput", thumbnail);
     }
     // setOpen(false);
   }, [isUpdated, courseupdatesuccessfullmessage]);
-
+ 
   ////
-
+ 
   const handleClose = () => {
     setOpen(false);
   };
-
+ 
   useEffect(() => {
     if (istrue) {
       setOpen(true);
@@ -286,33 +309,33 @@ console.log("thumbnailimageinuput", thumbnail);
       setDialogMessage(failuremessage);
     }
   }, [istrue, mes, isfalse, failuremessage, fetchCourses]);
-
+ 
   useEffect(() => {
     setFilteredCourses(
       courses.filter(
         (course) =>
           Object.values(course).some((value) =>
-          
+ 
             value.toString().toLowerCase().includes(searchTerm.toLowerCase())
           )
-
+ 
         // course.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
   }, [courses, searchTerm]);
-
+ 
   const dispatch = useDispatch();
-
+ 
   const handleDeleteClick = (courseId) => {
     setSelectedCourseId(courseId);
     setShowModal(true);
   };
-
+ 
   const confirmDeletion = () => {
     deleteCourse(selectedCourseId);
     setShowModal(false);
   };
-
+ 
   //const for Enable & Disable Pop up
   const [showEnableModal, setShowEnableModal] = useState(false);
   const handleToggle = (title, courseId, status) => {
@@ -322,22 +345,27 @@ console.log("thumbnailimageinuput", thumbnail);
     setCourseStatus(status);
     setShowEnableModal(true);
   };
-
+ 
   const [enabledisablecourseId, setenabledisablecourseId] = useState("");
   const [coursetitle, setCourseTitle] = useState("");
   const [coursestatus, setCourseStatus] = useState();
-
+ 
   //Event for Enable And Disable
+ 
+  const Enablesuccessage = useSelector((state) => state.enabledisablecourse.successfullmessage);
+ 
+ 
   const EnableOrDisable = () => {
     enableordisable(enabledisablecourseId, !coursestatus);
     setShowEnableModal(false);
     setTimeout(() => {
       document.location.reload();
     }, 500);
+ 
   };
-
+ 
   //Style for Disable And Enable Modal
-
+ 
   const style = {
     position: "absolute",
     top: "50%",
@@ -349,7 +377,7 @@ console.log("thumbnailimageinuput", thumbnail);
     boxShadow: 24,
     p: 4,
   };
-
+ 
   const IOSSwitch = styled((props) => (
     <Switch
       focusVisibleClassName=".Mui-focusVisible"
@@ -405,7 +433,7 @@ console.log("thumbnailimageinuput", thumbnail);
       }),
     },
   }));
-
+ 
   return (
     <>
       {/* Modal for Enable & Disable */}
@@ -503,8 +531,7 @@ console.log("thumbnailimageinuput", thumbnail);
                           <TableCell>{course.category}</TableCell>
                           <TableCell>{course.duration}</TableCell>
                           <TableCell>{course.level}</TableCell>
-                          <TableCell> {course.createdAt.split('T')[0].split('-').reverse().join('-') + ' ' + course.createdAt.split('T')[1]}
-                          </TableCell>
+                          <TableCell>{course.createdAt}</TableCell>
                           <TableCell align="right">
                             <Button>
                               <GridViewIcon />
@@ -737,16 +764,18 @@ console.log("thumbnailimageinuput", thumbnail);
     </>
   );
 };
-
+ 
 const mapStateToProps = (state) => ({
   courses: state.allcourse.courses,
 });
-
+ 
 const mapDispatchToProps = (dispatch) => ({
   fetchCourses: () => dispatch(fetchallCoursesRequest()),
   deleteCourse: (courseId) => dispatch(deleteCoursesRequest(courseId)),
   enableordisable: (enabledisablecourseId, coursestatus) =>
     dispatch(enableDisableCourseRequest(enabledisablecourseId, coursestatus)),
 });
-
+ 
 export default connect(mapStateToProps, mapDispatchToProps)(Adminviewcourse);
+ 
+ 

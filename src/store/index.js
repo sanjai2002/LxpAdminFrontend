@@ -85,7 +85,6 @@ import ApiViewEnrollmentReport from '../middleware/Admin/apiEnrollmentReport';
 
 
 // sanjai-5
-
 import ApiDashboardTopLearners from '../middleware/Admin/ApiDashboardTopLearners';
 import DashboardTopLearnersReducer from '../reducers/Admin/DashboardTopLearnersReducer';
 import ApiDashboardHighestEnrolledCourse from '../middleware/Admin/ApiDashboardHighestEnrolledCourse';
@@ -93,6 +92,46 @@ import DashboardHighestEnrolledCourseReducer from '../reducers/Admin/DashboardHi
 import ApiRecentFeedbackresponse from '../middleware/Admin/ApiRecentFeedbackresponse';
 import DashboardRecentFeedbackReducer from '../reducers/Admin/DashboardRecentFeedbackReducer';
 
+//quizmodule
+import quizIdReducer from "../reducers/Quiz And Feedback Module/Admin/FetchQuizIdReducer";
+
+import {
+  DeleteQuizQuestionsApi,
+  UpdateQuizQuestionsApi,
+} from "../middleware/Quiz And Feedback Module/Admin/QuestionApi";
+import { CreateQuizApi } from "../middleware/Quiz And Feedback Module/Admin/CreateQuizApi";
+import { FetchQuizById } from "../middleware/Quiz And Feedback Module/Admin/FetchQuizIdApi";
+import fetchQuizQuestionsReducer from "../reducers/Quiz And Feedback Module/Admin/FetchQuizQuestionsReducer.js";
+import { FetchQuizQuestionsApi } from "../middleware/Quiz And Feedback Module/Admin/FetchQuizQuestionsApi";
+import deleteQuizQuestionsReducer from "../reducers/Quiz And Feedback Module/Admin/DeleteQuizQuestionReducer";
+import updateQuizQuestionReducer from "../reducers/Quiz And Feedback Module/Admin/UpdateQuizQuestionReducer";
+import createQuizReducer from "../reducers/Quiz And Feedback Module/Admin/CreateQuizReducer";
+import DeleteQuizFeedbackApi from "../middleware/Quiz And Feedback Module/Admin/DeleteQuizFeedbackApi";
+import UpdateQuizFeedbackApi from "../middleware/Quiz And Feedback Module/Admin/UpdateQuizFeedbackApi";
+import DeleteTopicFeedbackApi from "../middleware/Quiz And Feedback Module/Admin/DeleteTopicFeedbackApi";
+import UpdateTopicFeedbackApi from "../middleware/Quiz And Feedback Module/Admin/UpdateTopicFeedbackApi";
+import UpdateQuizFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/UpdateQuizFeedbackReducer";
+import DeleteQuizFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/DeleteQuizFeedbackReducer";
+import DeleteTopicFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/DeleteTopicFeedbackReducer";
+import UpdateTopicFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/UpdateTopicFeedbackReducer";
+import AttemptQuizReducer from "../reducers/Quiz And Feedback Module/Learner/AttemptQuizReducer";
+import QuizInstructionReducer from "../reducers/Quiz And Feedback Module/Learner/QuizInstructionReducer";
+import { QuizInstructionApi } from "../middleware/Quiz And Feedback Module/Learner/QuizInstructionApi";
+import LearnerAttemptQuizIdReducer from "../reducers/Quiz And Feedback Module/Learner/LearnerAttemptQuizIdReducer.js";
+import LearnerAttemptQuizIdApi from "../middleware/Quiz And Feedback Module/Learner/LearnerAttemptQuizIdApi.js";
+import GetLearnerIDReducer from "../reducers/Quiz And Feedback Module/Learner/GetLearnerIDReducer.js";
+import GetLearnerIDApi from "../middleware/Quiz And Feedback Module/Learner/GetLearnerIDApi.js";
+import reviewReducer from "../reducers/Quiz And Feedback Module/Learner/ReviewReducer";
+import reviewApi from "../middleware/Quiz And Feedback Module/Learner/ReviewApi";
+import { fetchQuestionsMiddleware } from "../middleware/Quiz And Feedback Module/Learner/AttemptQuizApi";
+import SelectAnswerReducer from "../reducers/Quiz And Feedback Module/Learner/SelectAnswerReducer";
+import submitAttemptReducer from "../reducers/Quiz And Feedback Module/Learner/SubmitAttemptReducer";
+import { selectAnswerMiddleware } from "../middleware/Quiz And Feedback Module/Learner/SelectAnswerApi";
+import submitAttemptMiddleware from "../middleware/Quiz And Feedback Module/Learner/SubmitAttemptMiddleware";
+import LearnerScorePageReducer from "../reducers/Quiz And Feedback Module/Learner/LearnerScorePageReducer";
+import LearnerScorePageApi from "../middleware/Quiz And Feedback Module/Learner/LearnerScorePageApi";
+import editQuizReducer from "../reducers/Quiz And Feedback Module/Admin/EditQuizReducer";
+import { PutQuizDetails } from "../middleware/Quiz And Feedback Module/Admin/EditQuizApi";
 
 
 
@@ -143,6 +182,25 @@ const rootReducer = combineReducers({
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
+
+  //quizmodule
+  quizId: quizIdReducer,
+  quizQuestions: fetchQuizQuestionsReducer,
+  deleteQuestion: deleteQuizQuestionsReducer,
+  editQuizDetails: editQuizReducer,
+  quiz: createQuizReducer,
+  updatequizfeedback: UpdateQuizFeedbackReducer,
+  deletequizfeedback: DeleteQuizFeedbackReducer,
+  deletetopicfeedback: DeleteTopicFeedbackReducer,
+  updatetopicfeedback: UpdateTopicFeedbackReducer,
+  AttemptQuiz: AttemptQuizReducer,
+  fetchquizinstruction: QuizInstructionReducer,
+  learnerattempt: LearnerAttemptQuizIdReducer,
+  fetchlearnerid: GetLearnerIDReducer,
+  Review: reviewReducer,
+  SelectAnswer: SelectAnswerReducer,
+  SubmitAttempt: submitAttemptReducer,
+  learnerscore: LearnerScorePageReducer,
   
 
 
@@ -157,7 +215,25 @@ const store = createStore(
      ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,
      FetchRegisterApi,ApiQuizPassedUsers,ApiQuizFailedUsers,EnrollCourseLearners,
       ApiViewEnrollmentReport, EnrollCoursePassedLearner, EnrollCourseProgressLearner,
-      ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse,ApiDashboardEnrollmentcourseBarchart)
+      ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse,ApiDashboardEnrollmentcourseBarchart,
+      FetchQuizById,
+      FetchQuizQuestionsApi,
+      DeleteQuizQuestionsApi,
+      PutQuizDetails,
+      CreateQuizApi,
+      UpdateQuizFeedbackApi,
+      DeleteTopicFeedbackApi,
+      DeleteQuizFeedbackApi,
+      UpdateTopicFeedbackApi,
+      fetchQuestionsMiddleware,
+      QuizInstructionApi,
+      LearnerAttemptQuizIdApi,
+      GetLearnerIDApi,
+      reviewApi,
+      selectAnswerMiddleware,
+      submitAttemptMiddleware,
+      LearnerScorePageApi,
+      )
 );
 
 export default store;
