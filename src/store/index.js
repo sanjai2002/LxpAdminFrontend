@@ -114,6 +114,9 @@ import UpdateQuizFeedbackReducer from "../reducers/Quiz And Feedback Module/Admi
 import DeleteQuizFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/DeleteQuizFeedbackReducer";
 import DeleteTopicFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/DeleteTopicFeedbackReducer";
 import UpdateTopicFeedbackReducer from "../reducers/Quiz And Feedback Module/Admin/UpdateTopicFeedbackReducer";
+import editQuizReducer from "../reducers/Quiz And Feedback Module/Admin/EditQuizReducer";
+import { PutQuizDetails } from "../middleware/Quiz And Feedback Module/Admin/EditQuizApi";
+// quiz-learnerflow
 import AttemptQuizReducer from "../reducers/Quiz And Feedback Module/Learner/AttemptQuizReducer";
 import QuizInstructionReducer from "../reducers/Quiz And Feedback Module/Learner/QuizInstructionReducer";
 import { QuizInstructionApi } from "../middleware/Quiz And Feedback Module/Learner/QuizInstructionApi";
@@ -130,8 +133,12 @@ import { selectAnswerMiddleware } from "../middleware/Quiz And Feedback Module/L
 import submitAttemptMiddleware from "../middleware/Quiz And Feedback Module/Learner/SubmitAttemptMiddleware";
 import LearnerScorePageReducer from "../reducers/Quiz And Feedback Module/Learner/LearnerScorePageReducer";
 import LearnerScorePageApi from "../middleware/Quiz And Feedback Module/Learner/LearnerScorePageApi";
-import editQuizReducer from "../reducers/Quiz And Feedback Module/Admin/EditQuizReducer";
-import { PutQuizDetails } from "../middleware/Quiz And Feedback Module/Admin/EditQuizApi";
+import FetchTopicFeedbackQuestionReducer from "../reducers/Quiz And Feedback Module/Learner/FetchTopicFeedbackQuestionReducer";
+import { FetchTopicFeedbackQuestionApi } from "../middleware/Quiz And Feedback Module/Learner/FetchTopicFeedbackQuestionApi";
+import TopicFeedbackResponseReducer from "../reducers/Quiz And Feedback Module/Learner/TopicFeedbackResponseReducer.js";
+import { TopicFeedbackResponseApi } from "../middleware/Quiz And Feedback Module/Learner/TopicFeedbackResponseApi.js";
+import QuizFeedbackResponseReducer from "../reducers/Quiz And Feedback Module/Learner/QuizFeedbackResponseReducer.js";
+import { QuizFeedbackResponseApi } from "../middleware/Quiz And Feedback Module/Learner/QuizFeedbackResponseApi.js";
 
 
 
@@ -182,7 +189,6 @@ const rootReducer = combineReducers({
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
-
   //quizmodule
   quizId: quizIdReducer,
   quizQuestions: fetchQuizQuestionsReducer,
@@ -193,18 +199,20 @@ const rootReducer = combineReducers({
   deletequizfeedback: DeleteQuizFeedbackReducer,
   deletetopicfeedback: DeleteTopicFeedbackReducer,
   updatetopicfeedback: UpdateTopicFeedbackReducer,
-  AttemptQuiz: AttemptQuizReducer,
-  fetchquizinstruction: QuizInstructionReducer,
-  learnerattempt: LearnerAttemptQuizIdReducer,
-  fetchlearnerid: GetLearnerIDReducer,
-  Review: reviewReducer,
-  SelectAnswer: SelectAnswerReducer,
-  SubmitAttempt: submitAttemptReducer,
-  learnerscore: LearnerScorePageReducer,
+  //quizmodule-learner
+    //Learner side
+    fetchlearnerid: GetLearnerIDReducer,
+    AttemptQuiz: AttemptQuizReducer,
+    Review: reviewReducer,
+    SelectAnswer: SelectAnswerReducer,
+    SubmitAttempt: submitAttemptReducer,
+    learnerscore: LearnerScorePageReducer,
+    fetchquizinstruction: QuizInstructionReducer,
+    learnerattempt: LearnerAttemptQuizIdReducer,
+    fetchtopicfeedbackquestion: FetchTopicFeedbackQuestionReducer,
+    TopicFeedbackResponse: TopicFeedbackResponseReducer,
+    QuizFeedbackResponse: QuizFeedbackResponseReducer,
   
-
-
-
 });
 
 const store = createStore(
@@ -225,14 +233,19 @@ const store = createStore(
       DeleteTopicFeedbackApi,
       DeleteQuizFeedbackApi,
       UpdateTopicFeedbackApi,
-      fetchQuestionsMiddleware,
-      QuizInstructionApi,
-      LearnerAttemptQuizIdApi,
-      GetLearnerIDApi,
-      reviewApi,
-      selectAnswerMiddleware,
-      submitAttemptMiddleware,
-      LearnerScorePageApi,
+    //quiz-learner flow
+    GetLearnerIDApi,
+    fetchQuestionsMiddleware,
+    reviewApi,
+    selectAnswerMiddleware,
+    submitAttemptMiddleware,
+    LearnerScorePageApi,
+    FetchTopicFeedbackQuestionApi,
+    TopicFeedbackResponseApi,
+    QuizFeedbackResponseApi,
+    QuizInstructionApi,
+    LearnerAttemptQuizIdApi,
+   
       )
 );
 

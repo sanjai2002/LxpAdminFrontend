@@ -1,7 +1,7 @@
 import React from 'react'
-import { FETCH_LEARNERSCORE_REQUEST,FETCH_LEARNERSCORE_SUCCESS,FETCH_LEARNERSCORE_FAILURE } from '../../../../src/actions/Quiz And Feedback Module/Learner/LearnerScorePageAction';
+import { FETCH_LEARNERSCORE_REQUEST,FETCH_LEARNERSCORE_SUCCESS,FETCH_LEARNERSCORE_FAILURE } from '../../../actions/Quiz And Feedback Module/Learner/LearnerScorePageAction';
 const initialState = {
-  learnerscoredetails: [],
+  learnerscoredetails:null,
   loading: false,
   error: null,
   isSubmitted: false,

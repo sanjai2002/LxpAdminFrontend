@@ -41,23 +41,18 @@ import ReviewQuestions from "../../components/Quiz And Feedback Module/QuizCompo
 import GetAllFeedbacks from "../../components/Quiz And Feedback Module/QuizComponents/Admin/GetAllFeedbacks";
 import CoursePageView from "../../View/Quiz And Feedback Module/CoursePageView";
 import QuestionTemplateView from "../../View/Quiz And Feedback Module/QuestionTemplateView";
-import LearnerCoursepageView from "../../View/Quiz And Feedback Module/LearnerCoursepageview";
-import QuizInstruction from "../../components/Quiz And Feedback Module/QuizComponents/Learner/QuizInstruction";
-import AttemptQuiz from "../../components/Quiz And Feedback Module/QuizComponents/Learner/AttemptQuiz";
-import ReviewAnswers from "../../components/Quiz And Feedback Module/QuizComponents/Learner/ReviewAnswers";
-import LearnerScorePage from "../../components/Quiz And Feedback Module/QuizComponents/Learner/LearnerScorePage";
 import QuizFeedback from "../../components/Quiz And Feedback Module/QuizComponents/Admin/QuizFeedback";
 import TopicFeedback from "../../components/Quiz And Feedback Module/QuizComponents/Admin/TopicFeedback";
 
+import LearnerCoursepageView from "../../View/Quiz And Feedback Module/LearnerCoursepageview";
+import  AttemptQuiz from '../../components/Quiz And Feedback Module/QuizComponents/Learner/AttemptQuiz';
+import QuizInstruction from '../../components/Quiz And Feedback Module/QuizComponents/Learner/QuizInstruction';
+import ReviewAnswers from '../../components/Quiz And Feedback Module/QuizComponents/Learner/ReviewAnswers';
+import LearnerScorePage from '../../components/Quiz And Feedback Module/QuizComponents/Learner/LearnerScorePage';
+import TopicFeedbackquestion from '../../components/Quiz And Feedback Module/QuizComponents/Learner/FetchTopicFeedbackQuestion';
+import FetchQuizFeedbackQuestion from '../../components/Quiz And Feedback Module/QuizComponents/Learner/FetchQuizFeedbackQuestion';
+
 function Routing() {
-  // const DrawerHeader = styled('div')(({ theme }) => ({
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'flex-end',
-  //   padding: theme.spacing(0, 1),
-  //   // necessary for content to be below app bar
-  //   ...theme.mixins.toolbar,
-  // }));
 
   return (
     <BrowserRouter>
@@ -100,28 +95,28 @@ function Routing() {
           <Route path='/individualenrollprogresscourselearner/:courseId' element={<EnrollCourseProgressLearners />}></Route>
           <Route path="/enrollreport" element={<CourseEnrollmentReportView />}></Route>
           <Route path="/report" element={<ReportMainView />}></Route>
-
-
-          {/* updatequizintoadminnavbar */}
+          {/* quiz team */}
           <Route path="/coursepageview" element={<CoursePageView />} />
         <Route path="/createquiz" element={<CreateQuizView />} />
-       
         <Route path="/topicfeedback" element={<TopicFeedback />} />
         <Route path="/questiontemplate" element={<QuestionTemplateView />} />
-        <Route path="/getallfeedback" element={<GetAllFeedbacks />} />
+        {/* <Route path="/getallfeedback" element={<GetAllFeedbacks />} /> */}
         <Route path="/reviewquestions" element={<ReviewQuestions />} />
         <Route path="/quizfeedback" element={<QuizFeedback />} />
         <Route path="/upload" element={<UploadBulkQuiz />} />
         </Route>
 
         
-
-         {/* quiz  */}
+         {/* quiz learnermodule */}
         <Route path="/quizengine" element={<LearnerCoursepageView />} />
         <Route path="/instruction" element={<QuizInstruction/>} />
         <Route path="/attemptquiz" element={<AttemptQuiz />} />
         <Route path="/reviewanswer" element={<ReviewAnswers />} />
         <Route path="/learnerscorepage" element={<LearnerScorePage />} />
+        <Route path="/topicfeedbackquestion" element={<TopicFeedbackquestion/>} />
+        <Route path="/quizfeedbackquestion" element={<FetchQuizFeedbackQuestion/>} />
+
+
       </Routes>
     </BrowserRouter>
   );

@@ -2,7 +2,7 @@ import {
   FETCH_QUIZINSTRUCTION_REQUEST,
   FETCH_QUIZINSTRUCTION_SUCCESS,
   FETCH_QUIZINSTRUCTION_FAILURE,
-} from "../../../../src/actions/Quiz And Feedback Module/Learner/QuizInstructionAction";
+} from "../../../actions/Quiz And Feedback Module/Learner/QuizInstructionAction";
 
 const initialState = {
   quizinstructiondetails: [],

@@ -5,8 +5,8 @@ import Box from "@mui/joy/Box";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import AdminNavbar from "../../AdminNavbar";
-// import "../../../../Styles/Quiz And Feedback Module/QuizInstruction.css";
+import AdminNavbar from "../../../Quiz And Feedback Module/AdminNavbar";
+// import "../../../../Styles/Quiz And Feedback Module/Learner/QuizInstruction.css";
 import { Container } from "react-bootstrap";
 import Divider from "@mui/joy/Divider";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ function QuizInstruction() {
   const topicId = sessionStorage.getItem("topicId");
   const quizId = sessionStorage.getItem("quizId");
   const LearnerId = sessionStorage.getItem("LearnerId");
-  const AttemptId = sessionStorage.getItem("AttemptId");
+  // const AttemptId = sessionStorage.getItem("AttemptId");
   const quizinstructions = useSelector(
     (state) => state.fetchquizinstruction.quizinstructiondetails
   );
@@ -36,7 +36,7 @@ function QuizInstruction() {
   const [TakeQuiz, setTakeQuiz] = useState({
     learnerId: LearnerId,
     quizId: quizId,
-    attemptId: AttemptId,
+    // attemptId: AttemptId,
   });
 
   useEffect(() => {
@@ -104,7 +104,7 @@ function QuizInstruction() {
             <CardContent>
               <Divider inset="none" id="divider" />
               <Typography level="title-md">
-                Duration : {quizinstructions.duration}{" "}
+                Duration : {quizinstructions.duration}{" "} (In Minutes)
               </Typography>
               <Typography level="title-md">
                 Pass Mark : {quizinstructions.passMark}{" "}

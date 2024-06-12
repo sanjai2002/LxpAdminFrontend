@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuestionsRequest } from '../../../../actions/Quiz And Feedback Module/Learner/AttemptQuizAction';
-import { fetchReviewRequest } from '../../../../actions/Quiz And Feedback Module/Learner/ReviewAction';
-import { selectAnswerRequest } from '../../../../actions/Quiz And Feedback Module/Learner/SelectAnswerAction';
-import { useNavigate } from 'react-router-dom';
-// import '../../../../Styles/Quiz And Feedback Module/AttemptQuiz.css';
-import AdminNavbar from '../Admin/AdminNavbar';
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuestionsRequest } from "../../../../actions/Quiz And Feedback Module/Learner/AttemptQuizAction";
+import { fetchReviewRequest } from "../../../../actions/Quiz And Feedback Module/Learner/ReviewAction";
+import { selectAnswerRequest } from "../../../../actions/Quiz And Feedback Module/Learner/SelectAnswerAction";
+import { useNavigate } from "react-router-dom";
+// import "../../../../Styles/Quiz And Feedback Module/Learner/AttemptQuiz.css";
+import AdminNavbar from "../../AdminNavbar";
+import Timer from "./Timer";
 const AttemptQuiz = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const quizId = sessionStorage.getItem("quizId");
   const questions = useSelector((state) => state.AttemptQuiz.questions);
   const selectAnswerError = useSelector((state) => state.AttemptQuiz.error);
-  const learnerattemptid = useSelector((state) => state.learnerattempt.attemptId);
+  const learnerattemptid = useSelector(
+    (state) => state.learnerattempt.attemptId
+  );
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
-    const storedCurrentQuestionIndex = sessionStorage.getItem('currentQuestionIndex');
-    return storedCurrentQuestionIndex ? parseInt(storedCurrentQuestionIndex) : 0;
+    const storedCurrentQuestionIndex = sessionStorage.getItem(
+      "currentQuestionIndex"
+    );
+    return storedCurrentQuestionIndex
+      ? parseInt(storedCurrentQuestionIndex)
+      : 0;
   });
 
   const [selectedOptions, setSelectedOptions] = useState(() => {
-    const storedSelectedOptions = sessionStorage.getItem('selectedOptions');
+    const storedSelectedOptions = sessionStorage.getItem("selectedOptions");
     return storedSelectedOptions ? JSON.parse(storedSelectedOptions) : {};
   });
 
@@ -32,19 +38,19 @@ const AttemptQuiz = () => {
 
   // Update session storage when selectedOptions change
   useEffect(() => {
-    sessionStorage.setItem('selectedOptions', JSON.stringify(selectedOptions));
+    sessionStorage.setItem("selectedOptions", JSON.stringify(selectedOptions));
   }, [selectedOptions]);
 
   // Update session storage when currentQuestionIndex changes
   useEffect(() => {
-    sessionStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+    sessionStorage.setItem("currentQuestionIndex", currentQuestionIndex);
   }, [currentQuestionIndex]);
 
   const fetchQuestions = async (quizId) => {
     try {
       dispatch(fetchQuestionsRequest(quizId));
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -62,22 +68,26 @@ const AttemptQuiz = () => {
         const selectedForQuestion = updatedOptions[questionId] || [];
 
         if (selectedForQuestion.includes(optionValue)) {
-          updatedOptions[questionId] = selectedForQuestion.filter((opt) => opt !== optionValue);
+          updatedOptions[questionId] = selectedForQuestion.filter(
+            (opt) => opt !== optionValue
+          );
         } else if (selectedForQuestion.length < 3) {
           updatedOptions[questionId] = [...selectedForQuestion, optionValue];
         } else {
-          alert('You can select a maximum of 3 options.');
+          alert("You can select a maximum of 3 options.");
         }
       } else {
         updatedOptions[questionId] = [optionValue];
       }
 
       // Dispatch action to save the answer
-      dispatch(selectAnswerRequest({
-        learnerAttemptId,
-        quizQuestionId: questionId,
-        selectedOptions: updatedOptions[questionId],
-      }));
+      dispatch(
+        selectAnswerRequest({
+          learnerAttemptId,
+          quizQuestionId: questionId,
+          selectedOptions: updatedOptions[questionId],
+        })
+      );
 
       return updatedOptions;
     });
@@ -86,7 +96,7 @@ const AttemptQuiz = () => {
   const handleSubmit = () => {
     const attemptId = learnerattemptid;
     dispatch(fetchReviewRequest(attemptId));
-    navigate('/reviewanswer');
+    navigate("/reviewanswer");
   };
 
   const handleNext = () => {
@@ -102,8 +112,9 @@ const AttemptQuiz = () => {
   };
 
   return (
-    <div className='learner-attemptquiz'>
-      <AdminNavbar />
+    <div className="learner-attemptquiz">
+      {/* <AdminNavbar /> */}
+      <Timer />
       <div className="attempt-quiz-page">
         <h1 className="quiz-title">Attempt Quiz</h1>
         <div className="quiz-content">
@@ -113,7 +124,11 @@ const AttemptQuiz = () => {
                 <button
                   key={index}
                   onClick={() => handleQuestionClick(index)}
-                  className={selectedOptions[questions[index].quizQuestionId]?.length > 0 ? 'answered' : ''}
+                  className={
+                    selectedOptions[questions[index].quizQuestionId]?.length > 0
+                      ? "answered"
+                      : ""
+                  }
                 >
                   {index + 1}
                 </button>
@@ -126,33 +141,48 @@ const AttemptQuiz = () => {
             {questions && questions.length > 0 ? (
               <>
                 <div className="question-container">
-                  <h5>{questions[currentQuestionIndex].questionNo}. {questions[currentQuestionIndex].question}</h5>
+                  <h5 className="quiz-question">
+                    {questions[currentQuestionIndex].questionNo}.{" "}
+                    {questions[currentQuestionIndex].question}
+                  </h5>
                   <ul>
-                    {questions[currentQuestionIndex].options.map((option, optionIndex) => (
-                      <li key={optionIndex}>
-                        <input
-                          type={
-                            questions[currentQuestionIndex].questionType === 'MCQ' ||
-                            questions[currentQuestionIndex].questionType === 'TF' ||
-                            questions[currentQuestionIndex].questionType === 'T/F'
-                              ? 'radio'
-                              : 'checkbox'
-                          }
-                          name={questions[currentQuestionIndex].quizQuestionId}
-                          value={option.option}
-                          checked={
-                            selectedOptions[questions[currentQuestionIndex].quizQuestionId]?.includes(option.option) || false
-                          }
-                          onChange={() => handleOptionChange(
-                            questions[currentQuestionIndex].quizQuestionId,
-                            option.option,
-                            questions[currentQuestionIndex].questionType === 'MSQ'
-                          )}
-                          style={{ cursor: 'pointer' }}
-                        />
-                        {option.option}
-                      </li>
-                    ))}
+                    {questions[currentQuestionIndex].options.map(
+                      (option, optionIndex) => (
+                        <li key={optionIndex}>
+                          <input
+                            type={
+                              questions[currentQuestionIndex].questionType ===
+                                "MCQ" ||
+                              questions[currentQuestionIndex].questionType ===
+                                "TF" ||
+                              questions[currentQuestionIndex].questionType ===
+                                "T/F"
+                                ? "radio"
+                                : "checkbox"
+                            }
+                            name={
+                              questions[currentQuestionIndex].quizQuestionId
+                            }
+                            value={option.option}
+                            checked={
+                              selectedOptions[
+                                questions[currentQuestionIndex].quizQuestionId
+                              ]?.includes(option.option) || false
+                            }
+                            onChange={() =>
+                              handleOptionChange(
+                                questions[currentQuestionIndex].quizQuestionId,
+                                option.option,
+                                questions[currentQuestionIndex].questionType ===
+                                  "MSQ"
+                              )
+                            }
+                            style={{ cursor: "pointer" }}
+                          />
+                          {option.option}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </div>
                 <div className="navigation-buttons">
@@ -189,30 +219,195 @@ export default AttemptQuiz;
 
 
 
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
+// import { fetchReviewRequest } from '../../../actions/Quiz And Feedback Module/ReviewAction';
+// import { selectAnswerRequest } from '../../../actions/Quiz And Feedback Module/SelectAnswerAction';
+// import { useNavigate } from 'react-router-dom';
+// import '../../../Styles/Quiz And Feedback Module/AttemptQuiz.css';
+// import AdminNavbar from './AdminNavbar';
+// import Timer from "../../../components/Quiz And Feedback Module/QuizComponents/Timer"
 
+// const AttemptQuiz = () => {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const quizId = sessionStorage.getItem("quizId");
+//   const questions = useSelector((state) => state.AttemptQuiz.questions);
+//   const selectAnswerError = useSelector((state) => state.AttemptQuiz.error);
+//   const learnerattemptid = useSelector((state) => state.learnerattempt.attemptId);
 
+//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
+//     const storedCurrentQuestionIndex = sessionStorage.getItem('currentQuestionIndex');
+//     return storedCurrentQuestionIndex ? parseInt(storedCurrentQuestionIndex) : 0;
+//   });
 
+//   const [selectedOptions, setSelectedOptions] = useState(() => {
+//     const storedSelectedOptions = sessionStorage.getItem('selectedOptions');
+//     return storedSelectedOptions ? JSON.parse(storedSelectedOptions) : {};
+//   });
 
+//   // Fetch questions when the component mounts and reset selected options
+//   useEffect(() => {
+//     fetchQuestions(quizId);
+//   }, [quizId]);
 
+//   // Update session storage when selectedOptions change
+//   useEffect(() => {
+//     sessionStorage.setItem('selectedOptions', JSON.stringify(selectedOptions));
+//   }, [selectedOptions]);
 
+//   // Update session storage when currentQuestionIndex changes
+//   useEffect(() => {
+//     sessionStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+//   }, [currentQuestionIndex]);
 
+//   const fetchQuestions = async (quizId) => {
+//     try {
+//       dispatch(fetchQuestionsRequest(quizId));
+//     } catch (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//   };
 
+//   const handleQuestionClick = (index) => {
+//     setCurrentQuestionIndex(index);
+//   };
 
+//   const handleOptionChange = (questionId, optionValue, isMSQ) => {
+//     const learnerAttemptId = learnerattemptid;
 
+//     setSelectedOptions((prevSelectedOptions) => {
+//       const updatedOptions = { ...prevSelectedOptions };
 
+//       if (isMSQ) {
+//         const selectedForQuestion = updatedOptions[questionId] || [];
 
+//         if (selectedForQuestion.includes(optionValue)) {
+//           updatedOptions[questionId] = selectedForQuestion.filter((opt) => opt !== optionValue);
+//         } else if (selectedForQuestion.length < 3) {
+//           updatedOptions[questionId] = [...selectedForQuestion, optionValue];
+//         } else {
+//           alert('You can select a maximum of 3 options.');
+//         }
+//       } else {
+//         updatedOptions[questionId] = [optionValue];
+//       }
 
+//       // Dispatch action to save the answer
+//       dispatch(selectAnswerRequest({
+//         learnerAttemptId,
+//         quizQuestionId: questionId,
+//         selectedOptions: updatedOptions[questionId],
+//       }));
 
+//       return updatedOptions;
+//     });
+//   };
 
+//   const handleSubmit = () => {
+//     const attemptId = learnerattemptid;
+//     dispatch(fetchReviewRequest(attemptId));
+//     navigate('/reviewanswer');
+//   };
 
+//   const handleNext = () => {
+//     if (currentQuestionIndex < questions.length - 1) {
+//       setCurrentQuestionIndex(currentQuestionIndex + 1);
+//     }
+//   };
 
+//   const handlePrevious = () => {
+//     if (currentQuestionIndex > 0) {
+//       setCurrentQuestionIndex(currentQuestionIndex - 1);
+//     }
+//   };
 
+//   return (
+//     <div className='learner-attemptquiz'>
+//       <AdminNavbar />
+//   <Timer/>
+//       <div className="attempt-quiz-page">
+//         <h1 className="quiz-title">Attempt Quiz</h1>
+//         <div className="quiz-content">
+//           <div className="navbar">
+//             {questions && questions.length > 0 ? (
+//               questions.map((_, index) => (
+//                 <button
+//                   key={index}
+//                   onClick={() => handleQuestionClick(index)}
+//                   className={selectedOptions[questions[index].quizQuestionId]?.length > 0 ? 'answered' : ''}
+//                 >
+//                   {index + 1}
+//                 </button>
+//               ))
+//             ) : (
+//               <p>No questions available</p>
+//             )}
+//           </div>
+//           <div className="main-content1">
+//             {questions && questions.length > 0 ? (
+//               <>
+//                 <div className="question-container">
+//                   <h5>{questions[currentQuestionIndex].questionNo}. {questions[currentQuestionIndex].question}</h5>
+//                   <ul>
+//                     {questions[currentQuestionIndex].options.map((option, optionIndex) => (
+//                       <li key={optionIndex}>
+//                         <input
+//                           type={
+//                             questions[currentQuestionIndex].questionType === 'MCQ' ||
+//                             questions[currentQuestionIndex].questionType === 'TF' ||
+//                             questions[currentQuestionIndex].questionType === 'T/F'
+//                               ? 'radio'
+//                               : 'checkbox'
+//                           }
+//                           name={questions[currentQuestionIndex].quizQuestionId}
+//                           value={option.option}
+//                           checked={
+//                             selectedOptions[questions[currentQuestionIndex].quizQuestionId]?.includes(option.option) || false
+//                           }
+//                           onChange={() => handleOptionChange(
+//                             questions[currentQuestionIndex].quizQuestionId,
+//                             option.option,
+//                             questions[currentQuestionIndex].questionType === 'MSQ'
+//                           )}
+//                           style={{ cursor: 'pointer' }}
+//                         />
+//                         {option.option}
+//                       </li>
+//                     ))}
+//                   </ul>
+//                 </div>
+//                 <div className="navigation-buttons">
+//                   <button
+//                     className="previous-button"
+//                     onClick={handlePrevious}
+//                     disabled={currentQuestionIndex === 0}
+//                   >
+//                     Previous
+//                   </button>
+//                   {currentQuestionIndex < questions.length - 1 ? (
+//                     <button className="next-button" onClick={handleNext}>
+//                       Next
+//                     </button>
+//                   ) : (
+//                     <button className="review-button" onClick={handleSubmit}>
+//                       Review
+//                     </button>
+//                   )}
+//                 </div>
+//               </>
+//             ) : (
+//               <p>Loading questions...</p>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-
-
-
-
-
+// export default AttemptQuiz;
 
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -409,23 +604,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -605,25 +783,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -640,7 +799,7 @@ export default AttemptQuiz;
 //   const questions = useSelector((state) => state.AttemptQuiz.questions);
 //   const selectAnswerError = useSelector((state) => state.AttemptQuiz.error);
 //   const learnerattemptid = useSelector((state) => state.learnerattempt.attemptId);
-  
+
 //   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 //   const [selectedOptions, setSelectedOptions] = useState(() => {
 //     const storedSelectedOptions = sessionStorage.getItem('selectedOptions');
@@ -796,27 +955,6 @@ export default AttemptQuiz;
 // };
 
 // export default AttemptQuiz;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -1003,27 +1141,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -1197,29 +1314,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -1391,25 +1485,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -1580,33 +1655,6 @@ export default AttemptQuiz;
 // };
 
 // export default AttemptQuiz;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -1769,35 +1817,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestionsRequest } from '../../../actions/Quiz And Feedback Module/AttemptQuizAction';
@@ -1955,23 +1974,6 @@ export default AttemptQuiz;
 
 // export default AttemptQuiz;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { fetchQuestionsRequest } from "../../../actions/Quiz And Feedback Module/AttemptQuizAction";
@@ -1982,7 +1984,6 @@ export default AttemptQuiz;
 //   const quizId = "43588fc6-1eb2-4459-8313-527b4276c596";
 //   const questions = useSelector((state) => state.AttemptQuiz.questions);
 //   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  
 
 //   useEffect(() => {
 //     fetchQuestions(quizId);

@@ -1,5 +1,4 @@
 
-import React from 'react'
 
 import axios from "axios";
 
@@ -18,8 +17,8 @@ const LearnerScorePageApi =
   (next) =>
   async (action) => {
     if (action.type === FETCH_LEARNERSCORE_REQUEST) {
-      debugger;
-      const learnerattemptId = action.payload;
+      // debugger;
+      const learnerattemptid = action.payload;
       //   debugger;
       //   if (!learnerattemptId) {
       //     console.error("API ERROR: LearnerattemptId is undefined");
@@ -27,10 +26,10 @@ const LearnerScorePageApi =
       //     return next(action);
       //   }
       try {
-        const API_URL = `${baseUrl}/api/QuizEngine/attempt/${learnerattemptId}`;
+        const API_URL = `${baseUrl}/api/QuizEngine/attempts/${learnerattemptid}/result`;
         console.log("learnerscore", API_URL);
         const response = await axios.get(API_URL);
-        console.log("learner score", response);
+        console.log("learner score", response.data);
         // if (response.status === 200) {
         dispatch(fetchlearnerscoreSuccess(response.data));
         // } else {

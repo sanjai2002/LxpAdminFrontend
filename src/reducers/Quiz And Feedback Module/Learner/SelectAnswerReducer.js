@@ -3,7 +3,7 @@ import {
     SELECT_ANSWER_SUCCESS,
     SELECT_ANSWER_FAILURE,
     SELECT_ANSWER_STATUS,
-  } from '../../../../src/actions/Quiz And Feedback Module/Learner/SelectAnswerAction';
+  } from '../../../actions/Quiz And Feedback Module/Learner/SelectAnswerAction';
   
   const initialState = {
     questions: [],

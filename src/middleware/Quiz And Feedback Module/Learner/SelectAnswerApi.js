@@ -25,8 +25,8 @@ export const selectAnswerMiddleware = ({dispatch,getState}) => (next) => async (
             console.log("Response Exists");
           }
           else{
-            dispatch(selectAnswerSuccess(response.data.data)); 
-            console.log("successfullresponse",response.data.data)
+            dispatch(selectAnswerSuccess(response.data)); 
+            console.log("successfullresponse",response.data)
           }     
         }
         catch (error) {

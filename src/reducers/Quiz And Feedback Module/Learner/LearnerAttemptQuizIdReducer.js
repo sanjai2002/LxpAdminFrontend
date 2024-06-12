@@ -2,7 +2,7 @@ import {
     CREATE_ATTEMPT_REQUEST,
     CREATE_ATTEMPT_SUCCESS,
     CREATE_ATTEMPT_FAILURE
-  } from '../../../../src/actions/Quiz And Feedback Module/Learner/AttemptQuizAction';
+  } from '../../../actions/Quiz And Feedback Module/Learner/AttemptQuizAction';
  
 const initialState = {
   attemptId:null,

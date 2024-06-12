@@ -11,10 +11,10 @@ import { Container } from "react-bootstrap";
 
 function CoursePage() {
   const [noQuizTopicId, setNoQuizTopicId] = useState(
-    "a47ea775-b629-4421-9397-ebbfb5b84e78"
+    "6d55291d-c0e4-453c-9267-808a0ef7729e"
   );
   const [yesQuizTopicId, setYesQuizTopicId] = useState(
-    "aa6a386c-d78e-4563-b413-e27779a506aa"
+    "32299397-c1f2-437e-876a-516838cebe49"
   );
 
   const quizId = useSelector((state) => state.quizId.quizId);
