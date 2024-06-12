@@ -17,7 +17,6 @@ import Button from 'react-bootstrap/Button';
 import { updateQuizQuestionRequest } from '../../../../actions/Quiz And Feedback Module/Admin/UpdateQuizQuestionAction';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
-import { FetchQuizQuestionsApi } from '../../../../middleware/Quiz And Feedback Module/Admin/FetchQuizQuestionsApi';
 
 const QuestionTemplate = () => {
   const quizId = sessionStorage.getItem("quizId");
@@ -27,7 +26,6 @@ const QuestionTemplate = () => {
   }, [quizId]);
 
   const dispatch = useDispatch();
-  const [questions, setQuestions] = useState();
   const [error, setError] = useState("");
   const [errors, setErrors] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,12 +54,11 @@ const QuestionTemplate = () => {
     correctOptions: ["", "", ""],
   });
 
-  
+  const questions = useSelector((state) => state.quizQuestions.quizQuestions);
 
-  const fetchQuestions = async (quizId) => {
+  const fetchQuestions = (quizId) => {
     try {
-      const questionsData = await FetchQuizQuestionsApi(quizId);
-      setQuestions(questionsData);
+      dispatch(fetchAllQuizQuestionRequest(quizId));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -236,7 +233,6 @@ const QuestionTemplate = () => {
       UpdateQuizQuestionsApi(requestBody)
       handleCloseEditQuestionModal();
     }
-    // window.location.reload();
   };
 
   const validateField = (fieldName, value, index = null) => {
