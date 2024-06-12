@@ -52,6 +52,14 @@ import LearnerScorePage from '../../components/Quiz And Feedback Module/QuizComp
 import TopicFeedbackquestion from '../../components/Quiz And Feedback Module/QuizComponents/Learner/FetchTopicFeedbackQuestion';
 import FetchQuizFeedbackQuestion from '../../components/Quiz And Feedback Module/QuizComponents/Learner/FetchQuizFeedbackQuestion';
 
+// course team
+
+import {AddCourseView} from '../../View/Course/Course/AddCourseView'
+import { CourseContent } from "../../View/Course/Course/CourseContentView";
+import Topics from "../../View/Course/Topic/Topics";
+import SavedTopics from "../../components/Course/Topic/SavedTopics";
+import AddMaterial from "../../View/Course/Material/AddMaterial";
+
 function Routing() {
 
   return (
@@ -104,9 +112,14 @@ function Routing() {
         <Route path="/reviewquestions" element={<ReviewQuestions />} />
         <Route path="/quizfeedback" element={<QuizFeedback />} />
         <Route path="/upload" element={<UploadBulkQuiz />} />
-        </Route>
 
-        
+   {/* course module */}
+        <Route path="/addcourse" element={<AddCourseView/>} />
+        <Route path="/coursecontent" element={<CourseContent/>} />
+        <Route path="/addtopic/:id" element={<Topics/>} />
+        <Route path="/savedtopics/:id" element={<SavedTopics/>} />
+        <Route path='/addcontent/:id' element={<AddMaterial/>}/>
+        </Route>
          {/* quiz learnermodule */}
         <Route path="/quizengine" element={<LearnerCoursepageView />} />
         <Route path="/instruction" element={<QuizInstruction/>} />
@@ -115,6 +128,14 @@ function Routing() {
         <Route path="/learnerscorepage" element={<LearnerScorePage />} />
         <Route path="/topicfeedbackquestion" element={<TopicFeedbackquestion/>} />
         <Route path="/quizfeedbackquestion" element={<FetchQuizFeedbackQuestion/>} />
+
+       {/* course team */}
+
+        {/* <Route path="/addcourse" element={<AddCourseView/>} />
+        <Route path="/coursecontent" element={<CourseContent/>} />
+        <Route path="/addtopic/:id" element={<Topics/>} />
+        <Route path="/savedtopics/:id" element={<SavedTopics/>} />
+        <Route path='/addcontent/:id' element={<AddMaterial/>}/> */}
 
 
       </Routes>

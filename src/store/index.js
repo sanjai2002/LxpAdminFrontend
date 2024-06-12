@@ -142,6 +142,59 @@ import { QuizFeedbackResponseApi } from "../middleware/Quiz And Feedback Module/
 
 
 
+
+// COURSE TEAMS 
+
+// import fetchTopicsReducer from '../../reducer/Course/CTopic/FetchTopicReducer';
+import  fetchTopicsReducer from '../reducers/Course/Topic/FetchTopicReducer'
+
+import fetchTopicsApi from '../middleware/Course/Topic/FetchTopicMiddleware';
+// import fetchEditTopicsApi from '../../middleware/Course/Topic/FetchEditTopicMiddleware';
+import  fetchEditTopicsApi  from '../middleware/Course/Topic/FetchEditTopicMiddleware'
+
+// import fetchEditTopicsReducer from '../reducers/Course/Topic/FetchEditTopicsReducer';
+
+import fetchEditTopicsReducer from '../reducers/Course/Topic/FetchEditTopicsReducer'
+// import updateTopicReducer from '../reducers/Course/Topic/UpdateTopicsReducer'
+import updateTopicReducer from '../reducers/Course/Topic/UpdateTopicsReducer';
+
+import updateTopicsApi from '../middleware/Course/Topic/UpdateTopicsMiddleware';
+
+// import deleteTopicReducer from '../reducers/Course/Topic/DeleteTopicsReducer';
+import  deleteTopicReducer from '../reducers/Course/Topic/DeleteTopicsReducer'
+
+import deleteTopic from '../middleware/Course/Topic/DeleteTopicMiddleware';
+import addContent from '../middleware/Course/Material/AddContentMiddleware';
+
+import AddMaterialReducer from '../reducers/Course/Material/AddContentReducer';
+
+
+import fetchMaterialTypeReducer from '../reducers/Course/Material/FetchMaterialTypeReducer';
+import fetchMaterialTypeApi from '../middleware/Course/Material/FetchMaterialTypeMiddleware';
+
+import fetchContentApi from '../middleware/Course/Material/FetchContentMiddleware';
+import fetchContentReducer from '../reducers/Course/Material/FetchContentReducer';
+import deleteContentReducer from '../reducers/Course/Material/DeleteContentReducer';
+import deleteContentApi from '../middleware/Course/Material/DeleteContentMiddleware';
+import fetchIndividualContentReducer from '../reducers/Course/Material/FetchIndividualContentByIdReducer';
+import fetchIndividualContentApi from '../middleware/Course/Material/FetchIndividualContentByIdMiddleware';
+import updateContentReducer from '../reducers/Course/Material/UpdateContentReducer';
+import updateContentApi from '../middleware/Course/Material/UpdateContentMiddleware';
+import fetchContentUrlReducer from '../reducers/Course/Material/FetchContentUrlReducer';
+import fetchContentUrlApi from '../middleware/Course/Material/FetchContentUrlMiddleware';
+import addCourse from '../middleware/Course/Course/AddCourse';
+import fetchcategoryApi from '../middleware/Course/Category/FetchCategoryMiddleware';
+import fetchlevelApi from '../middleware/Course/Level/FetchLevelMiddleware';
+import fetchCategoryReducer from '../reducers/Course/Category/FetchCategoryReducer';
+import fetchLevelReducer from '../reducers/Course/Level/FetchLevelReducer';
+import categoryReducer from '../reducers/Course/Category/AddCategoryReducer';
+import addCategory from '../middleware/Course/Category/AddCategoryMiddleware';
+import fetchCourseReducer from '../reducers/Course/Course/FetchCourseDetailReducer';
+import fetchcourseApi from '../middleware/Course/Course/FetchCourseDetailMiddleware';
+import addTopicReducer from '../reducers/Course/Topic/AddTopicReducer';
+import addTopic from '../middleware/Course/Topic/AddTopicMiddleware';
+
+
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
   user: userReducer,
@@ -212,6 +265,27 @@ const rootReducer = combineReducers({
     fetchtopicfeedbackquestion: FetchTopicFeedbackQuestionReducer,
     TopicFeedbackResponse: TopicFeedbackResponseReducer,
     QuizFeedbackResponse: QuizFeedbackResponseReducer,
+
+
+    // COURSE TEAM  REDUCER
+    level:fetchLevelReducer,
+    category:fetchCategoryReducer,
+    addCategory:categoryReducer,
+    fetchCourse:fetchCourseReducer,
+    Topic:addTopicReducer,
+    fetchTopic:fetchTopicsReducer,
+    fetchEditTopic:fetchEditTopicsReducer,
+    updateTopic:updateTopicReducer,
+     deleteTopic:deleteTopicReducer,
+     deleteContent:deleteContentReducer,
+     addContent: AddMaterialReducer,
+    fetchMaterialType:fetchMaterialTypeReducer,
+    fetchContent:fetchContentReducer,
+    fetchIndividualContent: fetchIndividualContentReducer,
+    updateContent:updateContentReducer,
+    fetchContentUrl:fetchContentUrlReducer,
+
+
   
 });
 
@@ -245,6 +319,13 @@ const store = createStore(
     QuizFeedbackResponseApi,
     QuizInstructionApi,
     LearnerAttemptQuizIdApi,
+
+    addCourse,addCategory,fetchcategoryApi,fetchlevelApi,
+    fetchcourseApi,addTopic,fetchTopicsApi,fetchEditTopicsApi,
+    updateTopicsApi,deleteTopic,addContent,fetchMaterialTypeApi,
+    fetchContentApi,deleteContentApi,fetchIndividualContentApi,
+    updateContentApi,fetchContentUrlApi
+
    
       )
 );
