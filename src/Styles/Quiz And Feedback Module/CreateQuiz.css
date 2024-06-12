@@ -1,10 +1,4 @@
-#QuizCard{
-  width:1100px;
-  /* height:430px; */
-  margin-left:18%;
-  margin-top:-50%;
-  background-color:rgb(237, 231, 231);
-}
+
 .col-sm-3{
   font-weight: bold;
 }
@@ -21,15 +15,14 @@
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   margin-top:20%;
-  margin-left:35%;
+  margin-left:25%;
   border:2px solid #ccc;
-  background-color:aliceblue;
   border-radius:5px;
   width:280px;
  
 }
-.card-body{
-background-color: rgb(237, 231, 231);
+.card-body,.header{
+background-color:#F9F5F6;
 }
 
 .question-number {
@@ -49,7 +42,6 @@ background-color: rgb(237, 231, 231);
 }
 
 .question-grid-container {
-  position:fixed; /* This will make it fixed on the page */
   top:150px; /* Adjust this value to place it from the top */
   left:120px; /* Adjust this value to place it from the left */
   z-index:900; /* This ensures it stays above other content */
@@ -79,12 +71,12 @@ font-weight:500;
 }
 
 
-.question-details-container{
+/* .question-details-container{
   margin-top:-10%;
-  margin-left:25%;
-  width:800px;
+  margin-left:-3%;
+  width:840px;
   position: inherit;
-}
+} */
 
 #required{
   color:Red;
@@ -118,4 +110,13 @@ padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 20px;
   width:230px;
+}
+
+.quiz-content{
+  margin-top: 6%;
+}
+
+.question-template-container{
+  display: block;
+  margin-top: 400px;
 }

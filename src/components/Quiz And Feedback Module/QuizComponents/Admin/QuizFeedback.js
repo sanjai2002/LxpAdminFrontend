@@ -115,13 +115,13 @@ export const QuizFeedback = () => {
 
   return (
     <>
-    <Container fluid style={{marginTop:'700px'}}>
+    <Container fluid style={{marginTop:'600px'}}>
     <div>
       <button
         class="btn btn-light"
         style={{
           marginLeft: "95%",
-          marginTop: "5%",
+          marginTop: "-73%",
           backgroundColor: "#365486",
           color: "white",
           width: "50",
@@ -135,7 +135,7 @@ export const QuizFeedback = () => {
 
       <div>
         <div>
-          <h4 className="text" style={{ marginLeft: "10%", marginTop: "-40%" }}>
+          <h4 className="text" style={{ marginLeft: "5%", marginTop: "-35%" }}>
             <b>Feedback Questions for {quizName} Quiz</b>
           </h4>
           <button
@@ -150,7 +150,7 @@ export const QuizFeedback = () => {
             Add Feedback Questions
           </button>
           <GetAllFeedbacks />
-          <Modal show={showAddfbModal} onHide={handleCloseAddfbQuestionModal}>
+          <Modal show={showAddfbModal} onHide={handleCloseAddfbQuestionModal} style={{marginTop:"2.5%",marginLeft:"4%"}}>
             <Modal.Header
               closeButton
               style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
@@ -158,7 +158,7 @@ export const QuizFeedback = () => {
               <h5>Add Feedback Questions</h5>
               <Modal.Title></Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+            <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
               <div className="form-group">
                 <label>Question Type</label>
                 <select
@@ -234,7 +234,7 @@ export const QuizFeedback = () => {
               )}
             </Modal.Body>
 
-            <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+            <Modal.Footer style={{ backgroundColor: "F9F5F6" }}>
               <Button
                 variant="default"
                 style={{ backgroundColor: "#365486", color: "whitesmoke" }}

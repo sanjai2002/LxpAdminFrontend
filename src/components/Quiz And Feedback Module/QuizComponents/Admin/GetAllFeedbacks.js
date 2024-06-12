@@ -178,7 +178,7 @@ export const GetAllFeedbacks = () => {
   };
 
   return (
-    <Container fluid style={{marginTop:"400px"}}>
+    <Container fluid style={{marginTop:"10px"}}>
     <div>
       {/* <QuizFeedback /> */}
       <div className="question template container">
@@ -193,7 +193,7 @@ export const GetAllFeedbacks = () => {
               <div
                 key={index}
                 className="card mt-3"
-                style={{ backgroundColor: "rgb(237, 231, 231)" }}
+                style={{ backgroundColor: "#F9F5F6" }}
               >
                 <div className="d-flex justify-content-end">
                   <a
@@ -249,7 +249,7 @@ export const GetAllFeedbacks = () => {
           style={{
             backgroundColor: "#365486",
             color: "white",
-            marginLeft: "85%",
+            marginLeft: "90%",
           }}
         >
           Submit
@@ -259,16 +259,16 @@ export const GetAllFeedbacks = () => {
             closeButton
             style={{ backgroundColor: "#23275c" }}
           ></Modal.Header>
-          <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+          <Modal.Body  style={{ backgroundColor: "#F9F5F6" }}>
             <div onClick={handleTypeChange}>
               <Alert severity="success" color="info">
                 QuizFeedback Published successfully !
               </Alert>
             </div>
           </Modal.Body>
-          <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+          <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
             <Button
-              className="btn btn-light mt-1 mb-5"
+              className="btn btn-default mt-1 mb-5"
               style={{
                 backgroundColor: "#365486",
                 color: "white",
@@ -287,6 +287,7 @@ export const GetAllFeedbacks = () => {
       <Modal
         show={showEditfbQuestionModal}
         onHide={handleCloseEditQuestionModal}
+        style={{marginTop:"2.5%",marginLeft:"4%"}}
       >
         <Modal.Header
           closeButton
@@ -296,7 +297,7 @@ export const GetAllFeedbacks = () => {
             <h5>Edit Question</h5>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+        <Modal.Body  style={{ backgroundColor: "#F9F5F6" }}>
           <div className="form-group">
             <label>Question:</label>
             <input
@@ -349,11 +350,11 @@ export const GetAllFeedbacks = () => {
             <div style={{ color: "red" }}>{errors.options}</div>
           )}
         </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
-          <Button variant="secondary" onClick={handleCloseEditQuestionModal}>
+        <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
+          <Button className="btn btn-light" style={{ backgroundColor: "#365486" , color: "white"}} onClick={handleCloseEditQuestionModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={validUpdatedQuestion}>
+          <Button className="btn btn-light" style={{ backgroundColor: "#365486" , color: "white"}} onClick={validUpdatedQuestion}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -142,7 +142,6 @@ const mapStoreToProps = (state) => ({
   enrollmentcoursebarchart: state.enrollmentcoursebarchart,
 });
 
-debugger;
 
 const mapDispatchToProps = (dispatch) => ({
   fetchEnrollmentcourseBarchartRequest: (checking) =>

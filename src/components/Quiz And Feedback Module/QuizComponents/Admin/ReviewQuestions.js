@@ -168,12 +168,12 @@ const [selectedQuestion, setSelectedQuestion] = useState(null);
  
     return (
        <>
-       <Container fluid style={{marginTop:'200px'}}>
+       <Container fluid style={{marginTop:'300px'}}>
        <div>
-            <button class="btn btn-light" style={{ marginLeft: "95%", marginTop: "5%", backgroundColor: "#365486", color: "white", width: '50' }} onClick={() => { handleNavigate() }}>Back</button>
+            <button class="btn btn-light" style={{ marginLeft: "95%", marginTop: "-25%", backgroundColor: "#365486", color: "white", width: '50' }} onClick={() => { handleNavigate() }}>Back</button>
             <div>
   
-                <div className='question-template-container' style={{ display: 'flex', marginTop: "-37%" }}>
+                <div className='question-template-container' style={{ display: 'flex', marginTop: "-5%" }}>
                     <div className="question-grid-container ">
                         {questions && questions.length > 0 && (
                             <div className="question-grid">
@@ -232,7 +232,7 @@ const [selectedQuestion, setSelectedQuestion] = useState(null);
                             <Modal.Header closeButton>
                                 <Modal.Title>Add Feedback Questions</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+                            <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
                                 <div className="form-group">
                                     <label>Question Type:</label>
                                     <select className='form-control' value={selectedfbType} onChange={handlefbQuestionTypeChange}>
@@ -269,22 +269,22 @@ const [selectedQuestion, setSelectedQuestion] = useState(null);
                                     </>
                                 )}
                             </Modal.Body>
-                            <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+                            <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
                                 <Button variant="secondary" onClick={handleCloseAddfbQuestionModal}>Close</Button>
                                 <Button variant="primary" onClick={() => { handleSaveQuestion() }}>Save</Button>
  
                             </Modal.Footer>
                         </Modal>
  
-                        <Modal show={showAddModal} onHide={handleCloseModal}>
+                        <Modal show={showAddModal} onHide={handleCloseModal} style={{ marginTop: "2.5%", marginLeft: "3%" }}>
                             <Modal.Header closeButton style={{ backgroundColor: "#23275c" }}>
                             </Modal.Header>
-                            <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+                            <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
                                 <div onChange={handleTypeChange}>
                                     <Alert severity="success" color='info'>Quiz Questions Published successfully</Alert>
                                     </div>
                             </Modal.Body>
-                            <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+                            <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
                                 <Button onClick={handleFeedback} className="btn btn-light mt-3 mb-5 " style={{ backgroundColor: "#365486", color: "white", marginLeft: "-10%" }}>Add Feedback</Button>
                                 <Button className="btn btn-light mt-3 mb-5" style={{ backgroundColor: "#365486", color: "white", marginLeft: "55%" }} onClick={handleCloseModal}>Close</Button>
  

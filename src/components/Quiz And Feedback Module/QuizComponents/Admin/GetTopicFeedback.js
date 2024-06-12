@@ -163,7 +163,6 @@ export const GetTopicFeedback = () => {
 
   return (
     <div>
-      
       {/* <TopicFeedback /> */}
       <div className="question template container">
         <div>
@@ -175,7 +174,7 @@ export const GetTopicFeedback = () => {
               <div
                 key={index}
                 className="card mt-3"
-                style={{ backgroundColor: "rgb(237, 231, 231)" }}
+                style={{ backgroundColor: "#F9F5F6" }}
               >
                 <div className="d-flex justify-content-end">
                   <a
@@ -242,14 +241,14 @@ export const GetTopicFeedback = () => {
             closeButton
             style={{ backgroundColor: "#23275c" }}
           ></Modal.Header>
-          <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+          <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
             <div onClick={handleTypeChange}>
               <Alert severity="success" color="info">
                 TopicFeedback Published successfully !
               </Alert>
             </div>
           </Modal.Body>
-          <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+          <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
             <Button
               className="btn btn-light mt-1 mb-5"
               style={{
@@ -270,16 +269,17 @@ export const GetTopicFeedback = () => {
       <Modal
         show={showEditfbQuestionModal}
         onHide={handleCloseEditQuestionModal}
+        style={{marginTop:"2.5%",marginLeft:"4%"}}
       >
         <Modal.Header
           closeButton
-          style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
+          style={{ backgroundColor: "#23275c", color: "whitesmoke" }}  
         >
           <Modal.Title>
             <h5>Edit Question</h5>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+        <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
           <div className="form-group">
             <label>Question:<b id="required">*</b></label>
             <input
@@ -338,7 +338,7 @@ export const GetTopicFeedback = () => {
             <div style={{ color: "red" }}>{errors.options}</div>
           )}
         </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
+        <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
           <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleCloseEditQuestionModal}>
             Close
           </Button>
@@ -348,6 +348,7 @@ export const GetTopicFeedback = () => {
         </Modal.Footer>
       </Modal>
     </div>
+    
   );
 };
 export default GetTopicFeedback;

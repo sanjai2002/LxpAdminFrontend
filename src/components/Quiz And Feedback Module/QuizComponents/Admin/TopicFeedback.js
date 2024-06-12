@@ -100,14 +100,14 @@ export const TopicFeedback = () => {
 
     return (
         <>
-        <Container fluid className='' style={{marginTop:'450px'}}>
+        <Container fluid style={{marginTop:'600px'}}>
         <div>
             <div>
         <button
           class="btn btn-light"
           style={{
             marginLeft: "95%",
-            marginTop: "5%",
+            marginTop: "-73%",
             backgroundColor: "#365486",
             color: "white",
             width: "50",

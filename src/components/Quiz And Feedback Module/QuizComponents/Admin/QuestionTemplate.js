@@ -17,6 +17,7 @@ import Button from 'react-bootstrap/Button';
 import { updateQuizQuestionRequest } from '../../../../actions/Quiz And Feedback Module/Admin/UpdateQuizQuestionAction';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
+import { FetchQuizQuestionsApi } from '../../../../middleware/Quiz And Feedback Module/Admin/FetchQuizQuestionsApi';
 
 const QuestionTemplate = () => {
   const quizId = sessionStorage.getItem("quizId");
@@ -26,6 +27,7 @@ const QuestionTemplate = () => {
   }, [quizId]);
 
   const dispatch = useDispatch();
+  const [questions, setQuestions] = useState();
   const [error, setError] = useState("");
   const [errors, setErrors] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +40,8 @@ const QuestionTemplate = () => {
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const fetch = useRef(false);
   const [numOptions, setNumOptions] = useState(5);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState(null);
   const [selectedFilterQuestionType, setSelectedFilterQuestionType] = useState('')
   const [newQuestion, setNewQuestion] = useState({
     question: "",
@@ -52,14 +56,27 @@ const QuestionTemplate = () => {
     correctOptions: ["", "", ""],
   });
 
-  const questions = useSelector((state) => state.quizQuestions.quizQuestions);
+  
 
-  const fetchQuestions = (quizId) => {
+  const fetchQuestions = async (quizId) => {
     try {
-      dispatch(fetchAllQuizQuestionRequest(quizId));
+      const questionsData = await FetchQuizQuestionsApi(quizId);
+      setQuestions(questionsData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+
+  const handleDeleteQuestion = (quizQuestionId) => {
+    setQuestionToDelete(quizQuestionId);
+    setShowConfirmationModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteQuizQuestionRequest(questionToDelete));
+    setShowConfirmationModal(false);
+    setQuestionToDelete(null);
+    window.location.reload();
   };
 
 
@@ -90,10 +107,10 @@ const QuestionTemplate = () => {
     // window.location.reload();
   };
 
-  const handleDeleteQuestion = (quizQuestionId) => {
-    dispatch(deleteQuizQuestionRequest(quizQuestionId));
-    window.location.reload();
-  };
+  // const handleDeleteQuestion = (quizQuestionId) => {
+  //   dispatch(deleteQuizQuestionRequest(quizQuestionId));
+  //   window.location.reload();
+  // };
 
   const handleChange = (index, field, value) => {
     if (field === "correctOptions") {
@@ -219,6 +236,7 @@ const QuestionTemplate = () => {
       UpdateQuizQuestionsApi(requestBody)
       handleCloseEditQuestionModal();
     }
+    // window.location.reload();
   };
 
   const validateField = (fieldName, value, index = null) => {
@@ -379,179 +397,254 @@ const QuestionTemplate = () => {
   };
 
   return (
-    <Container fluid style={{marginTop:"500px"}}>
-    <div className="">
-      <div className="form-group row mt-4">
-        <div className="col-sm-2" id="filter">
-          <select
-            id="questionType"
-            className="form-control"
-            value={selectedFilterQuestionType}
-            onChange={(e) => setSelectedFilterQuestionType(e.target.value)}
-          >
-            <option value="" disabled selected>
-              Filter by question type
-            </option>
-            <option value="">All</option>
-            <option value="MCQ">MCQ</option>
-            <option value="MSQ">MSQ</option>
-            <option value="TF">True/False</option>
-          </select>
+    <Container >
+      <div className='question-template-container'>
+        <div className="form-group row">
+          <div className="col-sm-2" id="filter">
+            <select
+              id="questionType"
+              className="form-control"
+              value={selectedFilterQuestionType}
+              onChange={(e) => setSelectedFilterQuestionType(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Filter by question type
+              </option>
+              <option value="">All</option>
+              <option value="MCQ">MCQ</option>
+              <option value="MSQ">MSQ</option>
+              <option value="TF">True/False</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <input
-        id="search"
-        type="search"
-        placeholder="Search..."
-        className="search-box"
-        onChange={handleSearchChange}
-      />
+        <input
+          id="search"
+          type="search"
+          placeholder="Search..."
+          className="search-box"
+          onChange={handleSearchChange}
+        />
 
-      <div className="question template container">
-        {error && <p>Error: {error}</p>}
-        {currentQuestions.length > 0 ? (
-          <div style={{ marginTop: "-15%", marginLeft: "15%" }}>
-            <h5>Uploaded Questions</h5>
-            <div style={{ marginTop: "-6px", marginLeft: "68.5%" }}>
-              <div>
-                <BasicPagination
-                  totalQuestions={filteredQuestions.length}
-                  questionsPerPage={questionsPerPage}
-                  page={currentPage}
-                  onPageChange={handlePageChange}
-                />
-              </div>
-            </div>
-            {currentQuestions.map((question, index) => (
-              <div
-                key={index}
-                className="card mt-4"
-                style={{ backgroundColor: "rgb(237, 231, 231)" }}
-              >
-                <div className="d-flex justify-content-end">
-                  <a
-                    onClick={() => {
-                      handleOpenEditQuestionModal(question.quizQuestionId);
-                    }}
-                    className="m-2 me-2"
-                  >
-                    <AiFillEdit
-                      style={{
-                        fontSize: "30",
-                        color: "#365486",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </a>
-                  <a
-                    onClick={() => {
-                      handleDeleteQuestion(question.quizQuestionId);
-                    }}
-                    className="m-2 ms-3"
-                  >
-                    <FaTrashCan
-                      style={{
-                        fontSize: "23",
-                        color: "#365486",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </a>
-                </div>
-                <div className="card-body">
-                  <h5 className="card-title">
-                    Question Type : {question.questionType}
-                  </h5>
-                  <h5 className="card-title">
-                    Question {question.questionNo}:
-                  </h5>
-
-                  <input
-                    value={question.question}
-                    className="form-control"
-                    readOnly
+        <div className="question-template">
+          {error && <p>Error: {error}</p>}
+          {currentQuestions.length > 0 ? (
+            <div style={{ marginTop: "-15%", marginLeft: "15%" }}>
+              <h5>Uploaded Questions</h5>
+              <div style={{ marginTop: "-6px", marginLeft: "68.5%" }}>
+                <div>
+                  <BasicPagination
+                    totalQuestions={filteredQuestions.length}
+                    questionsPerPage={questionsPerPage}
+                    page={currentPage}
+                    onPageChange={handlePageChange}
                   />
-                  <div className="form-group">
-                    <label>Options:</label>
-                    {question.options.map((option, index) => (
-                      <input
-                        key={index}
-                        type="text"
-                        className="form-control mt-2"
-                        value={option.option}
-                        readOnly
+                </div>
+              </div>
+              {currentQuestions.map((question, index) => (
+                <div
+                  key={index}
+                  className="card mt-4"
+                  style={{ backgroundColor: "rgb(237, 231, 231)" }}
+                >
+                  <div className="d-flex justify-content-end header">
+                    <a
+                      onClick={() => {
+                        handleOpenEditQuestionModal(question.quizQuestionId);
+                      }}
+                      className="m-2 me-2"
+                    >
+                      <AiFillEdit
+                        style={{
+                          fontSize: "30",
+                          color: "#365486",
+                          cursor: "pointer",
+                        }}
                       />
-                    ))}
+                    </a>
+                    <a
+                      onClick={() => {
+                        handleDeleteQuestion(question.quizQuestionId);
+                      }}
+                      className="m-2 ms-3"
+                    >
+                      <FaTrashCan
+                        style={{
+                          fontSize: "23",
+                          color: "#365486",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                   </div>
-                  <div className="form-group">
-                    <label>Correct Answers:</label>
-                    {question.options
-                      .filter((option) => option.isCorrect)
-                      .map((correctOption, index) => (
+                  <div className="card-body">
+                    <h5 className="card-title">
+                      Question Type : {question.questionType}
+                    </h5>
+                    <h5 className="card-title">
+                      Question {question.questionNo}:
+                    </h5>
+
+                    <input
+                      value={question.question}
+                      className="form-control"
+                      readOnly
+                    />
+                    <div className="form-group">
+                      <label>Options:</label>
+                      {question.options.map((option, index) => (
                         <input
                           key={index}
                           type="text"
                           className="form-control mt-2"
-                          value={correctOption.option}
+                          value={option.option}
                           readOnly
                         />
                       ))}
+                    </div>
+                    <div className="form-group">
+                      <label>Correct Answers:</label>
+                      {question.options
+                        .filter((option) => option.isCorrect)
+                        .map((correctOption, index) => (
+                          <input
+                            key={index}
+                            type="text"
+                            className="form-control mt-2"
+                            value={correctOption.option}
+                            readOnly
+                          />
+                        ))}
+                    </div>
+                    <button
+                      onClick={handleOpenAddQuestionModal}
+                      className="btn btn-light mt-3 mb-5 float-right"
+                      style={{ backgroundColor: "#365486", color: "white" }}
+                    >
+                      Add More Question
+                    </button>
                   </div>
-                  <button
-                    onClick={handleOpenAddQuestionModal}
-                    className="btn btn-light mt-3 mb-5 float-right"
-                    style={{ backgroundColor: "#365486", color: "white" }}
-                  >
-                    Add More Question
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No questions match your search.</p>
+          )}
+        </div>
+        <Modal show={showAddQuestionModal} onHide={handleCloseAddQuestionModal} style={{ marginTop: "2.5%", marginLeft: "3%" }}>
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
+          >
+            <Modal.Title>Add New Question</Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
+            <div className="form-group">
+              <label>Question Type:<b id="required">*</b></label>
+              <select
+                className="form-control"
+                value={selectedQuestionType}
+                onChange={handleQuestionTypeChange}
+              >
+                <option value="">Select Question Type</option>
+                <option value="MSQ">Multiple Select Question (MSQ)</option>
+                <option value="MCQ">Multiple Choice Question (MCQ)</option>
+                <option value="T/F">True/False (T/F)</option>
+              </select>
+              {errors.questionType && (
+                <div style={{ color: "red" }}>{errors.questionType}</div>
+              )}
+            </div>
+
+            {selectedQuestionType === "MSQ" && (
+              <>
+                <div className="form-group">
+                  <label>Question:<b id="required">*</b></label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={newQuestion.question}
+                    onChange={(e) => handleChange(-1, "question", e.target.value)}
+                  />
+                </div>
+                {[...Array(numOptions)].map((_, index) => (
+                  <div className="form-group" key={index}>
+                    <label>Option {index + 1}:<b id="required">*</b></label>
+                    <div className="input-group">
+                      <input
+                        className="form-control"
+                        type="text"
+                        value={newQuestion.options[index] || ""}
+                        onChange={(e) =>
+                          handleChange(index, "options", e.target.value)
+                        }
+                      />
+                      {index >= 5 && (
+                        <div className="input-group-append">
+                          <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={() => handleRemoveOption(index)}>
+                            <FaMinus style={{ fontSize: "10px" }} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div className="form-group mt-3">
+                  <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleAddOption}>
+                    <FaPlus style={{ fontSize: "10px" }} /> Add Option
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No questions match your search.</p>
-        )}
-      </div>
-      <Modal show={showAddQuestionModal} onHide={handleCloseAddQuestionModal}>
-        <Modal.Header
-          closeButton
-          style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
-        >
-          <Modal.Title>Add New Question</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
-          <div className="form-group">
-            <label>Question Type:<b id="required">*</b></label>
-            <select
-              className="form-control"
-              value={selectedQuestionType}
-              onChange={handleQuestionTypeChange}
-            >
-              <option value="">Select Question Type</option>
-              <option value="MSQ">Multiple Select Question (MSQ)</option>
-              <option value="MCQ">Multiple Choice Question (MCQ)</option>
-              <option value="T/F">True/False (T/F)</option>
-            </select>
-            {errors.questionType && (
-              <div style={{ color: "red" }}>{errors.questionType}</div>
+                {[...Array(numCorrectOptions)].map((_, index) => (
+                  <div className="form-group" key={index}>
+                    <label>Correct Option {index + 1}:<b id="required">*</b></label>
+                    <div className="input-group">
+                      <select
+                        className="form-control"
+                        value={newQuestion.correctOptions[index] || ""}
+                        onChange={(e) =>
+                          handleChange(index, "correctOptions", e.target.value)
+                        }
+                      >
+                        <option value="">Select Correct Option</option>
+                        {newQuestion.options.map((option, optionIndex) => (
+                          <option key={optionIndex} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                      {index >= 1 && (
+                        <div className="input-group-append">
+                          <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={() => handleRemoveCorrectOption(index)}>
+                            <FaMinus style={{ fontSize: "10px" }} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div className="form-group mt-3">
+                  <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleAddCorrectOption}>
+                    <FaPlus style={{ fontSize: "10px" }} />Add Correct Option
+                  </button>
+                </div>
+              </>
             )}
-          </div>
-
-          {selectedQuestionType === "MSQ" && (
-            <>
-              <div className="form-group">
-                <label>Question:<b id="required">*</b></label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={newQuestion.question}
-                  onChange={(e) => handleChange(-1, "question", e.target.value)}
-                />
-              </div>
-              {[...Array(numOptions)].map((_, index) => (
-                <div className="form-group" key={index}>
-                  <label>Option {index + 1}:<b id="required">*</b></label>
-                  <div className="input-group">
+            {selectedQuestionType === "MCQ" && (
+              <>
+                <div className="form-group">
+                  <label>Question:<b id="required">*</b></label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={newQuestion.question}
+                    onChange={(e) => handleChange(-1, "question", e.target.value)}
+                  />
+                  {errors.question && (
+                    <div style={{ color: "red" }}>{errors.question}</div>
+                  )}
+                </div>
+                {[...Array(4)].map((_, index) => (
+                  <div className="form-group" key={index}>
+                    <label>Option {index + 1}:<b id="required">*</b></label>
                     <input
                       className="form-control"
                       type="text"
@@ -560,279 +653,218 @@ const QuestionTemplate = () => {
                         handleChange(index, "options", e.target.value)
                       }
                     />
-                    {index >= 5 && (
-                      <div className="input-group-append">
-                        <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={() => handleRemoveOption(index)}>
-                          <FaMinus style={{ fontSize: "10px" }} />
-                        </button>
-                      </div>
+                    {errors.options && (
+                      <div style={{ color: "red" }}>{errors.options}</div>
                     )}
                   </div>
-                </div>
-              ))}
-              <div className="form-group mt-3">
-                <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleAddOption}>
-                  <FaPlus style={{ fontSize: "10px" }} /> Add Option
-                </button>
-              </div>
-              {[...Array(numCorrectOptions)].map((_, index) => (
-                <div className="form-group" key={index}>
-                  <label>Correct Option {index + 1}:<b id="required">*</b></label>
-                  <div className="input-group">
-                    <select
-                      className="form-control"
-                      value={newQuestion.correctOptions[index] || ""}
-                      onChange={(e) =>
-                        handleChange(index, "correctOptions", e.target.value)
-                      }
-                    >
-                      <option value="">Select Correct Option</option>
-                      {newQuestion.options.map((option, optionIndex) => (
-                        <option key={optionIndex} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
-                    {index >= 1 && (
-                      <div className="input-group-append">
-                        <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={() => handleRemoveCorrectOption(index)}>
-                          <FaMinus style={{ fontSize: "10px" }} />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-              <div className="form-group mt-3">
-                <button className="btn btn-default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleAddCorrectOption}>
-                  <FaPlus style={{ fontSize: "10px" }} />Add Correct Option
-                </button>
-              </div>
-            </>
-          )}
-          {selectedQuestionType === "MCQ" && (
-            <>
-              <div className="form-group">
-                <label>Question:<b id="required">*</b></label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={newQuestion.question}
-                  onChange={(e) => handleChange(-1, "question", e.target.value)}
-                />
-                {errors.question && (
-                  <div style={{ color: "red" }}>{errors.question}</div>
-                )}
-              </div>
-              {[...Array(4)].map((_, index) => (
-                <div className="form-group" key={index}>
-                  <label>Option {index + 1}:<b id="required">*</b></label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={newQuestion.options[index] || ""}
-                    onChange={(e) =>
-                      handleChange(index, "options", e.target.value)
-                    }
-                  />
-                  {errors.options && (
-                    <div style={{ color: "red" }}>{errors.options}</div>
-                  )}
-                </div>
-              ))}
+                ))}
 
-              <div className="form-group">
-                <label>Correct Option:<b id="required">*</b></label>
-                <select
-                  className="form-control"
-                  value={newQuestion.correctOptions[0] || ""}
-                  onChange={(e) =>
-                    handleChange(0, "correctOptions", e.target.value)
-                  }
-                >
-                  <option value="">Select Correct Option</option>
-                  {newQuestion.options.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                {errors.correctOptions && (
-                  <div style={{ color: "red" }}>{errors.correctOptions}</div>
-                )}
-              </div>
-            </>
-          )}
-          {selectedQuestionType === "T/F" && (
-            <>
-              <div className="form-group">
-                <label>Question:<b id="required">*</b></label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={newQuestion.question}
-                  onChange={(e) => handleChange(-1, "question", e.target.value)}
-                />
-                {errors.question && (
-                  <div style={{ color: "red" }}>{errors.question}</div>
-                )}
-              </div>
-              {[...Array(2)].map((_, index) => (
-                <div className="form-group" key={index}>
-                  <label>Option {index + 1}:<b id="required">*</b></label>
+                <div className="form-group">
+                  <label>Correct Option:<b id="required">*</b></label>
+                  <select
+                    className="form-control"
+                    value={newQuestion.correctOptions[0] || ""}
+                    onChange={(e) =>
+                      handleChange(0, "correctOptions", e.target.value)
+                    }
+                  >
+                    <option value="">Select Correct Option</option>
+                    {newQuestion.options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.correctOptions && (
+                    <div style={{ color: "red" }}>{errors.correctOptions}</div>
+                  )}
+                </div>
+              </>
+            )}
+            {selectedQuestionType === "T/F" && (
+              <>
+                <div className="form-group">
+                  <label>Question:<b id="required">*</b></label>
                   <input
                     className="form-control"
                     type="text"
-                    value={newQuestion.options[index] || ""}
-                    onChange={(e) =>
-                      handleChange(index, "options", e.target.value)
-                    }
+                    value={newQuestion.question}
+                    onChange={(e) => handleChange(-1, "question", e.target.value)}
                   />
-                  {errors.options && (
-                    <div style={{ color: "red" }}>{errors.options}</div>
+                  {errors.question && (
+                    <div style={{ color: "red" }}>{errors.question}</div>
                   )}
                 </div>
-              ))}
-              <div className="form-group">
-                <label>Correct Option:<b id="required">*</b></label>
-                {errors.correctOptions && (
-                  <div style={{ color: "red" }}>{errors.correctOptions}</div>
-                )}
-                <select
-                  className="form-control"
-                  value={newQuestion.correctOptions[0] || ""}
-                  onChange={(e) =>
-                    handleChange(0, "correctOptions", e.target.value)
-                  }
-                >
-                  <option value="">Select Correct Option</option>
-                  {newQuestion.options.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </>
-          )}
-        </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
-          <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleCloseAddQuestionModal}>
-            Close
-          </Button>
-          <Button
-            variant="default"
-            style={{ backgroundColor: "#365486", color: "whitesmoke" }}
-            onClick={() => {
-              handleSaveQuestion();
-            }}
-          >
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showEditQuestionModal} onHide={handleCloseEditQuestionModal}>
-        <Modal.Header
-          closeButton
-          style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
-        >
-          <Modal.Title>
-            <h5>Edit Question</h5>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "rgb(237, 231, 231)" }}>
-          <div className="form-group">
-            <label>Question:<b id="required">*</b></label>
-            <input
-              className="form-control"
-              type="text"
-              value={editedQuestion.question}
-              onChange={(e) => {
-                setEditedQuestion({
-                  ...editedQuestion,
-                  question: e.target.value,
-                });
-                validateField("question", e.target.value);
-              }}
-            />
-            {errors.question && (
-              <div style={{ color: "red" }}>{errors.question}</div>
+                {[...Array(2)].map((_, index) => (
+                  <div className="form-group" key={index}>
+                    <label>Option {index + 1}:<b id="required">*</b></label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      value={newQuestion.options[index] || ""}
+                      onChange={(e) =>
+                        handleChange(index, "options", e.target.value)
+                      }
+                    />
+                    {errors.options && (
+                      <div style={{ color: "red" }}>{errors.options}</div>
+                    )}
+                  </div>
+                ))}
+                <div className="form-group">
+                  <label>Correct Option:<b id="required">*</b></label>
+                  {errors.correctOptions && (
+                    <div style={{ color: "red" }}>{errors.correctOptions}</div>
+                  )}
+                  <select
+                    className="form-control"
+                    value={newQuestion.correctOptions[0] || ""}
+                    onChange={(e) =>
+                      handleChange(0, "correctOptions", e.target.value)
+                    }
+                  >
+                    <option value="">Select Correct Option</option>
+                    {newQuestion.options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
             )}
-          </div>
-          {editedQuestion.options.map((option, index) => (
-            <div className="form-group" key={index}>
-              <label>Option {index + 1}:<b id="required">*</b></label>
+          </Modal.Body>
+          <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
+            <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleCloseAddQuestionModal}>
+              Close
+            </Button>
+            <Button
+              variant="default"
+              style={{ backgroundColor: "#365486", color: "whitesmoke" }}
+              onClick={() => {
+                handleSaveQuestion();
+              }}
+            >
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showEditQuestionModal} onHide={handleCloseEditQuestionModal} style={{ marginTop: "2.5%", marginLeft: "3%" }} >
+          <Modal.Header
+            closeButton
+            style={{ backgroundColor: "#23275c", color: "whitesmoke" }}
+          >
+            <Modal.Title>
+              <h5>Edit Question</h5>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body style={{ backgroundColor: "#F9F5F6" }}>
+            <div className="form-group">
+              <label>Question:<b id="required">*</b></label>
               <input
                 className="form-control"
                 type="text"
-                value={option}
+                value={editedQuestion.question}
                 onChange={(e) => {
-                  const updatedOptions = [...editedQuestion.options];
-                  updatedOptions[index] = e.target.value;
                   setEditedQuestion({
                     ...editedQuestion,
-                    options: updatedOptions,
+                    question: e.target.value,
                   });
-                  validateField("options", e.target.value);
+                  validateField("question", e.target.value);
                 }}
               />
-              {errors.individualoptions && errors.individualOptions[index] && (
-                <div style={{ color: "red" }}>
-                  {errors.individualOptions[index]}
-                </div>
+              {errors.question && (
+                <div style={{ color: "red" }}>{errors.question}</div>
               )}
             </div>
-          ))}
-          {errors.options && (
-            <div style={{ color: "red" }}>{errors.options}</div>
-          )}
-          <div className="form-group">
-            {editedQuestion.correctOptions.map((option, index) => (
-              <div key={index} className="form-group">
-                <label>Correct Option {index + 1}:</label>
-                <select
+            {editedQuestion.options.map((option, index) => (
+              <div className="form-group" key={index}>
+                <label>Option {index + 1}:<b id="required">*</b></label>
+                <input
                   className="form-control"
+                  type="text"
                   value={option}
                   onChange={(e) => {
-                    const updatedCorrectOptions = [...editedQuestion.correctOptions];
-                    updatedCorrectOptions[index] = e.target.value;
+                    const updatedOptions = [...editedQuestion.options];
+                    updatedOptions[index] = e.target.value;
                     setEditedQuestion({
                       ...editedQuestion,
-                      correctOptions: updatedCorrectOptions,
+                      options: updatedOptions,
                     });
-                    validateField("correctOptions", e.target.value, index);
+                    validateField("options", e.target.value);
                   }}
-                >
-                  <option value="">Select Correct Option</option>
-                  {editedQuestion.options.map((opt, i) => (
-                    <option key={i} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-                {errors.individualCorrectOptions &&
-                  errors.individualCorrectOptions[index] && (
-                    <div style={{ color: "red" }}>
-                      {errors.individualCorrectOptions[index]}
-                    </div>
-                  )}
+                />
+                {errors.individualoptions && errors.individualOptions[index] && (
+                  <div style={{ color: "red" }}>
+                    {errors.individualOptions[index]}
+                  </div>
+                )}
               </div>
             ))}
-            {errors.correctOptions && (
-              <div style={{ color: "red" }}>{errors.correctOptions}</div>
+            {errors.options && (
+              <div style={{ color: "red" }}>{errors.options}</div>
             )}
-          </div>
-        </Modal.Body>
-        <Modal.Footer style={{ backgroundColor: "rgb(237, 231, 231)" }}>
-          <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleCloseEditQuestionModal}>
-            Close
-          </Button>
-          <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={validUpdatedQuestion}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+            <div className="form-group">
+              {editedQuestion.correctOptions.map((option, index) => (
+                <div key={index} className="form-group">
+                  <label>Correct Option {index + 1}:</label>
+                  <select
+                    className="form-control"
+                    value={option}
+                    onChange={(e) => {
+                      const updatedCorrectOptions = [...editedQuestion.correctOptions];
+                      updatedCorrectOptions[index] = e.target.value;
+                      setEditedQuestion({
+                        ...editedQuestion,
+                        correctOptions: updatedCorrectOptions,
+                      });
+                      validateField("correctOptions", e.target.value, index);
+                    }}
+                  >
+                    <option value="">Select Correct Option</option>
+                    {editedQuestion.options.map((opt, i) => (
+                      <option key={i} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.individualCorrectOptions &&
+                    errors.individualCorrectOptions[index] && (
+                      <div style={{ color: "red" }}>
+                        {errors.individualCorrectOptions[index]}
+                      </div>
+                    )}
+                </div>
+              ))}
+              {errors.correctOptions && (
+                <div style={{ color: "red" }}>{errors.correctOptions}</div>
+              )}
+            </div>
+          </Modal.Body>
+          <Modal.Footer style={{ backgroundColor: "#F9F5F6" }}>
+            <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={handleCloseEditQuestionModal}>
+              Close
+            </Button>
+            <Button variant="default" style={{ backgroundColor: "#365486", color: "whitesmoke" }} onClick={validUpdatedQuestion}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)} style={{ marginTop: "2.5%", marginLeft: "3%" }}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Delete</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure you want to delete this question?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowConfirmationModal(false)}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleConfirmDelete}>
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     </Container>
   );
 };
