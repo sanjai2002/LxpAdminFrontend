@@ -32,7 +32,7 @@ import { validateForm } from "../../../utils/Course/Course/AddCourseValidation";
 import {createCategoryrequest} from '../../../actions/Course/Category/AddCategoryAction';
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Dialog,TextField,DialogContent,DialogTitle,DialogActions,Button,Alert, Stack,Box,MenuItem,FormControl,FormHelperText} from "@mui/material";
+import { Dialog,TextField,DialogContent,DialogTitle,DialogActions,Button,Alert, Stack,Box,MenuItem,FormControl,FormHelperText,CardContent} from "@mui/material";
 import CheckIcon from '@mui/icons-material/Check';
 import {  validateCategory } from "../../../utils/Course/Course/AddCourseValidation";
 // import { fetchCategoryRequest } from "../../../action/Course/Category/FetchCategoryAction";
@@ -290,13 +290,13 @@ const AddCourse = () => {
      
         <Row>
            <Col  xs={2} sm={3} md={4} ></Col>
-          <Col  xs={9} sm={7} md={6} lg={4}>
-            <Card className="mt-5 custom-card">
+          <Col xs={12} sm={12} md={9} lg={6}>
+            <Card className="mt-5" id="Course-custom-card" >
               <Card.Header style={{backgroundColor:'#23275C',color:'white'}} className="Course-header">
                 Create Course
               </Card.Header>
-              <Card.Body className="scrollable-body">
-                <Form onSubmit={handleSubmit}>
+              <CardContent className="Course-scrollable-body">
+              <Form onSubmit={handleSubmit}>
                 <FormControl className="mb-3" fullWidth>
                     {/* <Form.Label>Course Title</Form.Label> */}
                     <TextField
@@ -311,13 +311,13 @@ const AddCourse = () => {
                       value={course.title}
                       onChange={handleInputChange}
                     />
-                    {errors.title && <p className="error">{errors.title}</p>}
+                    {/* {errors.title && <p className="error">{errors.title}</p>} */}
                   </FormControl>
 
                   <FormControl className="mb-3" fullWidth>
                     {/* <Form.Label required>Course Category</Form.Label> */}
 
-                    <TextField select name="category" onChange={handleInputChange} fullWidth label="Course Catagory" required placeholder="Select Catagory" helperText={errors.category}>
+                    <TextField select name="category" onChange={handleInputChange} fullWidth label="Course Catagory"  placeholder="Select Catagory" error={Boolean(errors.category)} helperText={errors.category}>
                       <b>Select Category</b>
                       {fetchCategory.map((category) => (
                         <MenuItem
@@ -329,14 +329,14 @@ const AddCourse = () => {
                       ))}
                       <MenuItem value="Add category" style={{color:"#050C9C"}}>+ Add Category</MenuItem>
                     </TextField>
-                    {errors.category && (
+                    {/* {errors.category && (
                       <p className="error">{errors.category}</p>
-                    )}
+                    )} */}
                    
                   </FormControl>
                   <FormControl className="mb-3" fullWidth>
                     {/* <Form.Label>Course Level</Form.Label> */}
-                    <TextField name="level"select  onChange={handleInputChange}  label="Course Level"  fullWidth  required placeholder="Select Level">
+                    <TextField name="level"select  onChange={handleInputChange}  label="Course Level"  fullWidth error={Boolean(errors.level)} helperText={errors.level} placeholder="Select Level">
                       <MenuItem>Select Level</MenuItem>
                       {fetchLevel.map((level) => (
                         <MenuItem key={level.levelId} value={level.levelId}>
@@ -344,35 +344,33 @@ const AddCourse = () => {
                         </MenuItem>
                       ))}
                     </TextField>
-                    {errors.level && <p className="error">{errors.level}</p>}
+                    {/* {errors.level && <p className="error">{errors.level}</p>} */}
                     </FormControl>
 
                   <FormControl className="mb-3" fullWidth>
                    
                     <TextField
-                       autoFocus
-                       required
                         margin="dense"
                        id="name"
                        label="Course Duration (in hrs)"
                       fullWidth
                       type="time"
+                      helperText={errors.duration}
+                      error={Boolean(errors.duration)}
                       // step="0.1"
                       // min="0"
-                      // placeholder="Course Duration (in hrs)"
+                      placeholder="CourseDuration (in hrs)"
                       name="duration"
                       value={course.duration}
                       onChange={handleInputChange}
                     />
-                    {errors.duration && (
+                    {/* {errors.duration && (
                       <p className="error">{errors.duration}</p>
-                    )}
-                    {errors.duration && (
-                      <p className="error">{errors.duration}</p>
-                    )}
+                    )} */}
+                  
                   </FormControl>
 
-                  <FormControl className="mb-3" fullWidth>
+                  <FormControl className="mb-3" fullWidth >
       <TextField
         type="text"
         label="Description"
@@ -449,7 +447,8 @@ const AddCourse = () => {
                     
                   </Row>
                 </Form>
-              </Card.Body>
+              </CardContent>
+              
             </Card>
           </Col>
          <Col xs={0} sm={1} md={2}></Col>

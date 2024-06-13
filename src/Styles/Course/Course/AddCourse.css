@@ -1,9 +1,8 @@
-/* .Course-header{
+.Course-header{
   font-weight:400;
   font-size: larger;
   background-color: #23275c;
   color: white;
-  position: sticky;
   top: 0;
   z-index: 1020;
 }
@@ -12,20 +11,24 @@
   color: aliceblue;
  
 }
-has context menu
-.custom-card {
-  width: 500px; 
+
+#Course-custom-card  {
+margin: auto;
+  width: 100vh;
 }
 
-.scrollable-body {
+
+
+
+.Course-scrollable-body {
  
-  max-height: 600px;
+  max-height: 700px;
   overflow-y: auto; 
 }
 
 .course-form {
   width: 70vh;
-  height: 80dvh;
+  height: 85dvh;
   margin: 0 auto;
   padding: 5px 5px 0px 5px;
   background-color: #f8f8f8;
@@ -38,7 +41,7 @@ has context menu
 
 }
 
-.course-form::-webkit-scrollbar {
+.Course-scrollable-body::-webkit-scrollbar {
   display: none;
 }
 
@@ -198,4 +201,4 @@ h2{
   margin-top: 50px;
 }
 
- */
+

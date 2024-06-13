@@ -21,7 +21,7 @@
   width:280px;
  
 }
-.card-body,.header{
+#QuizCard.card-body,.header{
 background-color:#F9F5F6;
 }
 
