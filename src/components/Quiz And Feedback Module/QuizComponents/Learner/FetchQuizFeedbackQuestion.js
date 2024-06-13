@@ -163,7 +163,8 @@ import { useNavigate } from "react-router-dom";
 import AdminNavbar from '../../AdminNavbar';
 // import '../../../../Styles/Quiz And Feedback Module/Learner/FeedbackResponse.css';
 import Button from 'react-bootstrap/Button';
-import { fetchallquizfeedbackRequest } from '../../../../actions/Quiz And Feedback Module/Learner/GetAllQuizFeedbackAction';
+import { fetchallquizfeedbackRequest } from '../../../../actions/Quiz And Feedback Module/Admin/GetAllQuizFeedbackAction';
+import { fetchquizfeedbackquestionrequest } from '../../../../actions/Quiz And Feedback Module/Learner/FetchQuizFeedbackQuestionAction';
 import { quizfeedbackresponserequest } from '../../../../actions/Quiz And Feedback Module/Learner/QuizFeedbackResponseAction';
 import { Container } from 'react-bootstrap';
  
@@ -172,7 +173,7 @@ const FetchQuizFeedbackQuestion = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const quizfeedbackquestionfetch = useSelector(
-    (state) => state.fetchfeedback.quizfeedback
+    (state) => state.fetchquizfeedbackquestion.quizfeedbackquestions
   );
   console.log("selector", quizfeedbackquestionfetch);
   // const quizId = "6e84d8f1-1230-416a-bde4-d115d15a23cf";
@@ -184,6 +185,9 @@ const FetchQuizFeedbackQuestion = () => {
  
   }, [quizId])
  
+  useEffect(()=>{
+    dispatch(fetchquizfeedbackquestionrequest(quizId));
+  },[quizId])
  
  
  
@@ -194,7 +198,7 @@ const[answers,setAnswers]=useState([])
       setAnswers(quizfeedbackquestionfetch.map(question => ({
         quizFeedbackQuestionId: question.quizFeedbackQuestionId,
         quizId: question.quizId,
-        learnerId: "b9c313df-f48b-43ce-9c12-8a4c4546aad3",
+        learnerId: "dfaeb52f-1dde-4368-bd55-6226b5f2d880",
         response: "",
         optionText: ""
       })));

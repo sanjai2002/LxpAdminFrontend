@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.container {
+.containersco {
     margin: 0;
     width: 1200px;
     max-width: 100%;
@@ -13,6 +13,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#scorepage-topic {
+    width:700px;
+    height:80px;
+    margin-top:10%;
+}
+
+#scorepage-content{
+    margin-top:40%;
+    margin-left:-120%;
+    height:415px;
+    width: 700px;
 }
 
 .emoji__face,

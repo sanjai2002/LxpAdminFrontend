@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.attempt-quiz-page {
+.learner-attempt-quiz-page {
   font-family: Arial, sans-serif;
   padding: 20px;
   display: flex;
@@ -30,11 +30,8 @@
 }
 
 .navbar {
-  /* width: 300px; */
-  /* height: 300px; */
   padding: 35px;
-  /* background-color: #eaeaea; */
-  background-color:rgb(237, 231, 231);
+  background-color: rgb(237, 231, 231);
   border-right: 1px solid #ddd;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -59,33 +56,30 @@
 
 .question-container {
   width: 100%;
-  padding: 25px;
+  padding: 20px;
   background-color: #fafafa;
   border-radius: 5px;
   border: 1px solid #ddd;
-  height: 300px;
+  height: 350px;
   overflow-y: auto;
-  /* font-weight: bold; */
 }
 
 .quiz-question {
-  /* font-weight: bold; */
+  margin-bottom: 20px;
 }
 
-.question-container h5 {
-  margin-bottom: 10px;
-}
-
-.question-container ul {
+.question-options {
   list-style-type: none;
+  padding: 0;
 }
 
-.question-container li {
+.question-options li {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+.option-type {
   margin-right: 10px;
 }
 
@@ -111,7 +105,7 @@ input[type="checkbox"] {
 
 .previous-button:hover,
 .next-button:hover,
-.submit-button:hover {
+.review-button:hover {
   background-color: #0056b3;
 }
 
@@ -122,7 +116,6 @@ input[type="checkbox"] {
 }
 
 .review-button {
-  display: block;
   background-color: #0d0932d0;
   margin-top: 20px;
 }
@@ -147,8 +140,6 @@ input[type="checkbox"] {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  
-
   .main-content1 {
     width: 100%;
   }
@@ -165,25 +156,19 @@ input[type="checkbox"] {
   }
 }
 
-.learner-attemptquiz{
-  margin-top: -40%;
+.learner-attemptquiz {
+  margin-top: 8%;
+  margin-left: 6%;
 }
-
 
 .answered {
-  background-color: #5d5e5d58; 
+  background-color: #5d5e5d58;
   color: black;
 }
-
-/* .unanswered {
-  background-color: #3a3939; 
-  color: white;
-} */
 
 .navbar button {
   margin: 5px;
   padding: 10px;
-  /* border: none; */
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -192,21 +177,9 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 
-/* .navbar button {
-  width: 40px;
-  height: 40px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-} */
-
 .navbar button:focus {
   outline: none;
 }
-
 
 .flag-button {
   background-color: #f0f0f0;
@@ -219,4 +192,13 @@ input[type="checkbox"] {
 .flag-button.flagged {
   background-color: red;
   color: white;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  /* Adjust the spacing */
+  margin: 0 -350px 0 0; 
+  margin-left: -45%;
+  /* Aligns the input vertically with the text */
+  /* vertical-align: middle;  */
 }

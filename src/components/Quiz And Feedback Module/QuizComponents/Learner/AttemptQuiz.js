@@ -4,7 +4,7 @@ import { fetchQuestionsRequest } from "../../../../actions/Quiz And Feedback Mod
 import { fetchReviewRequest } from "../../../../actions/Quiz And Feedback Module/Learner/ReviewAction";
 import { selectAnswerRequest } from "../../../../actions/Quiz And Feedback Module/Learner/SelectAnswerAction";
 import { useNavigate } from "react-router-dom";
-// import "../../../../Styles/Quiz And Feedback Module/Learner/AttemptQuiz.css";
+import "../../../../Styles/Quiz And Feedback Module/Learner/AttemptQuiz.css";
 import AdminNavbar from "../../AdminNavbar";
 import Timer from "./Timer";
 const AttemptQuiz = () => {
@@ -145,7 +145,7 @@ const AttemptQuiz = () => {
                     {questions[currentQuestionIndex].questionNo}.{" "}
                     {questions[currentQuestionIndex].question}
                   </h5>
-                  <ul>
+                  <ul className="question-options">
                     {questions[currentQuestionIndex].options.map(
                       (option, optionIndex) => (
                         <li key={optionIndex}>
@@ -177,7 +177,7 @@ const AttemptQuiz = () => {
                                   "MSQ"
                               )
                             }
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer" }} className="option-type"
                           />
                           {option.option}
                         </li>

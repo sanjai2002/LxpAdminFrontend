@@ -6,7 +6,7 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import AdminNavbar from "../../../Quiz And Feedback Module/AdminNavbar";
-// import "../../../../Styles/Quiz And Feedback Module/Learner/QuizInstruction.css";
+import "../../../../Styles/Quiz And Feedback Module/Learner/QuizInstruction.css";
 import { Container } from "react-bootstrap";
 import Divider from "@mui/joy/Divider";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchQuizInstructionRequest } from "../../../../actions/Quiz And Feedback Module/Learner/QuizInstructionAction";
 import { CreateAttemptRequest } from "../../../../actions/Quiz And Feedback Module/Learner/AttemptQuizAction";
 import { fetchlearneridRequest } from "../../../../actions/Quiz And Feedback Module/Learner/GetLearnerIDAction";
-
+ 
 function QuizInstruction() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,30 +38,31 @@ function QuizInstruction() {
     quizId: quizId,
     // attemptId: AttemptId,
   });
-
+ 
   useEffect(() => {
     dispatch(fetchQuizInstructionRequest(topicId));
     dispatch(fetchlearneridRequest(learnerId));
   }, [dispatch]);
-
+ 
   const handleNavigate = () => {
     sessionStorage.removeItem("topicId");
     navigate("/quizengine");
   };
-
+ 
   const handleTakeQuiz = () => {
     sessionStorage.removeItem("selectedOptions");
     sessionStorage.removeItem("reviewData");
     sessionStorage.removeItem("answeredQuestions");
-
+ 
     sessionStorage.setItem("quizId", quizId);
     sessionStorage.setItem("LearnerId", LearnerId);
-
+ 
     dispatch(CreateAttemptRequest(TakeQuiz));
     navigate("/attemptquiz");
   };
-
+ 
   return (
+    <Container fluid style={{marginTop:"700px"}}>
     <div>
       <div>
         <button
@@ -80,10 +81,10 @@ function QuizInstruction() {
           Back
         </button>
       </div>
-      <AdminNavbar />
+      {/* <AdminNavbar /> */}
       <Container fluid id="container" style={divStyle}>
         <Box
-          id="instruction"
+          id="quizinstructionpage"
           sx={{
             width: "100%",
             maxWidth: 500,
@@ -92,15 +93,15 @@ function QuizInstruction() {
             gap: 2,
           }}
         >
-          <Card style={{ height: "50px", marginLeft: "-13%" }} variant="soft">
+          <Card style={{ height: "50px", marginLeft: "-13%" }} variant="soft" id="instruction-topic">
             <CardContent>
               <Typography level="title-md">
                 {quizinstructions.nameOfQuiz} Assessment
               </Typography>
             </CardContent>
           </Card>
-
-          <Card id="card" variant="soft">
+ 
+          <Card id="instruction-content" variant="soft">
             <CardContent>
               <Divider inset="none" id="divider" />
               <Typography level="title-md">
@@ -164,40 +165,41 @@ function QuizInstruction() {
         </Box>
       </Container>
     </div>
+    </Container>
   );
 }
-
+ 
 export default QuizInstruction;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 // import React from "react";
 // import { useEffect,useState } from "react";
 // import Button from "react-bootstrap/Button";
@@ -215,7 +217,7 @@ export default QuizInstruction;
 // import { CreateAttemptRequest } from "../../../actions/Quiz And Feedback Module/AttemptQuizAction";
 // // import { fetchQuizInstructionRequest } from "../../actions/QuizInstructionAction";
 // import { fetchlearneridRequest } from "../../../actions/Quiz And Feedback Module/GetLearnerIDAction";
-
+ 
 // function QuizInstruction() {
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
@@ -245,7 +247,7 @@ export default QuizInstruction;
 //     dispatch(fetchQuizInstructionRequest(topicId));
 //     dispatch(fetchlearneridRequest(learnerId));
 //   }, [dispatch]);
-
+ 
 //   const handleNavigate = () => {
 //     sessionStorage.removeItem("topicId");
 //     navigate("/quizengine");
@@ -255,14 +257,14 @@ export default QuizInstruction;
 //      sessionStorage.removeItem('selectedOptions');
 //      sessionStorage.removeItem('reviewData');
 //     //  sessionStorage.removeItem('answeredQuestions');
-
+ 
 //      sessionStorage.setItem("quizId",quizId);
 //      sessionStorage.setItem("LearnerId",LearnerId);
-
+ 
 //      dispatch(CreateAttemptRequest(TakeQuiz));
 //      navigate("/attemptquiz");
 //   }
-
+ 
 //   return (
 //     <div>
 //       <div>
@@ -301,7 +303,7 @@ export default QuizInstruction;
 //               </Typography>
 //             </CardContent>
 //           </Card>
-
+ 
 //           <Card id="card" variant="soft">
 //             <CardContent>
 //               <Divider inset="none" id="divider" />

@@ -139,6 +139,8 @@ import TopicFeedbackResponseReducer from "../reducers/Quiz And Feedback Module/L
 import { TopicFeedbackResponseApi } from "../middleware/Quiz And Feedback Module/Learner/TopicFeedbackResponseApi.js";
 import QuizFeedbackResponseReducer from "../reducers/Quiz And Feedback Module/Learner/QuizFeedbackResponseReducer.js";
 import { QuizFeedbackResponseApi } from "../middleware/Quiz And Feedback Module/Learner/QuizFeedbackResponseApi.js";
+import FetchQuizFeedbackQuestionReducer from '../reducers/Quiz And Feedback Module/Learner/FetchQuizFeedbackQuestionReducer';
+import { FetchQuizFeedbackQuestionApi } from '../middleware/Quiz And Feedback Module/Learner/FetchQuizFeedbackQuestionApi';
 
 
 
@@ -193,6 +195,7 @@ import fetchCourseReducer from '../reducers/Course/Course/FetchCourseDetailReduc
 import fetchcourseApi from '../middleware/Course/Course/FetchCourseDetailMiddleware';
 import addTopicReducer from '../reducers/Course/Topic/AddTopicReducer';
 import addTopic from '../middleware/Course/Topic/AddTopicMiddleware';
+
 
 
 const rootReducer = combineReducers({
@@ -264,6 +267,7 @@ const rootReducer = combineReducers({
     learnerattempt: LearnerAttemptQuizIdReducer,
     fetchtopicfeedbackquestion: FetchTopicFeedbackQuestionReducer,
     TopicFeedbackResponse: TopicFeedbackResponseReducer,
+    fetchquizfeedbackquestion:FetchQuizFeedbackQuestionReducer,
     QuizFeedbackResponse: QuizFeedbackResponseReducer,
 
 
@@ -316,6 +320,7 @@ const store = createStore(
     LearnerScorePageApi,
     FetchTopicFeedbackQuestionApi,
     TopicFeedbackResponseApi,
+    FetchQuizFeedbackQuestionApi,
     QuizFeedbackResponseApi,
     QuizInstructionApi,
     LearnerAttemptQuizIdApi,

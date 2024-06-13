@@ -157,10 +157,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchReviewRequest } from '../../../../actions/Quiz And Feedback Module/Learner/ReviewAction';
 import { fetchQuestionsRequest } from '../../../../actions/Quiz And Feedback Module/Learner/AttemptQuizAction';
 import { submitAttemptRequest } from '../../../../actions/Quiz And Feedback Module/Learner/SubmitAttemptAction';
-// import '../../../../Styles/Quiz And Feedback Module/Learner/ReviewAnswers.css';
+import '../../../../Styles/Quiz And Feedback Module/Learner/ReviewAnswers.css';  
 import { useNavigate } from 'react-router-dom';
 import AdminNavbar from '../../AdminNavbar';
 import QuestionNavigationBar from './QuestionNavigationBar'; 
+import { Container } from 'react-bootstrap';
 
 const ReviewAnswers = ({ attemptId }) => {
     const dispatch = useDispatch();
@@ -186,7 +187,6 @@ const ReviewAnswers = ({ attemptId }) => {
         } else if (attemptId) {
             dispatch(fetchReviewRequest(attemptId));
         }
-
         dispatch(fetchQuestionsRequest(sessionStorage.getItem("quizId")));
     }, [dispatch, attemptId]);
 
@@ -241,6 +241,7 @@ const ReviewAnswers = ({ attemptId }) => {
     }
 
     return (
+        <Container fluid style={{marginTop:"700px"}}>
         <div>
             {/* <AdminNavbar /> */}
             <div className="review-container">
@@ -267,7 +268,7 @@ const ReviewAnswers = ({ attemptId }) => {
                                 className="review-question-container"
                             >
                                 <h5>{index + 1}: {question.question}</h5>
-                                <ul>
+                                <ul className="question-options">
                                     {question.options.map((option, optionIndex) => (
                                         <li key={optionIndex}>
                                             <input
@@ -276,7 +277,9 @@ const ReviewAnswers = ({ attemptId }) => {
                                                 value={option.option}
                                                 checked={Array.isArray(response.selectedOptions) ? response.selectedOptions.includes(option.option) : response.selectedOptions === option.option}
                                                 readOnly
+                                                style={{ cursor: "pointer" }} className="option-type"
                                             />
+                                              &nbsp; &nbsp;
                                             {option.option}
                                         </li>
                                     ))}
@@ -319,6 +322,7 @@ const ReviewAnswers = ({ attemptId }) => {
                 </div>
             </div>
         </div>
+        </Container>
     );
 };
 

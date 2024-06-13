@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { IoLogoHtml5 } from "react-icons/io5";
 import { PiFileCssFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
@@ -13,13 +13,13 @@ import { fetchQuizIdRequest } from "../../../../actions/Quiz And Feedback Module
 
 function LearnerCoursepage() {
   const [noQuizTopicId, setNoQuizTopicId] = useState(
-    "6d55291d-c0e4-453c-9267-808a0ef7729e"
+    "db7c16a2-49e6-44e7-8504-ff4f293f3efd"
   );
   const [yesQuizTopicId, setYesQuizTopicId] = useState(
-    "32299397-c1f2-437e-876a-516838cebe49"
+    "0542acd4-ba01-4592-a451-8dbc0e7f0f18"
   );
   const [LearnerId, setLearnerId] = useState(
-    "0754f08d-0ebd-4cae-a5e3-8ecbacf7535f"
+    "a2b7a936-9809-4128-bc3e-e69a1dc48d3b"
   );
   const quizId = useSelector(
     (state) => state.fetchquizinstruction.quizinstructiondetails
