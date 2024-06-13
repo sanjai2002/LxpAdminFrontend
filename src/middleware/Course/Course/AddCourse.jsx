@@ -13,20 +13,16 @@ const API_URL = 'http://localhost:5199/lxp/course';
     try {
       debugger
       console.log("post",action.payload)
-      debugger
       // Assuming 'action.payload' contains the data you want to senda
       const response = await axios.post(API_URL,action.payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      debugger
       console.log('API Response:', response.data); // Log the response data
       
-      debugger
       console.log("aaa",response.data.data.courseId)
       
-      debugger
       
       if(response.data.statusCode==412){
         dispatch(createCoursesExists());

@@ -11,20 +11,17 @@ import {
 
 const initialState = {
 
-  course_id:null,
-  loading: false,
-  error: null,
-  isSubmitted:false,
-  isError:false,
-  isExists:false,
+  // course_id:null,
+  
 };
 
-const courseReducer = (state = initialState, action) => {
+const AddCourseReducer = (state = initialState, action) => {
   switch (action.type) {
      case CREATE_COURSES_REQUEST:
       return {
         ...state,
-        loading: true,
+        // course_id:null,
+  
       };
     case CREATE_COURSES_SUCCESS:
       console.log('Coursecaa', action.payload);
@@ -62,4 +59,4 @@ const courseReducer = (state = initialState, action) => {
   }
 };
 
-export default courseReducer;
+export default AddCourseReducer;

@@ -31,7 +31,7 @@ import forgotPasswordReducer from '../reducers/Admin/ForgotPasswordReducer';
 
 import ApiViewlearnersReport from '../middleware/Admin/ApiViewlearnersReport';
 import ViewLearnersreportsReducer from '../reducers/Admin/ViewLearnersreportsReducer';
-import ApiViewCourseReport  from '../middleware/Admin/ApiViewCourseReport';
+import ApiViewCourseReport from '../middleware/Admin/ApiViewCourseReport';
 import ViewCoursereportReducers from '../reducers/Admin/ViewCoursereportReducers';
 import QuizReportReducer from '../reducers/Admin/ViewQuizReportReducers';
 import ApiViewQuizReport from '../middleware/Admin/ApiViewQuizReport';
@@ -43,7 +43,7 @@ import DashboardEnrollmentcourseBarchartReducer from '../reducers/Admin/Dashboar
 
 import LearnerGetCourseReducer from "../reducers/LearnerReducer/LearnerGetCourseReducer";
 import LearnerGetCourse from '../middleware/LearnerMiddleware/LearnerGetCourse';
-import LearnerPostEnrollReducer  from "../reducers/LearnerReducer/LearnerPostEnrollReducer";
+import LearnerPostEnrollReducer from "../reducers/LearnerReducer/LearnerPostEnrollReducer";
 import LearnerPostEnroll from "../middleware/LearnerMiddleware/LearnerPostEnroll";
 import enrollCourseApi from "../middleware/LearnerMiddleware/EnrollCourseApi";
 import enrollmentReducer from "../reducers/LearnerReducer/EnrollmentReducer";
@@ -57,7 +57,7 @@ import GetUserProfileReducer from '../reducers/LearnerReducer/GetUserProfileRedu
 import UpdateUserProfileReducer from '../reducers/LearnerReducer/UpdateUserProfileReducer';
 import fetchProfileData from '../middleware/LearnerMiddleware/GetUserProfileMiddleware';
 import { updateUserData } from '../middleware/LearnerMiddleware/UpdateUserProfileMiddleware';
-import {RegisterApi}   from '../middleware/LearnerMiddleware/RegisterApi';
+import { RegisterApi } from '../middleware/LearnerMiddleware/RegisterApi';
 import fetchEmailApi from '../middleware/LearnerMiddleware/FetchEmailApi';
 import OTPReducer from '../reducers/LearnerReducer/OTPReducer';
 import PasswordChangeReducer from '../reducers/LearnerReducer/PasswordChangeReducer';
@@ -148,11 +148,11 @@ import { FetchQuizFeedbackQuestionApi } from '../middleware/Quiz And Feedback Mo
 // COURSE TEAMS 
 
 // import fetchTopicsReducer from '../../reducer/Course/CTopic/FetchTopicReducer';
-import  fetchTopicsReducer from '../reducers/Course/Topic/FetchTopicReducer'
+import fetchTopicsReducer from '../reducers/Course/Topic/FetchTopicReducer'
 
 import fetchTopicsApi from '../middleware/Course/Topic/FetchTopicMiddleware';
 // import fetchEditTopicsApi from '../../middleware/Course/Topic/FetchEditTopicMiddleware';
-import  fetchEditTopicsApi  from '../middleware/Course/Topic/FetchEditTopicMiddleware'
+import fetchEditTopicsApi from '../middleware/Course/Topic/FetchEditTopicMiddleware'
 
 // import fetchEditTopicsReducer from '../reducers/Course/Topic/FetchEditTopicsReducer';
 
@@ -163,7 +163,7 @@ import updateTopicReducer from '../reducers/Course/Topic/UpdateTopicsReducer';
 import updateTopicsApi from '../middleware/Course/Topic/UpdateTopicsMiddleware';
 
 // import deleteTopicReducer from '../reducers/Course/Topic/DeleteTopicsReducer';
-import  deleteTopicReducer from '../reducers/Course/Topic/DeleteTopicsReducer'
+import deleteTopicReducer from '../reducers/Course/Topic/DeleteTopicsReducer'
 
 import deleteTopic from '../middleware/Course/Topic/DeleteTopicMiddleware';
 import addContent from '../middleware/Course/Material/AddContentMiddleware';
@@ -195,6 +195,7 @@ import fetchCourseReducer from '../reducers/Course/Course/FetchCourseDetailReduc
 import fetchcourseApi from '../middleware/Course/Course/FetchCourseDetailMiddleware';
 import addTopicReducer from '../reducers/Course/Topic/AddTopicReducer';
 import addTopic from '../middleware/Course/Topic/AddTopicMiddleware';
+import AddCourseReducer from '../reducers/Course/Course/AddCourseReducer';
 
 
 
@@ -211,12 +212,12 @@ const rootReducer = combineReducers({
   enrolledcourse: LastEnrolledCourseReducer,
   enabledisablecourse: EnableDisableCourseReducer,
   fetchdashboard: fetchDataReducer,
-  learnerreport:ViewLearnersreportsReducer,
-  coursereport:ViewCoursereportReducers,
-  quizreport:QuizReportReducer,
-  email:emailReducer,
-  quizpassedusers:quizPassedUserReducer,
-  quizfailedusers:quizFailedUserReducer,
+  learnerreport: ViewLearnersreportsReducer,
+  coursereport: ViewCoursereportReducers,
+  quizreport: QuizReportReducer,
+  email: emailReducer,
+  quizpassedusers: quizPassedUserReducer,
+  quizfailedusers: quizFailedUserReducer,
   // enrolledCourses:LearnerPostEnrollReducer,
   fetchcourse: LearnerGetCourseReducer,
 
@@ -225,23 +226,23 @@ const rootReducer = combineReducers({
   enrolledpasseduser: EnrollCoursePassedLearnerReducer,
   enrolledprogressuser: EnrollCourseProgressLearnerReducer,
   //sanjai -5
-  toplearners:DashboardTopLearnersReducer,
-  highestenrolledcourse:DashboardHighestEnrolledCourseReducer,
-  recentfeedbackresponse:DashboardRecentFeedbackReducer,
-  enrollmentcoursebarchart:DashboardEnrollmentcourseBarchartReducer,
+  toplearners: DashboardTopLearnersReducer,
+  highestenrolledcourse: DashboardHighestEnrolledCourseReducer,
+  recentfeedbackresponse: DashboardRecentFeedbackReducer,
+  enrollmentcoursebarchart: DashboardEnrollmentcourseBarchartReducer,
 
   //
-  passwordchangereducer : PasswordChangeReducer,
+  passwordchangereducer: PasswordChangeReducer,
   user: userReducer,
   course: courseReducer,
   allcourse: AllcourseReducer,
   deletecourse: DeletecourseReducer,
-  updatecourse:courseupdateReducer,
-  learner:LearnerReducer,
-  verifyemail:fetchEmailReducer,
-  otp:OTPReducer,
+  updatecourse: courseupdateReducer,
+  learner: LearnerReducer,
+  verifyemail: fetchEmailReducer,
+  otp: OTPReducer,
   fetchcourse: LearnerGetCourseReducer,
-  enrolledCourses:LearnerPostEnrollReducer,
+  enrolledCourses: LearnerPostEnrollReducer,
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
@@ -256,61 +257,62 @@ const rootReducer = combineReducers({
   deletetopicfeedback: DeleteTopicFeedbackReducer,
   updatetopicfeedback: UpdateTopicFeedbackReducer,
   //quizmodule-learner
-    //Learner side
-    fetchlearnerid: GetLearnerIDReducer,
-    AttemptQuiz: AttemptQuizReducer,
-    Review: reviewReducer,
-    SelectAnswer: SelectAnswerReducer,
-    SubmitAttempt: submitAttemptReducer,
-    learnerscore: LearnerScorePageReducer,
-    fetchquizinstruction: QuizInstructionReducer,
-    learnerattempt: LearnerAttemptQuizIdReducer,
-    fetchtopicfeedbackquestion: FetchTopicFeedbackQuestionReducer,
-    TopicFeedbackResponse: TopicFeedbackResponseReducer,
-    fetchquizfeedbackquestion:FetchQuizFeedbackQuestionReducer,
-    QuizFeedbackResponse: QuizFeedbackResponseReducer,
+  //Learner side
+  fetchlearnerid: GetLearnerIDReducer,
+  AttemptQuiz: AttemptQuizReducer,
+  Review: reviewReducer,
+  SelectAnswer: SelectAnswerReducer,
+  SubmitAttempt: submitAttemptReducer,
+  learnerscore: LearnerScorePageReducer,
+  fetchquizinstruction: QuizInstructionReducer,
+  learnerattempt: LearnerAttemptQuizIdReducer,
+  fetchtopicfeedbackquestion: FetchTopicFeedbackQuestionReducer,
+  TopicFeedbackResponse: TopicFeedbackResponseReducer,
+  fetchquizfeedbackquestion: FetchQuizFeedbackQuestionReducer,
+  QuizFeedbackResponse: QuizFeedbackResponseReducer,
 
 
-    // COURSE TEAM  REDUCER
-    level:fetchLevelReducer,
-    category:fetchCategoryReducer,
-    addCategory:categoryReducer,
-    fetchCourse:fetchCourseReducer,
-    Topic:addTopicReducer,
-    fetchTopic:fetchTopicsReducer,
-    fetchEditTopic:fetchEditTopicsReducer,
-    updateTopic:updateTopicReducer,
-     deleteTopic:deleteTopicReducer,
-     deleteContent:deleteContentReducer,
-     addContent: AddMaterialReducer,
-    fetchMaterialType:fetchMaterialTypeReducer,
-    fetchContent:fetchContentReducer,
-    fetchIndividualContent: fetchIndividualContentReducer,
-    updateContent:updateContentReducer,
-    fetchContentUrl:fetchContentUrlReducer,
+  // COURSE TEAM  REDUCER
+  level: fetchLevelReducer,
+  category: fetchCategoryReducer,
+  addCategory: categoryReducer,
+  fetchCourse: fetchCourseReducer,
+  Topic: addTopicReducer,
+  fetchTopic: fetchTopicsReducer,
+  fetchEditTopic: fetchEditTopicsReducer,
+  updateTopic: updateTopicReducer,
+  deleteTopic: deleteTopicReducer,
+  deleteContent: deleteContentReducer,
+  addContent: AddMaterialReducer,
+  fetchMaterialType: fetchMaterialTypeReducer,
+  fetchContent: fetchContentReducer,
+  fetchIndividualContent: fetchIndividualContentReducer,
+  updateContent: updateContentReducer,
+  fetchContentUrl: fetchContentUrlReducer,
+  addcourse: AddCourseReducer,
+  fetchindividualCourse: fetchCourseReducer,
 
 
-  
 });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware( thunk,LearnerGetCourse, apiMiddleware,ApiForgotpassword,emailMiddleware,apiviewallcourse, 
+  applyMiddleware(thunk, LearnerGetCourse, apiMiddleware, ApiForgotpassword, emailMiddleware, apiviewallcourse,
     loginUser, apiDeletecourse, UpdateCourse, apiViewAllLearners, GetProfileCard, GetProfileCourses,
-     LastEnrolledCourse, EnableDisableCourse, FetchdashboardData,ApiViewlearnersReport,ApiViewCourseReport,
-     ApiViewQuizReport, RegisterApi ,fetchEmailApi,VerifyEmailApi,LearnerPostEnroll,enrollCourseApi,
-     FetchRegisterApi,ApiQuizPassedUsers,ApiQuizFailedUsers,EnrollCourseLearners,
-      ApiViewEnrollmentReport, EnrollCoursePassedLearner, EnrollCourseProgressLearner,
-      ApiDashboardTopLearners,ApiDashboardHighestEnrolledCourse,ApiRecentFeedbackresponse,ApiDashboardEnrollmentcourseBarchart,
-      FetchQuizById,
-      FetchQuizQuestionsApi,
-      DeleteQuizQuestionsApi,
-      PutQuizDetails,
-      CreateQuizApi,
-      UpdateQuizFeedbackApi,
-      DeleteTopicFeedbackApi,
-      DeleteQuizFeedbackApi,
-      UpdateTopicFeedbackApi,
+    LastEnrolledCourse, EnableDisableCourse, FetchdashboardData, ApiViewlearnersReport, ApiViewCourseReport,
+    ApiViewQuizReport, RegisterApi, fetchEmailApi, VerifyEmailApi, LearnerPostEnroll, enrollCourseApi,
+    FetchRegisterApi, ApiQuizPassedUsers, ApiQuizFailedUsers, EnrollCourseLearners,
+    ApiViewEnrollmentReport, EnrollCoursePassedLearner, EnrollCourseProgressLearner,
+    ApiDashboardTopLearners, ApiDashboardHighestEnrolledCourse, ApiRecentFeedbackresponse, ApiDashboardEnrollmentcourseBarchart,
+    FetchQuizById,
+    FetchQuizQuestionsApi,
+    DeleteQuizQuestionsApi,
+    PutQuizDetails,
+    CreateQuizApi,
+    UpdateQuizFeedbackApi,
+    DeleteTopicFeedbackApi,
+    DeleteQuizFeedbackApi,
+    UpdateTopicFeedbackApi,
     //quiz-learner flow
     GetLearnerIDApi,
     fetchQuestionsMiddleware,
@@ -324,15 +326,15 @@ const store = createStore(
     QuizFeedbackResponseApi,
     QuizInstructionApi,
     LearnerAttemptQuizIdApi,
+    //course
+    addCourse, addCategory, fetchcategoryApi, fetchlevelApi,
+    fetchcourseApi, addTopic, fetchTopicsApi, fetchEditTopicsApi,
+    updateTopicsApi, deleteTopic, addContent, fetchMaterialTypeApi,
+    fetchContentApi, deleteContentApi, fetchIndividualContentApi,
+    updateContentApi, fetchContentUrlApi, fetchcourseApi,
 
-    addCourse,addCategory,fetchcategoryApi,fetchlevelApi,
-    fetchcourseApi,addTopic,fetchTopicsApi,fetchEditTopicsApi,
-    updateTopicsApi,deleteTopic,addContent,fetchMaterialTypeApi,
-    fetchContentApi,deleteContentApi,fetchIndividualContentApi,
-    updateContentApi,fetchContentUrlApi
 
-   
-      )
+  )
 );
 
 export default store;

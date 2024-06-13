@@ -6,7 +6,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import Box from '@mui/material/Box';
 // import { useDispatch, useSelector } from "react-redux";
 // import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack';
-// import { fetchContentUrlRequest,setContentUrlStatus } from "../../../action/Course/Material/FetchContentUrlAction";
+// import { fetchContentUrlRequest,setContentUrlStatus } from "../../../actions/Course/Material/FetchContentUrlAction";
 import { Container, Overlay, Row } from "react-bootstrap";
  
 function PDFViewer(prop) {
@@ -16,28 +16,24 @@ function PDFViewer(prop) {
   useEffect(()=>{
     setViewPdf(material)
   },[material])
-  // const dispatch = useDispatch();
+//   const dispatch = useDispatch();
  
-  // let pdfselector = useSelector((state) => state.fetchContentUrl.content);
-  // const [pdf,setPdf]=useState({"filePath":undefined});
-  // useEffect(() => {
-  //   dispatch(fetchContentUrlRequest(material));      
-  //   // setPdf({...pdfselector})  
+//   let pdfselector = useSelector((state) => state.fetchContentUrl.content);
+//   const [pdf,setPdf]=useState({"filePath":undefined});
+//   useEffect(() => {
+//     dispatch(fetchContentUrlRequest(material));      
+//     setPdf(pdfselector.filePath)  
 
    
-  //   // console.log("pdf",pdf);           {/*modified  full code */}
-  // }, [ material ]);
-  // useEffect(() => {
-  //   dispatch(fetchContentUrlRequest(material));      
-  //   // setPdf({...pdfselector})  
-  //   // console.log("pdf",pdf);           {/*modified  full code */}
-  // }, []);
+//     // console.log("pdf",pdf);           {/*modified  full code */}
+//   }, [ material ]);
+ 
 //  useEffect(()=>{
-  // setTimeout(()=>{
+//   setTimeout(()=>{
       
-  //    setViewPdf(pdf.filePath);
+//      setViewPdf(pdf.filePath);
 
-  // },20000)
+//   },20000)
 //   if(pdfselector){
 //     if(pdfselector.filePath){
 //       dispatch(setContentUrlStatus())
@@ -50,21 +46,7 @@ function PDFViewer(prop) {
 //   }
 
 //  },[pdfselector])
-//  useEffect(()=>{
-//   // setTimeout(()=>{
-      
-//   //    setViewPdf(pdf.filePath);
-
-//   // },20000)
-//   if(pdfselector){
-//     if(pdfselector.filePath){
-//       dispatch(setContentUrlStatus())
-//     }
-//     setViewPdf(pdfselector.filePath);
-
-
-//   }
-//  })
+ 
 //  useEffect(()=>{
 //   // setTimeout(()=>{
       
@@ -95,12 +77,12 @@ function PDFViewer(prop) {
 
 //   }
 //  },[viewpdf])
-  // useEffect(() => {
-  //   setTimeout(()=>{
-  //     setViewPdf(pdfselector.filePath);
+//   useEffect(() => {
+//     setTimeout(()=>{
+//       setViewPdf(pdfselector.filePath);
 
-  //   },10000)
-  // }, []);
+//     },10000)
+//   }, []);
  
   // const newPlugin = defaultLayoutPlugin({
   //   toolbar: {
@@ -127,7 +109,7 @@ function PDFViewer(prop) {
           {error ? (
             <div className="error">{error}</div>
           ) : (
-            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
               {viewpdf ? (
                 <Viewer fileUrl = {viewpdf} />
               ) : (

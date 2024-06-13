@@ -18,8 +18,8 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchContentUrlRequest } from '../../../action/Course/Material/FetchContentUrlAction';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContentUrlRequest } from '../../../actions/Course/Material/FetchContentUrlAction';
 
 const Video = styled.video`
   flex-shrink: 1;

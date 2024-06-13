@@ -205,7 +205,7 @@ export default function SavedTopics(props) {
 
     }
     const handleShow = () => setShow(true);
-    const handlePreview = (filePath, materialType, materialName) => {
+    const handlePreview = (filePath, materialType, materialName,materialId) => {
         setViewerModelHeader(materialName);
         switch (materialType) {
           case 'PDF':
@@ -297,7 +297,7 @@ export default function SavedTopics(props) {
                             <ul type='none'>
                                 {topic.materials.map((material) => (<>
 
-                                    <li onClick={() => { handlePreview(material.filePath, material.materialType, material.materialName) }}>{material.materialType === 'VIDEO' ? <><CiYoutube className="icon" style={{ color: 'blue', fontSize: '20px' }} /></> : material.materialType == 'AUDIO' ? <><CiMusicNote1 className="icon" style={{ color: 'blue' }} /></> : material.materialType == 'TEXT' ? <><FaFileAlt className="icon" style={{ color: 'red' }} /></> : material.materialType == 'PDF' ? <><BsFiletypePdf className="icon" style={{ color: 'red' }} /></> : <><BsFiletypePpt className="icon" style={{ color: 'red' }} /></>}{material.materialName}</li>
+                                    <li onClick={() => { handlePreview(material.filePath, material.materialType, material.materialName,material.materialId) }}>{material.materialType === 'VIDEO' ? <><CiYoutube className="icon" style={{ color: 'blue', fontSize: '20px' }} /></> : material.materialType == 'AUDIO' ? <><CiMusicNote1 className="icon" style={{ color: 'blue' }} /></> : material.materialType == 'TEXT' ? <><FaFileAlt className="icon" style={{ color: 'red' }} /></> : material.materialType == 'PDF' ? <><BsFiletypePdf className="icon" style={{ color: 'red' }} /></> : <><BsFiletypePpt className="icon" style={{ color: 'red' }} /></>}{material.materialName}</li>
                                 </>))}
                             </ul>
 

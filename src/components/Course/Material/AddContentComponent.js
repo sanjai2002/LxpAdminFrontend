@@ -344,7 +344,7 @@ function AddContentComponent() {
     borderRadius: '20px',
   };
 
-  const handlePreview = (filePath, materialType, materialName) => {
+  const handlePreview = (filePath, materialType, materialName,materialId) => {
     setViewerModelHeader(materialName);
     switch (materialType) {
       case 'PDF':
@@ -398,7 +398,7 @@ function AddContentComponent() {
         
 
       </section> */}
-      <Container style={{...divStyle, overflowy: "auto", maxHeight: '100vh'}}>
+      <Container style={{...divStyle, overflowy: "auto", maxHeight: '100vh',marginTop:'15vh'}}>
         <Row>
           <Col></Col>
           <Col>
@@ -507,7 +507,7 @@ function AddContentComponent() {
                           </div>
                           <div className="col">
                               <Box display="flex" alignItems="center">
-                                      <IconButton className='ms-1' onClick={() => handlePreview(content.materialId, content.materialType, content.name)}><IoEyeOutline fontSize={20} color="#5dbea3"   /></IconButton>
+                                      <IconButton className='ms-1' onClick={() => handlePreview(content.filePath, content.materialType, content.name,content.materialId)}><IoEyeOutline fontSize={20} color="#5dbea3"   /></IconButton>
                                       <IconButton className='ms-1' onClick={() => handleEditButton(content.materialId)}><FaRegEdit fontSize={20} color="#27235c" /></IconButton>
                                       <IconButton className='ms-1' onClick={() => handleDeleteClickOpen(content.materialId)}><MdOutlineDelete fontSize={20} color="FF0000" /></IconButton>
                                </Box>

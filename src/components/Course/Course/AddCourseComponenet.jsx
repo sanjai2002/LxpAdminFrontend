@@ -60,11 +60,16 @@ const AddCourse = () => {
     duration: "",
     thumbnailimage: null,
   });
- //If course is created then navigate to course creation  page
- const isSubmit = useSelector((state) => state.course.isSubmitted);
- console.log("checkcoursecontent",isSubmit);
+ //If course is created then navigate to course creation  page\
+ const courseid = useSelector((state) => state.addcourse.course_id);
+
+//  const isSubmits = useSelector((state) => state.addcourse);
+ const isSubmit = useSelector((state) => state.addcourse.isSubmitted);
+//  const CourseId= useSelector((state)=>state.AddCourse.course_id)
+//  console.log("checkcoursecontent",isSubmits);
  useEffect(() => {
    if (isSubmit) {
+    // console.log("oppp",courseid);
      navigate("/coursecontent"); // Navigate to the next page on success
    }
  }, [isSubmit, navigate]);

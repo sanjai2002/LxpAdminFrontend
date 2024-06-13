@@ -24,28 +24,32 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { Row, Col, Container } from "react-bootstrap";
 // import { fetchCourseRequest } from "../../../action/Course/Course/FetchCouseDetailsAction";
-import {fetchCourseRequest} from '../../../actions/Course/Course/FetchCouseDetailsAction';
+import { fetchCourseRequest } from '../../../actions/Course/Course/FetchCouseDetailsAction';
 import { LogoDev } from "@mui/icons-material";
 
 // import CourseCreationForm from "./Content_Page";
 const Content = () => {
   //const [content,setContent]=useState([]);
   const dispatch = useDispatch();
-  const courseid = useSelector((state) => state.course.course_id);
-  const course = useSelector((state) => state.fetchCourse.courses)
+  const courseid = useSelector((state) => state.addcourse.course_id);
+  debugger
+  const course = useSelector((state) => state.fetchindividualCourse.courses);
   console.log("Course", course);
   console.log("content", courseid);
   useEffect(() => {
-   
-    dispatch(fetchCourseRequest(courseid));
-
+    if (courseid) {
+      dispatch(fetchCourseRequest(courseid));
+    }
+    console.log("asdfgh", courseid);
   }
     , [courseid]);
 
 
   //id=courseid;
   const navigate = useNavigate();
-  const iscourse = useSelector((state) => state.fetchCourse.isNavigate)
+  const iscourse = useSelector((state) => state.fetchindividualCourse.isNavigate)
+
+
   const handleAddTopic = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     if (iscourse) {
@@ -59,7 +63,7 @@ const Content = () => {
   };
   return (
     <>
-      <Container style={divStyle}>
+      <Container style={divStyle} className="mt-5">
         <Row className="mt-1">
           <Col md={3} xs={3}></Col>
           <Col md={6} xs={6}>
@@ -102,6 +106,6 @@ const Content = () => {
       </Container>
 
     </>
-   );
+  );
 };
 export default Content;
