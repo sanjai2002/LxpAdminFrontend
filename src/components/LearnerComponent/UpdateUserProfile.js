@@ -3,21 +3,32 @@ import Avatar from "@mui/material/Avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
 import { ValidationUpdateUserProfile } from '../../utils/LearnerValidations/ValidationUpdateUserProfile';
- 
 import { useEffect } from 'react';
 import { getUserProfileRequest } from '../../actions/LearnerAction/GetUpdateUserProfileAction';
 import { put_user_profile_request } from '../../actions/LearnerAction/UpdateUserProfileAction';
 import LearnerNavbar from '../LearnerComponent/LearnerNavbar';
- 
- 
- 
+import { fetchUserData } from '../../middleware/LearnerMiddleware/GetUserProfileMiddleware';
+import Select from 'react-select';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import IconButton from '@mui/material/IconButton';
+import '../../Styles/Learner/UpdateProfile.css';
+import { Block } from '@mui/icons-material';
+
+const options = [
+  { value: 'C++', label: 'C++' },
+  { value: 'LINQ', label: 'LINQ' },
+  { value: '.NET', label: '.NET' },
+  { value: 'C#', label: 'C#' },
+  { value: 'JAVA', label: 'JAVA' },
+  { value: 'RUST', label: 'RUST' },
+  { value: 'Python', label: 'Python' },
+];
+
 function UpdateUserProfileComponent() {
   const dispatch = useDispatch();
- 
-  const LearnerId = "178012db-9074-4fff-b219-448e14b14cb4";
-  const FetchProfile= useSelector((state)=>state.getUseProfile.CredentialGet);
+  const [LearnerId] = useState(sessionStorage.getItem('ProfileId'));
   const [editInfo, setEditInfo] = useState({
-    profileId: "",
+    ProfileId: "",
     firstName: "",
     lastName: "",
     dob: "",
@@ -26,89 +37,74 @@ function UpdateUserProfileComponent() {
     stream: "",
     profilePhoto: "",
   });
- 
-    console.log("fecsdfs", FetchProfile);
-  // console.log("fetch profile ", FetchProfile);
-  useEffect(() => {
-   
-    dispatch(getUserProfileRequest(LearnerId));  // dispatch
-    setEditInfo(FetchProfile);
-   
-  },[]);
- 
- 
-  // const fetchProfileData = useSelector((state) => state.getuserprofile.CredentialGet);
- 
- 
   const [isEditable, setIsEditable] = useState(false);
- 
- 
   const [file, setFile] = useState(null);
- 
+
   const calculateMaxDate = () => {
     const today = new Date();
     today.setFullYear(today.getFullYear() - 18);
     return today.toISOString().split("T")[0];
   };
- 
- 
+
+  const fetch = async (LearnerId) => {
+    try {
+      const userData = await fetchUserData(LearnerId);
+      sessionStorage.setItem("userData", userData.profilePhoto);
+      setEditInfo(userData);
+    } catch (error) {
+      console.error('Error in fetch: ', error);
+    }
+  };
+
+  useEffect(() => {
+    const data = fetch(LearnerId);
+    setEditInfo(data);
+  }, [setEditInfo]);
+
   const updateStatus = async () => {
     const errors = ValidationUpdateUserProfile(editInfo);
-    // Check for validation errors
     if (Object.keys(errors).length > 0) {
-      // Check for a specific error related to the contact number
       if (errors.contactNumber) {
-        alert(errors.contactNumber); // Alert the user about the invalid phone number
+        alert(errors.contactNumber);
       } else {
         alert("Please insert all the required fields.");
       }
       console.error("Validation errors", errors);
       return;
     }
- 
+
     try {
-      // Dispatch the action to update the user profile
-     debugger;
-      const response = await dispatch(put_user_profile_request(LearnerId, editInfo));
-      // Check if the update was successful
- 
- 
+      const updatedEditInfo = {
+        ...editInfo,
+        stream: Array.isArray(editInfo.stream) ? editInfo.stream.join(", ") : editInfo.stream,
+      };
+
+      const response = await dispatch(put_user_profile_request(LearnerId, updatedEditInfo));
       if (response.status === 200) {
-        // If successful, fetch the updated user profile data
-        // dispatch(getUserProfileRequest(LearnerId));
-        // Display success message
-       
- 
+        // ...
       } else {
-        // If update failed, display error message
         alert("Profile updated successfully");
       }
- 
     } catch (error) {
       console.error("Error updating profile:", error);
-      // Handle error
-      // alert("An error occurred while updating profile. Please try again later.");
       alert("Profile updated successfully");
     }
- 
- 
-  }
- 
- 
- 
- 
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditInfo({ ...editInfo, [name]: value });
+    if (name === 'stream') {
+      const selectedValues = value.map(option => option.value);
+      setEditInfo((prevEditInfo) => ({ ...prevEditInfo, stream: selectedValues }));
+    } else {
+      setEditInfo((prevEditInfo) => ({ ...prevEditInfo, [name]: value }));
+    }
   };
- 
+
   const enableEditing = () => {
     setIsEditable(!isEditable);
   };
- 
- 
- 
- 
+
   const handleThumbnailChange = (event) => {
     event.preventDefault();
     if (event.target.files && event.target.files[0]) {
@@ -120,197 +116,181 @@ function UpdateUserProfileComponent() {
       setEditInfo({ ...editInfo, profilePhoto: event.target.files[0] });
     }
   };
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
+  const formatStreamData = (stream) => {
+    if (Array.isArray(stream)) {
+      return stream.map(s => ({ value: s, label: s }));
+    }
+    return [{ value: stream, label: stream }];
+  };
+
   return (
     <>
-    <LearnerNavbar/>
-    <div className="container-fluid py-5  backgroundcontainer">
-    <div className="card mx-auto cardcolor" style={{ maxWidth: "500px" }}>
-      <div className="card-body">
-        <h1 className="card-title text-center mb-4">User Information</h1>
-        <div
-          className="mb-3"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Avatar
-            alt="User Avatar"
-            src={
-              file ||
-              (editInfo && editInfo.profilePhoto
-                ? editInfo.profilePhoto
-                : "default-avatar.png")
-            }
-            style={{ width: "100px", height: "100px" }}
-          />
+      <LearnerNavbar />
+      <div className="background-container_update">
+        <div className="cardcolor_update"   >
+          <div className="card-update" >
+            <h1 className="card-updatetitle text-center mb-4" style={{ color: "#27235C", marginRight: '35px' }}>My Profile</h1>
+            <div className="row">
+              <div className="col-md-2 text-center  mb-4">
+                <Avatar
+                  alt="User Avatar"
+                  src={file || (editInfo && editInfo.profilePhoto ? editInfo.profilePhoto : "default-avatar.png")}
+                  style={{ width: "200px", height: "200px", marginTop: 80, }}
+                  className='avatar-outline'
+                />
+                <IconButton
+
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                  disabled={!isEditable}
+                >
+                  <input
+                    type="file"
+                    id="profile"
+                    name="profilePhoto"
+                    onChange={handleThumbnailChange}
+                    accept="image/jpeg, image/png, image/gif, image/bmp, image/svg+xml"
+                    style={{ display: "none" }}
+                  />
+                  <CameraAltIcon sx={{ color: "#27235C", marginTop: 1 }} />
+                </IconButton>
+              </div>
+              <div className="col-md-4" sx={{ marginRight: 60 }}>
+
+                <div className="mb-4 get">
+                  <h5>First Name</h5>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="form-control_update"
+                    placeholder="First Name"
+                    color="#27235C"
+                    value={editInfo.firstName}
+                    onChange={handleInputChange}
+                    disabled={!isEditable}
+                    onKeyPress={(event) => {
+                      if (!/^[A-Za-z]+$/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                  />
+                </div>
+                <div className="mb-4 get">
+                  <h5>DOB</h5>
+                  <input
+                    type="date"
+                    name="dob"
+                    className="form-control_update"
+                    placeholder="Date of Birth"
+                    value={editInfo.dob}
+                    color="#27235C"
+                    onChange={handleInputChange}
+                    disabled={!isEditable}
+                    max={calculateMaxDate()}
+                    onKeyDown={(e) => e.preventDefault()}
+                  />
+                </div>
+                <div className="mb-4">
+                  <h5>Contact Number</h5>
+                  <input
+                    type="number"
+                    name="contactNumber"
+                    className="form-control_update"
+                    color="#27235C"
+                    placeholder="Contact Number"
+                    value={editInfo.contactNumber}
+                    onChange={handleInputChange}
+                    disabled={!isEditable}
+                  />
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="mb-4">
+                  <h5>Last Name</h5>
+                  <input
+                    type="text"
+                    name="lastName"
+                    className="form-control_update"
+                    color="#27235C"
+                    placeholder="Last Name"
+                    value={editInfo.lastName}
+                    onChange={handleInputChange}
+                    disabled={!isEditable}
+                    onKeyPress={(event) => {
+                      if (!/^[A-Za-z]+$/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                  />
+                </div>
+                <div className="mb-4">
+                  <h5>Gender</h5>
+                  <select
+                    name="gender"
+                    className="form-control_dropdown"
+                    value={editInfo.gender}
+                    color="#27235C"
+                    type="text"
+                    onChange={handleInputChange}
+                    disabled={!isEditable}
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <h5>Stream</h5>
+                  <Select
+                    isMulti
+                    name="stream"
+                    options={options}
+                    type="text"
+                    color="#27235C"
+
+                    className="basic-multi-select_learner"
+                    classNamePrefix="stream"
+                    placeholder="Choose your stream"
+                    value={formatStreamData(editInfo.stream)}
+                    onChange={(selectedOption) => handleInputChange({ target: { name: "stream", value: selectedOption } })}
+                    disabled={!isEditable}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <button
+                type="button"
+                className="btn btn-secondary_update"
+                onClick={enableEditing}
+              >
+                Edit
+              </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button
+                type="button"
+                className="btn btn-primary_update"
+                onClick={() => {
+                  if (isEditable) {
+                    updateStatus();
+                  }
+                  enableEditing();
+                }}
+                disabled={!isEditable}
+              >
+                Save
+              </button>
+
+            </div>
+          </div>
         </div>
- 
-        <input
-          type="file"
-          id="profile"
-          name="profilePhoto"
-          onChange={handleThumbnailChange}
-          accept="image/jpeg, image/png, image/gif, image/bmp, image/svg+xml"
-          style={{ display: "none" }}
-        />
-        <div className="d-flex justify-content-center">
-          <button
-            onClick={() => document.getElementById("profile").click()}
-            className="btn btn-link"
-            disabled={!isEditable}
-          >
-            Upload Profile image
-          </button>
-        </div>
- 
-        <>
-          <div className="mb-3">
-            <h5>FirstName</h5>
- 
-            <input
-              type="text"
-              name="firstName"
-              className="form-control"
-              placeholder="First Name"
-              value={editInfo.firstName}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-              onKeyPress={(event) => {
-                if (!/^[A-Za-z]+$/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
-          </div>
-          <div className="mb-3">
-            <h5>LastName</h5>
-            <input
-              type="text"
-              name="lastName"
-              className="form-control"
-              placeholder="Last Name"
-              value={editInfo.lastName}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-              onKeyPress={(event) => {
-                if (!/^[A-Za-z]+$/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
-          </div>
- 
-          <div className="mb-3">
-            <h5>DOB</h5>
-            <input
-              type="date"
-              name="dob"
-              className="form-control"
-              placeholder="Date of Birth"
-              value={editInfo.dob}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-              max={calculateMaxDate()}
-              onKeyDown={(e) => e.preventDefault()}
-            />
-          </div>
-          <div className="mb-3">
-            <h5>Gender</h5>
-            <select
-              name="gender"
-              className="form-control"
-              value={editInfo.gender}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-            >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
- 
-          <div className="mb-3">
-            <h5>ContactNumber</h5>
-            <input
-              type="number"
-              name="contactNumber"
-              className="form-control mobile"
-              placeholder="Contact Number"
-              value={editInfo.contactNumber}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-            />
-          </div>
-          <div className="mb-3">
-            <h5>Stream</h5>
-            <input
-              type="text"
-              name="stream"
-              className="form-control"
-              placeholder="Stream"
-              value={editInfo.stream}
-              onChange={handleInputChange}
-              disabled={!isEditable}
-              required
-            />
-          </div>
- 
-          <div className="text-center">
-            {/* <button type="button" className="btn btn-primary" onClick={() => { if (isEditable) { updateStatus(); } } } disabled={!isEditable} onClick={enableEditing}> Update </button> */}
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => {
-                if (isEditable) {
-                  updateStatus();
-                }
-                enableEditing();
-              }}
-              disabled={!isEditable}
-            >
-              Update
-            </button>
- 
-            <button
-              type="button"
-              className="btn btn-secondary ms-2"
-              onClick={enableEditing}
-            >
-              Edit
-            </button>
-          </div>
-        </>
       </div>
-    </div>
-  </div>
-  </>
-);
-};
- 
-   
- 
- 
- 
-export default UpdateUserProfileComponent
+
+    </>
+  );
+}
+
+export default UpdateUserProfileComponent;

@@ -1,29 +1,27 @@
-import { FETCH_USER_DATA_REQUEST, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILURE } from '..//../actions/LearnerAction/FetchRegisterAction';
-
+import { FETCH_DASHBOARD_REQUEST, FETCH_DASHBOARD_SUCCESS, FETCH_DASHBOARD_FAILURE } from "../../actions/LearnerAction/LearnerdashboardAction";
 
 const initialState = {
-    userData: [],
+    dashboard: [],
     loading: false,
     error: null,
 };
 
-const FetchRegisterReducer = (state = initialState, action) => {
+const LearnerdashboardReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_USER_DATA_REQUEST:
+        case FETCH_DASHBOARD_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
 
-        case FETCH_USER_DATA_SUCCESS:
+        case FETCH_DASHBOARD_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                userData: action.payload,
-
+                dashboard: action.payload,
             };
 
-        case FETCH_USER_DATA_FAILURE:
+        case FETCH_DASHBOARD_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -34,4 +32,4 @@ const FetchRegisterReducer = (state = initialState, action) => {
     }
 };
 
-export default FetchRegisterReducer;
+export default LearnerdashboardReducer;

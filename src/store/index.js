@@ -196,8 +196,14 @@ import fetchcourseApi from '../middleware/Course/Course/FetchCourseDetailMiddlew
 import addTopicReducer from '../reducers/Course/Topic/AddTopicReducer';
 import addTopic from '../middleware/Course/Topic/AddTopicMiddleware';
 import AddCourseReducer from '../reducers/Course/Course/AddCourseReducer';
-
-
+import UnenrollCourseApi from '../middleware/LearnerMiddleware/UnenrollApi';
+import UnEnrollReducer from '../reducers/LearnerReducer/UnEnrollReducer';
+import LearnerScoreProgressBarGraphReducer from '../reducers/LearnerReducer/LearnerScoreProgressBarGraphReducer';
+import LearnerScoreProgressBarGraphApi from '../middleware/LearnerMiddleware/LearnerScoreProgressBarGraphApi';
+import LearnerdashboardReducer from '../reducers/LearnerReducer/LearnerdashboardReducer';
+import LearnerdashboardApi from '../middleware/LearnerMiddleware/LearnerdashboardApi';
+import { CoursebyScoreApi } from '../middleware/LearnerMiddleware/CoursebyScoreApi';
+import CoursebyScoreReducer from '../reducers/LearnerReducer/CoursebyScoreReducer';
 
 const rootReducer = combineReducers({
   forgotPassword: ForgotPasswordreducer,
@@ -246,6 +252,12 @@ const rootReducer = combineReducers({
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
+
+  //learner 
+  unenroll: UnEnrollReducer,
+  scoreProgressBarGraph: LearnerScoreProgressBarGraphReducer,
+  learnerdashboard: LearnerdashboardReducer,
+  coursebyscore: CoursebyScoreReducer,
   //quizmodule
   quizId: quizIdReducer,
   quizQuestions: fetchQuizQuestionsReducer,
@@ -332,8 +344,8 @@ const store = createStore(
     updateTopicsApi, deleteTopic, addContent, fetchMaterialTypeApi,
     fetchContentApi, deleteContentApi, fetchIndividualContentApi,
     updateContentApi, fetchContentUrlApi, fetchcourseApi,
-
-
+    //learner
+    UnenrollCourseApi, LearnerScoreProgressBarGraphApi, LearnerdashboardApi,
   )
 );
 

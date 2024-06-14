@@ -170,16 +170,16 @@ const Adminviewcourse = ({
   }, [fetchCourses]);
  
   // Form Validation
-  const validationform = () => {
-    const { title, level, category, description, duration } = selectedcourse;
-    return (
-      title.trim() !== "" &&
-      level.trim() !== "" &&
-      category.trim() !== "" &&
-      description.trim() !== "" &&
-      duration > 0
-    );
-  };
+  // const validationform = () => {
+  //   const { title, level, category, description, duration } = selectedcourse;
+  //   return (
+  //     title.trim() !== "" &&
+  //     level.trim() !== "" &&
+  //     category.trim() !== "" &&
+  //     description.trim() !== "" &&
+  //     duration > 0
+  //   );
+  // };
  
   // check the the values in the dialog box container when its open
  
@@ -193,13 +193,13 @@ const Adminviewcourse = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
  
-    const checkcoursevalidform = validationform();
+    // const checkcoursevalidform = validationform();
  
-    if (!checkcoursevalidform) {
-      setDialogMessage("All the fields are required for validation");
-      setOpen(true);
-      return;
-    }
+    // if (!checkcoursevalidform) {
+    //   setDialogMessage("All the fields are required for validation");
+    //   setOpen(true);
+    //   return;
+    // }
  
     const formData = new FormData();
  
@@ -710,7 +710,7 @@ const Adminviewcourse = ({
               margin="dense"
               name="duration"
               label="Duration"
-              type="number"
+              type="time"
               fullWidth
               value={selectedcourse.duration}
               onChange={handleInputChange}
@@ -777,5 +777,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
  
 export default connect(mapStateToProps, mapDispatchToProps)(Adminviewcourse);
- 
- 

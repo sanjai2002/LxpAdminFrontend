@@ -34,6 +34,8 @@ import EnrollCoursePassLearners from "../../components/Admin/EnrollCoursePassLea
 import EnrollCourseProgressLearners from "../../components/Admin/EnrollCourseProgressLearners";
 import ReportMainView from "../../View/Admin/Report/ReportMainView";
 
+//learner
+
 // quizandfeedback
 import CreateQuizView from "../../View/Quiz And Feedback Module/CreateQuizView";
 import UploadBulkQuiz from "../../components/Quiz And Feedback Module/QuizComponents/Admin/UploadBulkQuiz";
@@ -45,7 +47,7 @@ import QuizFeedback from "../../components/Quiz And Feedback Module/QuizComponen
 import TopicFeedback from "../../components/Quiz And Feedback Module/QuizComponents/Admin/TopicFeedback";
 
 import LearnerCoursepageView from "../../View/Quiz And Feedback Module/LearnerCoursepageview";
-import  AttemptQuiz from '../../components/Quiz And Feedback Module/QuizComponents/Learner/AttemptQuiz';
+import AttemptQuiz from '../../components/Quiz And Feedback Module/QuizComponents/Learner/AttemptQuiz';
 import QuizInstruction from '../../components/Quiz And Feedback Module/QuizComponents/Learner/QuizInstruction';
 import ReviewAnswers from '../../components/Quiz And Feedback Module/QuizComponents/Learner/ReviewAnswers';
 import LearnerScorePage from '../../components/Quiz And Feedback Module/QuizComponents/Learner/LearnerScorePage';
@@ -54,7 +56,7 @@ import FetchQuizFeedbackQuestion from '../../components/Quiz And Feedback Module
 
 // course team
 
-import {AddCourseView} from '../../View/Course/Course/AddCourseView'
+import { AddCourseView } from '../../View/Course/Course/AddCourseView'
 import { CourseContent } from "../../View/Course/Course/CourseContentView";
 import Topics from "../../View/Course/Topic/Topics";
 import SavedTopics from "../../components/Course/Topic/SavedTopics";
@@ -69,7 +71,7 @@ function Routing() {
         <Route path="/email" element={<Email />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
         <Route path='/PageNotFound' element={<PageNotFound />} />
-        <Route path='*' element={< PageNotFound/>}></Route>
+        <Route path='*' element={< PageNotFound />}></Route>
         <Route path='/passwordchange' element={<PasswordChange />} />
         <Route path='/updateuserprofile' element={<UpdateUserProfileComponent />} />
         <Route exact path="/" element={<Loginpage />} />
@@ -95,8 +97,8 @@ function Routing() {
           <Route path="/learnerreport" element={<LearnerReportView />}></Route>
           <Route path="/coursereport" element={<CourseReportView />}></Route>
           <Route path='/quizreport' element={<QuizReportView />}></Route>
-          <Route path='/quizpassedusers/:quizId' element={<QuizPassedUsers/>}></Route>
-          <Route path="/quizfailedusers/:FailedUserQuizId" element={<QuizFailedReport/>}></Route>
+          <Route path='/quizpassedusers/:quizId' element={<QuizPassedUsers />}></Route>
+          <Route path="/quizfailedusers/:FailedUserQuizId" element={<QuizFailedReport />}></Route>
           <Route path='/ReportSkeleton' element={<ReportSkeleton />}></Route>
           <Route path='/individualenrollcourselearner/:courseId' element={<EnrollCourseLearners />}></Route>
           <Route path='/individualenrollpasscourselearner/:courseId' element={<EnrollCoursePassLearners />}></Route>
@@ -105,37 +107,37 @@ function Routing() {
           <Route path="/report" element={<ReportMainView />}></Route>
           {/* quiz team */}
           <Route path="/coursepageview" element={<CoursePageView />} />
-        <Route path="/createquiz" element={<CreateQuizView />} />
-        <Route path="/topicfeedback" element={<TopicFeedback />} />
-        <Route path="/questiontemplate" element={<QuestionTemplateView />} />
-        {/* <Route path="/getallfeedback" element={<GetAllFeedbacks />} /> */}
-        <Route path="/reviewquestions" element={<ReviewQuestions />} />
-        <Route path="/quizfeedback" element={<QuizFeedback />} />
-        <Route path="/upload" element={<UploadBulkQuiz />} />
+          <Route path="/createquiz" element={<CreateQuizView />} />
+          <Route path="/topicfeedback" element={<TopicFeedback />} />
+          <Route path="/questiontemplate" element={<QuestionTemplateView />} />
+          {/* <Route path="/getallfeedback" element={<GetAllFeedbacks />} /> */}
+          <Route path="/reviewquestions" element={<ReviewQuestions />} />
+          <Route path="/quizfeedback" element={<QuizFeedback />} />
+          <Route path="/upload" element={<UploadBulkQuiz />} />
 
-   {/* course module */}
-        <Route path="/addcourse" element={<AddCourseView/>} />
-        <Route path="/coursecontent" element={<CourseContent/>} />
-        <Route path="/addtopic/:id" element={<Topics/>} />
-        <Route path="/savedtopics/:id" element={<SavedTopics/>} />
-        <Route path='/addcontent/:id' element={<AddMaterial/>}/>
+          {/* course module */}
+          <Route path="/addcourse" element={<AddCourseView />} />
+          <Route path="/coursecontent" element={<CourseContent />} />
+          <Route path="/addtopic/:id" element={<Topics />} />
+          <Route path="/savedtopics/:id" element={<SavedTopics />} />
+          <Route path='/addcontent/:id' element={<AddMaterial />} />
         </Route>
-         {/* quiz learnermodule */}
+        {/* quiz learnermodule */}
         <Route path="/quizengine" element={<LearnerCoursepageView />} />
-        <Route path="/instruction" element={<QuizInstruction/>} />
+        <Route path="/instruction" element={<QuizInstruction />} />
         <Route path="/attemptquiz" element={<AttemptQuiz />} />
         <Route path="/reviewanswer" element={<ReviewAnswers />} />
         <Route path="/learnerscorepage" element={<LearnerScorePage />} />
-        <Route path="/topicfeedbackquestion" element={<TopicFeedbackquestion/>} />
-        <Route path="/quizfeedbackquestion" element={<FetchQuizFeedbackQuestion/>} />
+        <Route path="/topicfeedbackquestion" element={<TopicFeedbackquestion />} />
+        <Route path="/quizfeedbackquestion" element={<FetchQuizFeedbackQuestion />} />
 
-       {/* course team */}
+        {/* course team */}
 
-        <Route path="/addcourse" element={<AddCourseView/>} />
-        <Route path="/coursecontent" element={<CourseContent/>} />
-        <Route path="/addtopic/:id" element={<Topics/>} />
-        <Route path="/savedtopics/:id" element={<SavedTopics/>} />
-        <Route path='/addcontent/:id' element={<AddMaterial/>}/>
+        <Route path="/addcourse" element={<AddCourseView />} />
+        <Route path="/coursecontent" element={<CourseContent />} />
+        <Route path="/addtopic/:id" element={<Topics />} />
+        <Route path="/savedtopics/:id" element={<SavedTopics />} />
+        <Route path='/addcontent/:id' element={<AddMaterial />} />
 
 
       </Routes>

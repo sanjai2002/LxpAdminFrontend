@@ -5,7 +5,7 @@ export const FetchQuizFeedbackQuestionApi = ({ dispatch }) => (next) => async (a
     if (action.type === FETCH_QUIZFEEDBACKQUESTION_REQUEST) {
         try {
             // console.log("sending quizId", action.payload);
-            const response = await axios.get(`http://localhost:5199/api/QuizFeedback/GetAllFeedbackQuestions/${action.payload}`);
+            const response = await axios.get(`http://localhost:5199/api/QuizFeedback/GetFeedbackQuestionsByQuizId/${action.payload}`);
             console.log("FetchingQuizFeedbackQuestions:", response.data);
             dispatch(fetchquizfeedbackquestionSuccess(response.data.data));
             console.log("Success", fetchquizfeedbackquestionSuccess(response.data));
