@@ -197,6 +197,11 @@ import addTopicReducer from '../reducers/Course/Topic/AddTopicReducer';
 import addTopic from '../middleware/Course/Topic/AddTopicMiddleware';
 import AddCourseReducer from '../reducers/Course/Course/AddCourseReducer';
 
+// LearnerTeam - Modified By Kavin
+import UnEnrollReducer from '../reducers/LearnerReducer/UnEnrollReducer';
+import UnenrollCourseApi from '../middleware/LearnerMiddleware/UnenrollApi';
+
+
 
 
 const rootReducer = combineReducers({
@@ -246,6 +251,7 @@ const rootReducer = combineReducers({
   fetchPdf: fetchPdfReducer,
   enroll: enrollmentReducer,
   fetchlearner: FetchRegisterReducer,
+  unenroll: UnEnrollReducer,
   //quizmodule
   quizId: quizIdReducer,
   quizQuestions: fetchQuizQuestionsReducer,
@@ -331,8 +337,12 @@ const store = createStore(
     fetchcourseApi, addTopic, fetchTopicsApi, fetchEditTopicsApi,
     updateTopicsApi, deleteTopic, addContent, fetchMaterialTypeApi,
     fetchContentApi, deleteContentApi, fetchIndividualContentApi,
-    updateContentApi, fetchContentUrlApi, fetchcourseApi,
+    updateContentApi, 
+    fetchContentUrlApi, 
+    fetchcourseApi,
 
+    
+UnenrollCourseApi,
 
   )
 );

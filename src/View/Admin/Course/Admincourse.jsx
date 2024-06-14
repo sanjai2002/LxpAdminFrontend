@@ -42,7 +42,8 @@ const Admincourse = ({ fetchCourses, courses }) => {
                         </Row> */}
                         <Row className='pt-3 contentbody'>
                             <Col>
-                            <Col className='text-end mt-5'><Button>Add Course</Button></Col>
+                            <Col className='text-end mt-5'>
+                                <Link to='/addcourse'><Button>Add Course</Button></Link></Col>
 
                             </Col>
                             <Container>
